@@ -4,7 +4,7 @@ struct MainScreen: View {
     @State private var currentIndex = 0
     
     var body: some View {
-        NavigationView {
+        
             VStack {
                 Text("Salut")
                     .font(.title)
@@ -21,10 +21,7 @@ struct MainScreen: View {
                             }
                     )
                 Spacer()
-            }
-            .overlay(MenuView(), alignment: .bottom)
-        }
-    }
+            }    }
     
     func nextCard() {
         if currentIndex < Activity.sampleData.count - 1 {
@@ -33,8 +30,3 @@ struct MainScreen: View {
     }
 }
 
-struct MainScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        MainScreen()
-    }
-}

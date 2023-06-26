@@ -15,7 +15,7 @@
 		ACA6F4E02A497F7E00724276 /* ActivityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA6F4DF2A497F7E00724276 /* ActivityCard.swift */; };
 		ACA6F4E22A4996F400724276 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA6F4E12A4996F400724276 /* ProfileView.swift */; };
 		ACA6F4E42A499C4800724276 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA6F4E32A499C4800724276 /* FavoritesView.swift */; };
-		ACA6F4E62A49AC4500724276 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA6F4E52A49AC4500724276 /* MenuView.swift */; };
+		ACF0C1412A49D2F5008D10A8 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF0C1402A49D2F5008D10A8 /* TabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +28,7 @@
 		ACA6F4DF2A497F7E00724276 /* ActivityCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCard.swift; sourceTree = "<group>"; };
 		ACA6F4E12A4996F400724276 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		ACA6F4E32A499C4800724276 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
-		ACA6F4E52A49AC4500724276 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		ACF0C1402A49D2F5008D10A8 /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +69,7 @@
 				ACA6F4DF2A497F7E00724276 /* ActivityCard.swift */,
 				ACA6F4E12A4996F400724276 /* ProfileView.swift */,
 				ACA6F4E32A499C4800724276 /* FavoritesView.swift */,
-				ACA6F4E52A49AC4500724276 /* MenuView.swift */,
+				ACF0C1402A49D2F5008D10A8 /* TabView.swift */,
 			);
 			path = MyFirstApp;
 			sourceTree = "<group>";
@@ -154,7 +154,7 @@
 			files = (
 				ACA6F4DE2A497A7800724276 /* Activity.swift in Sources */,
 				ACA6F4DC2A49766400724276 /* MainScreen.swift in Sources */,
-				ACA6F4E62A49AC4500724276 /* MenuView.swift in Sources */,
+				ACF0C1412A49D2F5008D10A8 /* TabView.swift in Sources */,
 				ACA6F4E02A497F7E00724276 /* ActivityCard.swift in Sources */,
 				ACA6F4E42A499C4800724276 /* FavoritesView.swift in Sources */,
 				ACA6F4E22A4996F400724276 /* ProfileView.swift in Sources */,
