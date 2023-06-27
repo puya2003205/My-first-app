@@ -5,7 +5,7 @@ struct FavoritesView: View {
     var body: some View {
         List(activities, id: \.titlu) { activity in
             if activity.status == true {
-                ActivityCard(activity: activity)
+                ActivityCard(activity: activity, color: .blue)
             }
         }
     }

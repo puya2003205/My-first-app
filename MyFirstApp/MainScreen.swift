@@ -2,30 +2,30 @@ import SwiftUI
 
 struct MainScreen: View {
     @State private var currentIndex = 0
+    @State private var offset = CGSize.zero
     
     var body: some View {
-        
-            VStack {
-                Text("Salut")
-                    .font(.title)
-                    .padding(.top, 50)
-                Spacer()
-                ActivityCard(activity: Activity.sampleData[currentIndex])
-                    .gesture(
-                        DragGesture()
-                            .onEnded { value in
-                                if value.translation.width < 0 {
-                                } else if value.translation.width > 0 {
-                                }
-                                nextCard()
-                            }
-                    )
-                Spacer()
-            }    }
-    
-    func nextCard() {
-        if currentIndex < Activity.sampleData.count - 1 {
-            currentIndex += 1
+        VStack {
+            Text("Salut")
+                .font(.title)
+                .padding(.top, 50)
+            Spacer()
+            ZStack{
+                ForEach(0..<Activity.sampleData.count){ currentIndex in
+                    ActivityCardWithAnimation(activity: Activity.sampleData[currentIndex])
+                }
+            }
+            Spacer()
+        }
+    }
+    func swipeCard(width: CGFloat) {
+        switch width {
+        case -500...(-150):
+            offset = CGSize(width: -500, height: 0)
+        case 150...500:
+            offset = CGSize(width: 500, height: 0)
+        default:
+            offset = .zero
         }
     }
 }
