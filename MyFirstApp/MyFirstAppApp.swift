@@ -1,17 +1,27 @@
-//
-//  MyFirstAppApp.swift
-//  MyFirstApp
-//
-//  Created by Andrei Stanciu on 26.06.2023.
-//
-
 import SwiftUI
 
 @main
 struct MyFirstAppApp: App {
+    @StateObject private var store = ActivityStore()
     var body: some Scene {
+    
         WindowGroup {
-            TabItem()
+            TabItem(activityStore: store) {
+                Task {
+                    do {
+                        try await store.save(activitati: store.activitati)
+                    } catch {
+                        
+                    }
+                }
+            }
+            .task {
+                do {
+                    try await store.load()
+                } catch {
+                    print(error)
+                }
+            }
         }
     }
 }

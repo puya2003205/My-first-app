@@ -1,52 +1,50 @@
 import SwiftUI
 
 struct ActivityCard: View {
-    var activity: Activity
+    @State var activity: Activity
     @State private var offset = CGSize.zero
     var color: Color
     
     var body: some View {
-        ZStack{
-            VStack(spacing: 10) {
-                HStack(alignment: .firstTextBaseline) {
-                    Spacer()
-                    Text("Titlu:")
-                        .font(.system(size:40))
-                    Text(activity.titlu)
-                        .font(.system(size:30))
-                    Spacer()
-                }
-                .padding(.bottom, 10)
-                
-                HStack(alignment: .firstTextBaseline) {
-                    Spacer()
-                    Text("Distanta:")
-                        .font(.system(size:40))
-                    Text("\(activity.distanta) km")
-                        .font(.system(size:30))
-                    Spacer()
-                }
-                .padding(.bottom, 10)
-                
-                HStack(alignment: .firstTextBaseline) {
-                    Spacer()
-                    Text("Ora de start:")
-                        .font(.system(size:40))
-                    Text("\(activity.startHour) am")
-                        .font(.system(size:30))
-                    Spacer()
-                }
-                .padding(.bottom, 10)
+        VStack(spacing: 10) {
+            HStack {
+                Spacer()
+                Text("Titlu:")
+                    .font(.title)
+                Text(activity.titlu)
+                    .font(.title2)
+                Spacer()
             }
-            .padding(20)
-            .background(color)
-            .foregroundColor(.white)
-            .cornerRadius(10)
-            .shadow(radius: 3)
+            .padding(.bottom, 10)
+            
+            HStack {
+                Spacer()
+                Text("Distanta:")
+                    .font(.title)
+                Text("\(activity.distanta) km")
+                    .font(.title2)
+                Spacer()
+            }
+            .padding(.bottom, 10)
+            
+            HStack {
+                Spacer()
+                Text("Ora de start:")
+                    .font(.title)
+                Text("\(activity.startHour) am")
+                    .font(.title2)
+                Spacer()
+            }
+            .padding(.bottom, 10)
         }
+        .padding(20)
+        .background(color)
+        .foregroundColor(.white)
+        .cornerRadius(10)
+        .shadow(radius: 3)
     }
 }
-    
+
 struct ActivityCard_Previews: PreviewProvider {
     static var activity = Activity.sampleData[0]
     
