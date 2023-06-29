@@ -1,9 +1,10 @@
 import SwiftUI
 
 struct FavoritesView: View {
-    @Binding var activities: [Activity]
+    @StateObject var activityStore: ActivityStore
+    
     var body: some View {
-        List(activities, id: \.titlu) { activity in
+        List(activityStore.activitati, id: \.titlu) { activity in
             if activity.status == true {
                 ActivityCard(activity: activity, color: .blue)
             }
@@ -11,8 +12,8 @@ struct FavoritesView: View {
     }
 }
 
-struct Favorites_Previews: PreviewProvider {
-    static var previews: some View {
-        FavoritesView(activities: .constant(Activity.sampleData))
-    }
-}
+//struct Favorites_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FavoritesView(activities: .constant(Activity.sampleData))
+//    }
+//}

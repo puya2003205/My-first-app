@@ -55,115 +55,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F38D7FE4-2A15-4930-B06B-E9FF8EB02576"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MyFirstApp/ActivityStore.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "load()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9D146246-A4E0-45E6-9949-83AC0376D1EA"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MyFirstApp/MyFirstAppApp.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "body"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "9D146246-A4E0-45E6-9949-83AC0376D1EA - 1f458aaa388a5c59"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for closure #2 @Sendable () async -&gt; () in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.task(priority: Swift.TaskPriority, _: @Sendable () async -&gt; ()) -&gt; some&gt;&gt;.0 in MyFirstApp.MyFirstAppApp.body.getter : some"
-                  moduleName = "MyFirstApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andrei.stanciu/Desktop/App/FirstApp/MyFirstApp/MyFirstAppApp.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "84">
-               </Location>
-               <Location
-                  uuid = "9D146246-A4E0-45E6-9949-83AC0376D1EA - 5642360f706db405"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for closure #2 @Sendable () async -&gt; () in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.task(priority: Swift.TaskPriority, _: @Sendable () async -&gt; ()) -&gt; some&gt;&gt;.0 in MyFirstApp.MyFirstAppApp.body.getter : some"
-                  moduleName = "MyFirstApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andrei.stanciu/Desktop/App/FirstApp/MyFirstApp/MyFirstAppApp.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "36">
-               </Location>
-               <Location
-                  uuid = "9D146246-A4E0-45E6-9949-83AC0376D1EA - 28e9e0ce976d105b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #2 @Sendable () async -&gt; () in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.task(priority: Swift.TaskPriority, _: @Sendable () async -&gt; ()) -&gt; some&gt;&gt;.0 in MyFirstApp.MyFirstAppApp.body.getter : some"
-                  moduleName = "MyFirstApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andrei.stanciu/Desktop/App/FirstApp/MyFirstApp/MyFirstAppApp.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "28">
-               </Location>
-               <Location
-                  uuid = "9D146246-A4E0-45E6-9949-83AC0376D1EA - dfbb15dca040725a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for closure #2 @Sendable () async -&gt; () in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.task(priority: Swift.TaskPriority, _: @Sendable () async -&gt; ()) -&gt; some&gt;&gt;.0 in MyFirstApp.MyFirstAppApp.body.getter : some"
-                  moduleName = "MyFirstApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andrei.stanciu/Desktop/App/FirstApp/MyFirstApp/MyFirstAppApp.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "36">
-               </Location>
-               <Location
-                  uuid = "9D146246-A4E0-45E6-9949-83AC0376D1EA - dfbb15dca040725a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for closure #2 @Sendable () async -&gt; () in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.task(priority: Swift.TaskPriority, _: @Sendable () async -&gt; ()) -&gt; some&gt;&gt;.0 in MyFirstApp.MyFirstAppApp.body.getter : some"
-                  moduleName = "MyFirstApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/andrei.stanciu/Desktop/App/FirstApp/MyFirstApp/MyFirstAppApp.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "60">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "75E65364-F514-4ACA-9656-1C9A72977521"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -171,8 +62,8 @@
             filePath = "MyFirstApp/MyFirstAppApp.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -212,16 +103,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C60CFBE3-A4A3-47ED-874E-DA6732E7F180"
-            shouldBeEnabled = "Yes"
+            uuid = "8D5D19F6-7348-4897-933D-C4A9991128B8"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyFirstApp/ActivityStore.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
-            landmarkName = "load()"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "save(activitate:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

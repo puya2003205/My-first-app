@@ -19,7 +19,7 @@ struct ActivityView: View {
                 Slider(value: $activity.startHourDouble, in: 8...15, step: 1) {
                     Text("StartHour")
                 }
-                Toggle(isOn: $activity.status) {
+                Toggle(isOn: Binding(projectedValue: $activity.status)) {
                 }
             }
         }
@@ -28,8 +28,9 @@ struct ActivityView: View {
 
 struct NewActivitySheet: View {
     @State private var newActivity = Activity.emptyActivity
-    @State var activities: [Activity]
     @Binding var isPresentingNewScrumView: Bool
+    @StateObject var activityStore: ActivityStore
+    
     var body: some View {
         NavigationStack {
             ActivityView(activity: $newActivity)
@@ -41,7 +42,9 @@ struct NewActivitySheet: View {
                     }
                     ToolbarItem(placement: .confirmationAction) {
                         Button("Add") {
-                            activities.append(newActivity)
+                            Task {
+                                    try await activityStore.save(activitate:newActivity)
+                            }
                             isPresentingNewScrumView = false
                         }
                     }
@@ -49,5 +52,3 @@ struct NewActivitySheet: View {
         }
     }
 }
-
-

@@ -5,12 +5,12 @@ struct TabItem: View {
     @Environment(\.scenePhase) private var scenePhase
     @State private var selectedTab = 1
     @State private var isPresentingNewActivityView = false
-    let saveAction: ()->Void
+
     
     var body: some View {
         NavigationStack{
             TabView(selection: $selectedTab) {
-                FavoritesView(activities: .constant(Activity.sampleData))
+                FavoritesView(activityStore: activityStore)
                     .tabItem {
                         Label("Favorites", systemImage: "star")
                     }
@@ -36,10 +36,8 @@ struct TabItem: View {
                 }
                 .accessibilityLabel("New Activity")
             }
-            .sheet(isPresented: $isPresentingNewActivityView, onDismiss: {
-                saveAction()
-            }){
-                NewActivitySheet(activities: activityStore.activitati, isPresentingNewScrumView: $isPresentingNewActivityView)
+            .sheet(isPresented: $isPresentingNewActivityView){
+                NewActivitySheet(isPresentingNewScrumView: $isPresentingNewActivityView, activityStore: activityStore)
             }
         }
     }

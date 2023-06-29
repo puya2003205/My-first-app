@@ -6,7 +6,7 @@ class ActivityStore: ObservableObject {
     
     private static func fileURL() throws -> URL {
         try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            .appendingPathComponent("activitati.data")
+            .appendingPathComponent("activitati2.data")
     }
     
     func load() async throws {
@@ -21,13 +21,44 @@ class ActivityStore: ObservableObject {
         let activitati = try await task.value
         self.activitati = activitati
     }
-
-    func save(activitati: [Activity]) async throws {
+    
+    func save(activitate: Activity) async throws {
         let task = Task {
-            let data = try JSONEncoder().encode(activitati)
-            let outfile = try Self.fileURL()
-            try data.write(to: outfile)
+            do{
+                try await load()
+                activitati.append(activitate)
+                let data = try JSONEncoder().encode(activitati)
+                let outfile = try Self.fileURL()
+                try data.write(to: outfile)
+            } catch {
+                print(error)
+            }
         }
-        _ = try await task.value
+        try await load()
+        _ = await task.value
+    }
+    
+    func updateActivityStatusTrue() {
+        _ = Task {
+            let fileURL = try Self.fileURL()
+            let data = try Data(contentsOf: fileURL)
+            var activity = try JSONDecoder().decode(Activity.self, from: data)
+            activity.status = true
+            let updatedData = try JSONEncoder().encode(activity)
+            try updatedData.write(to: fileURL)
+        }
+        
+    }
+    
+    func updateActivityStatusFalse() {
+        _ = Task {
+            let fileURL = try Self.fileURL()
+            let data = try Data(contentsOf: fileURL)
+            var activity = try JSONDecoder().decode(Activity.self, from: data)
+            activity.status = false
+            let updatedData = try JSONEncoder().encode(activity)
+            try updatedData.write(to: fileURL)
+        }
+       
     }
 }

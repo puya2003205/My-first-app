@@ -6,15 +6,7 @@ struct MyFirstAppApp: App {
     var body: some Scene {
     
         WindowGroup {
-            TabItem(activityStore: store) {
-                Task {
-                    do {
-                        try await store.save(activitati: store.activitati)
-                    } catch {
-                        
-                    }
-                }
-            }
+            TabItem(activityStore: store)
             .task {
                 do {
                     try await store.load()

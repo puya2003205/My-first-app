@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ActivityCardWithAnimation: View {
+ //   @StateObject var activityStore: ActivityStore
     var activity: Activity
     @State private var offset = CGSize.zero
     @State private var color: Color = .blue
