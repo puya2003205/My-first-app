@@ -77,9 +77,6 @@ struct ActivityCardWithAnimation: View {
         }
     }
 
-
-
-    
     func changeColor(width: CGFloat) {
         switch width {
         case -500...(-130):

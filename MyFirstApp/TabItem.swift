@@ -38,6 +38,18 @@ struct TabItem: View {
                     .accessibilityLabel("New Activity")
                 }
             }
+            .onChange(of: selectedTab) { tab in
+                switch tab {
+                case 0:
+                    Task{
+                        do {
+                            try await activityStore.load()
+                        }
+                    }
+                default:
+                    break
+                }
+            }
             .sheet(isPresented: $isPresentingNewActivityView){
                 NewActivitySheet(isPresentingNewScrumView: $isPresentingNewActivityView, activityStore: activityStore)
             }
