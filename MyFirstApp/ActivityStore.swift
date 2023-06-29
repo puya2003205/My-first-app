@@ -38,27 +38,47 @@ class ActivityStore: ObservableObject {
         _ = await task.value
     }
     
-    func updateActivityStatusTrue() {
-        _ = Task {
-            let fileURL = try Self.fileURL()
-            let data = try Data(contentsOf: fileURL)
-            var activity = try JSONDecoder().decode(Activity.self, from: data)
-            activity.status = true
-            let updatedData = try JSONEncoder().encode(activity)
-            try updatedData.write(to: fileURL)
+    func updateActivityStatusTrue(for activity: Activity) async throws {
+        Task {
+            do {
+                let fileURL = try Self.fileURL()
+                var activities = try loadActivities()
+                if let index = activities.firstIndex(where: { $0.id == activity.id }) {
+                    activities[index].status = true
+                    let updatedData = try JSONEncoder().encode(activities)
+                    try updatedData.write(to: fileURL)
+                }
+            } catch {
+                print(error)
+            }
         }
-        
     }
-    
-    func updateActivityStatusFalse() {
-        _ = Task {
-            let fileURL = try Self.fileURL()
-            let data = try Data(contentsOf: fileURL)
-            var activity = try JSONDecoder().decode(Activity.self, from: data)
-            activity.status = false
-            let updatedData = try JSONEncoder().encode(activity)
-            try updatedData.write(to: fileURL)
+
+    func updateActivityStatusFalse(for activity: Activity) async throws {
+        Task {
+            do {
+                let fileURL = try Self.fileURL()
+                var activities = try loadActivities()
+                if let index = activities.firstIndex(where: { $0.id == activity.id }) {
+                    activities[index].status = false
+                    let updatedData = try JSONEncoder().encode(activities)
+                    try updatedData.write(to: fileURL)
+                }
+            } catch {
+                print(error)
+            }
         }
-       
     }
+
+    private func loadActivities() throws -> [Activity] {
+        let fileURL = try Self.fileURL()
+        guard let data = try? Data(contentsOf: fileURL) else {
+            return []
+        }
+        let activities = try JSONDecoder().decode([Activity].self, from: data)
+        return activities
+    }
+
 }
+
+

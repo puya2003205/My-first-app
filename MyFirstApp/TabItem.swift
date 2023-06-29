@@ -8,7 +8,7 @@ struct TabItem: View {
 
     
     var body: some View {
-        NavigationStack{
+        NavigationView{
             TabView(selection: $selectedTab) {
                 FavoritesView(activityStore: activityStore)
                     .tabItem {
@@ -29,12 +29,14 @@ struct TabItem: View {
                     .tag(2)
             }
             .toolbar {
-                Button(action: {
-                    isPresentingNewActivityView = true
-                }) {
-                    Image(systemName: "plus")
+                if selectedTab == 1 {
+                    Button(action: {
+                        isPresentingNewActivityView = true
+                    }) {
+                        Image(systemName: "plus")
+                    }
+                    .accessibilityLabel("New Activity")
                 }
-                .accessibilityLabel("New Activity")
             }
             .sheet(isPresented: $isPresentingNewActivityView){
                 NewActivitySheet(isPresentingNewScrumView: $isPresentingNewActivityView, activityStore: activityStore)

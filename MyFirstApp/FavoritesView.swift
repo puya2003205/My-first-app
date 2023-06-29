@@ -4,16 +4,14 @@ struct FavoritesView: View {
     @StateObject var activityStore: ActivityStore
     
     var body: some View {
-        List(activityStore.activitati, id: \.titlu) { activity in
-            if activity.status == true {
-                ActivityCard(activity: activity, color: .blue)
+        ScrollView {
+            VStack {
+                ForEach(activityStore.activitati.filter { $0.status }, id: \.titlu) { activity in
+                    ActivityCard(activity: activity, color: .blue)
+                }
+                .padding(5)
             }
         }
+        .padding(.horizontal, 10)
     }
 }
-
-//struct Favorites_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FavoritesView(activities: .constant(Activity.sampleData))
-//    }
-//}
