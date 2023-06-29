@@ -19,9 +19,9 @@ struct ActivityCard: View {
             
             HStack {
                 Spacer()
-                Text("Distanta:")
+                Text("Importanta:")
                     .font(.title)
-                Text("\(activity.distanta) km")
+                Text(activity.importanta)
                     .font(.title2)
                 Spacer()
             }
@@ -29,9 +29,9 @@ struct ActivityCard: View {
             
             HStack {
                 Spacer()
-                Text("Ora de start:")
+                Text("Durata:")
                     .font(.title)
-                Text("\(activity.startHour) am")
+                Text("\(activity.durata) ore")
                     .font(.title2)
                 Spacer()
             }

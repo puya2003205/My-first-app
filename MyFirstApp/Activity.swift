@@ -3,31 +3,23 @@ import Foundation
 struct Activity: Identifiable, Codable{
     let id: UUID
     var titlu: String
-    var distanta: Int
-    var startHour: Int
+    var importanta: String
+    var durata: Int
     var status: Bool
-    var distantaDouble: Double {
+    var durataDouble: Double {
         get {
-            Double(distanta)
+            Double(durata)
         }
         set {
-            distanta = Int(newValue)
-        }
-    }
-    var startHourDouble: Double {
-        get {
-            Double(startHour)
-        }
-        set {
-            startHour = Int(newValue)
+            durata = Int(newValue)
         }
     }
     
-    init(id: UUID = UUID(), titlu: String, distanta: Int, startHour: Int, status: Bool) {
+    init(id: UUID = UUID(), titlu: String, importanta: String, durata: Int, status: Bool) {
         self.id = id
         self.titlu = titlu
-        self.distanta = distanta
-        self.startHour = startHour
+        self.importanta = importanta
+        self.durata = durata
         self.status = status
     }
 }
@@ -35,14 +27,14 @@ struct Activity: Identifiable, Codable{
 extension Activity {
     static let sampleData: [Activity] =
     [
-        Activity(titlu: "Pucioasa1", distanta: 60, startHour: 12, status: false),
-        Activity(titlu: "Pucioasa2", distanta: 50, startHour: 11, status: true),
-        Activity(titlu: "Pucioasa3", distanta: 40, startHour: 4, status: false),
-        Activity(titlu: "Pucioasa4", distanta: 70, startHour: 6, status: true),
-        Activity(titlu: "Pucioasa5", distanta: 80, startHour: 19, status: false)
+        Activity(titlu: "Pucioasa1", importanta: "medie", durata: 12, status: false),
+        Activity(titlu: "Pucioasa2", importanta: "mica", durata: 11, status: true),
+        Activity(titlu: "Pucioasa3", importanta: "mare", durata: 4, status: false),
+        Activity(titlu: "Pucioasa4", importanta: "urgenta", durata: 6, status: true),
+        Activity(titlu: "Pucioasa5", importanta: "mica", durata: 19, status: false)
     ]
     
     static var emptyActivity: Activity {
-        Activity(titlu: "", distanta: 0, startHour: 0, status: false)
+        Activity(titlu: "", importanta: "", durata: 0, status: false)
     }
 }

@@ -3,10 +3,15 @@ import SwiftUI
 @MainActor
 class ActivityStore: ObservableObject {
     @Published var activitati: [Activity] = []
+//    private static var name = "activitati2"
+//
+//    private static var filename: String {
+//        return name + ".data"
+//    }
     
     private static func fileURL() throws -> URL {
         try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            .appendingPathComponent("activitati2.data")
+            .appendingPathComponent("taskuri.data")
     }
     
     func load() async throws {

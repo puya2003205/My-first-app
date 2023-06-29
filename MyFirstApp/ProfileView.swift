@@ -13,9 +13,9 @@ struct ProfileView: View {
                     .foregroundColor(.black)
                     .bold()
                 HStack{
-                    Text("Sport:")
+                    Text("Role:")
                     .foregroundColor(.gray)
-                    Text("cycling")
+                    Text("Ios Dev")
                 }
                 .font(.title2)
             }

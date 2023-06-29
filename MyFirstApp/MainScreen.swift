@@ -8,9 +8,6 @@ struct MainScreen: View {
     
     var body: some View {
         VStack {
-            Text("Salut")
-                .font(.title)
-                .padding(.top, 50)
             Spacer()
             ZStack {
                 ForEach(activityStore.activitati) { activity in

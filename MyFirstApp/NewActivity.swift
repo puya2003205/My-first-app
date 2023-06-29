@@ -3,27 +3,62 @@ import SwiftUI
 
 struct ActivityView: View {
     @Binding var activity: Activity
+    @State private var selectedOption: String = ""
     
     var body: some View {
         Form {
             Section(header: Text("Activity Info")) {
                 TextField("Titlu", text: $activity.titlu)
+            }
+            Section{
                 HStack{
-                    Slider(value: $activity.distantaDouble, in: 1...130, step: 1) {
-                        Text("Distanta")
+                    Menu("Importanta") {
+                        Button(action: {
+                            selectedOption = "Mica"
+                            setImportantaValue()
+                        }) {
+                            Text("Mica")
+                        }
+                        Button(action: {
+                            selectedOption = "Medie"
+                            setImportantaValue()
+                        }) {
+                            Text("Medie")
+                        }
+                        Button(action: {
+                            selectedOption = "Mare"
+                            setImportantaValue()
+                        }) {
+                            Text("Mare")
+                        }
+                        Button(action: {
+                            selectedOption = "Urgenta"
+                            setImportantaValue()
+                        }) {
+                            Text("Urgenta")
+                        }
                     }
                     Spacer()
-                    Text("\(activity.distanta) km")
+                    Text(selectedOption)
+                }
+            }
+            Section {
+                HStack{
+                    Text("Durata")
+                    Slider(value: $activity.durataDouble, in: 0...8, step: 0.5) {
+                        Text("Durata")
+                    }
+                    Spacer()
+                    Text("\(activity.durata) ore")
                         .accessibilityHidden(true)
-                }
-                Slider(value: $activity.startHourDouble, in: 8...15, step: 1) {
-                    Text("StartHour")
-                }
-                Toggle(isOn: Binding(projectedValue: $activity.status)) {
                 }
             }
         }
     }
+    
+    func setImportantaValue() {
+        activity.importanta = selectedOption
+        }
 }
 
 struct NewActivitySheet: View {
