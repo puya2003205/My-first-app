@@ -35,9 +35,17 @@ struct TabItem: View {
         
         NavigationView{
             VStack{
-                Text(pozitie.capitalized)
-                    .padding(.top, 20)
-                    .font(.title)
+                if selectedTab == 1 {
+                    if selected == .ios {
+                        Text(pozitie.uppercased())
+                            .padding(.top, 20)
+                            .font(.title)
+                    } else {
+                        Text(pozitie.capitalized)
+                            .padding(.top, 20)
+                            .font(.title)
+                    }
+                }
                 TabView(selection: $selectedTab) {
                     FavoritesView(activityStore: activityStore)
                         .tabItem {
@@ -125,9 +133,7 @@ struct TabItem: View {
                     if selectedTab == 0 {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button(action: {
-                                Task{
-                                    try await activityStore.clearFavorites()
-                                }
+                                confirmationAlert()
                             }) {
                                 Image(systemName: "trash.circle")
                             }
@@ -151,9 +157,32 @@ struct TabItem: View {
                     }
                 }
                 .sheet(isPresented: $isPresentingNewActivityView){
-                    NewActivitySheet(isPresentingNewScrumView: $isPresentingNewActivityView, activityStore: activityStore)
+                    NewActivitySheet(isPresentingNewScrumView: $isPresentingNewActivityView, activityStore: activityStore, pozitie: pozitie)
                 }
             }
+        }
+    }
+    
+    func confirmationAlert() {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+            return
+        }
+        
+        let alertController = UIAlertController(title: "Confirmation", message: "Esti sigur ca vrei sa stergi toate favoritele?", preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "Confirm", style: .destructive) { _ in
+            Task {
+                    try await activityStore.clearFavorites()
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        
+        if let window = windowScene.windows.first {
+            window.rootViewController?.present(alertController, animated: true, completion: nil)
         }
     }
 }

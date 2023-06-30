@@ -5,7 +5,7 @@ class ActivityStore: ObservableObject {
     @Published var activitati: [Activity] = []
     @Published var favorite: [Activity] = []
     
-    var name: String = ""
+    var name: String = "frontend"
     var filename: String {
         return name + ".data"
     }

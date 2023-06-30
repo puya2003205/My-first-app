@@ -65,6 +65,7 @@ struct NewActivitySheet: View {
     @State private var newActivity = Activity.emptyActivity
     @Binding var isPresentingNewScrumView: Bool
     @StateObject var activityStore: ActivityStore
+    @State var pozitie: String = ""
     
     var body: some View {
         NavigationStack {
@@ -77,13 +78,23 @@ struct NewActivitySheet: View {
                     }
                     ToolbarItem(placement: .confirmationAction) {
                         Button("Add") {
-                            Task {
-                                    try await activityStore.save(activitate:newActivity)
+                            if newActivity.titlu != "" {
+                                if newActivity.importanta != "" {
+                                    if newActivity.durata > 0 {
+                                        setPozitie()
+                                        Task {
+                                            try await activityStore.save(activitate: newActivity)
+                                        }
+                                        isPresentingNewScrumView = false
+                                    }
+                                }
                             }
-                            isPresentingNewScrumView = false
                         }
                     }
                 }
         }
     }
+    func setPozitie() {
+        newActivity.pozitie = pozitie
+        }
 }
