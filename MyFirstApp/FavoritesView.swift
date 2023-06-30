@@ -6,7 +6,7 @@ struct FavoritesView: View {
     var body: some View {
         ScrollView {
             VStack {
-                ForEach(activityStore.activitati.filter { $0.status }, id: \.titlu) { activity in
+                ForEach(activityStore.favorite, id: \.titlu) { activity in
                     ActivityCard(activity: activity, color: .blue)
                 }
                 .padding(5)
