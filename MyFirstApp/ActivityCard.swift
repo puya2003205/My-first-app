@@ -52,4 +52,3 @@ struct ActivityCard_Previews: PreviewProvider {
         ActivityCard(activity: activity, color: .blue)
     }
 }
-

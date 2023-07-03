@@ -9,10 +9,6 @@ struct FavoritesView: View {
                 if (activityStore.favorite == []) {
                     FavoriteViewNil()
                 } else {
-//                    ForEach(activityStore.favorite, id: \.titlu) { activity in
-//                        ActivityCard(activity: activity, color: .blue)
-//                    }
-                
                         Section(header: Text("Frontend")) {
                             if activityStore.favorite.filter ({ $0.pozitie == "frontend" }).count == 0 {
                                 FavoritesCategoryNil()
@@ -24,7 +20,6 @@ struct FavoritesView: View {
                                 }
                             }
                         }
-                            
                         Section(header: Text("Backend")) {
                             if activityStore.favorite.filter({ $0.pozitie == "backend" }).count == 0 {
                                 FavoritesCategoryNil()
@@ -69,9 +64,6 @@ struct FavoritesView: View {
                                 }
                             }
                         }
-
-                    
-                    
                 }
             }
         }
@@ -93,7 +85,6 @@ struct FavoriteViewNil: View {
 struct FavoritesCategoryNil: View {
     var body: some View {
         VStack(spacing: 10) {
-            
             HStack {
                 Spacer()
                 Text("Inca nu ai adaugat nicio activitate la aceasta categorie")
@@ -103,8 +94,6 @@ struct FavoritesCategoryNil: View {
                 Spacer()
             }
             .padding(.vertical, 5)
-            
-            
         }
         .padding(20)
         .background(Color.blue.opacity(0.5))

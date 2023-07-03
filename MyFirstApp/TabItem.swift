@@ -32,7 +32,6 @@ struct TabItem: View {
     }
     
     var body: some View {
-        
         NavigationView{
             VStack{
                 if selectedTab == 1 {
@@ -117,8 +116,6 @@ struct TabItem: View {
                         .font(.system(size: 20))
                         .padding(5)
                         }
-                        
-                        
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button(action: {
                                 isPresentingNewActivityView = true
@@ -143,7 +140,6 @@ struct TabItem: View {
                         }
                     }
                     if selectedTab == 2 {
-                        
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button(action: {
                                 isPresentingEditProfile = true
@@ -156,7 +152,6 @@ struct TabItem: View {
                         }
                     }
                 }
-                
                 .onChange(of: selectedTab) { tab in
                     switch tab {
                     case 0:
@@ -197,12 +192,9 @@ struct TabItem: View {
                     try await activityStore.clearFavorites()
             }
         }
-        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
         alertController.addAction(confirmAction)
         alertController.addAction(cancelAction)
-        
         if let window = windowScene.windows.first {
             window.rootViewController?.present(alertController, animated: true, completion: nil)
         }

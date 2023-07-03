@@ -50,10 +50,3 @@ struct ProfileFormView: View {
         }
     }
 }
-
-//struct ProfileFormView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let profileStore = ActivityStore()
-//        return ProfileFormView(profileStore: profileStore)
-//    }
-//}
