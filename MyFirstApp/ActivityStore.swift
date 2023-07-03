@@ -4,6 +4,7 @@ import SwiftUI
 class ActivityStore: ObservableObject {
     @Published var activitati: [Activity] = []
     @Published var favorite: [Activity] = []
+    @Published var profiles: [Person] = []
     
     var name: String = "frontend"
     var filename: String {
@@ -68,7 +69,7 @@ class ActivityStore: ObservableObject {
             }
         }
     }
-
+    
     func updateActivityStatusFalse(for activity: Activity) async throws {
         Task {
             do {
@@ -84,7 +85,7 @@ class ActivityStore: ObservableObject {
             }
         }
     }
-
+    
     private func loadActivities() throws -> [Activity] {
         let fileURL = try fileURL()
         guard let data = try? Data(contentsOf: fileURL) else {
@@ -119,6 +120,39 @@ class ActivityStore: ObservableObject {
         }
         _ = await task.value
     }
+    
+    private func profileFileURL() throws -> URL {
+        try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            .appendingPathComponent("profile.date")
+    }
+    
+    func loadProfile() async throws {
+        let task = Task<[Person], Error> {
+            let fileURL = try profileFileURL()
+            guard let data = try? Data(contentsOf: fileURL) else {
+                return []
+            }
+            let firstProfile = try JSONDecoder().decode(Person.self, from: data)
+            return [firstProfile]
+        }
+        let profiles = try await task.value
+        self.profiles = profiles
+    }
+    
+    func createProfile(profile: Person) async throws {
+        let task = Task {
+            do{
+                try await loadProfile()
+                profiles.append(profile)
+                let data = try JSONEncoder().encode(profile)
+                let outfile = try profileFileURL()
+                try data.write(to: outfile)
+            } catch {
+                print(error)
+            }
+        }
+        try await loadProfile()
+        _ = await task.value
+    }
 }
-
 

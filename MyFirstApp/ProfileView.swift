@@ -1,6 +1,9 @@
 import SwiftUI
 
-struct ProfileView: View {
+struct ProfileCard: View {
+    @State var profile: Person
+    @State var dailyReminderTime = Date(timeIntervalSince1970: 0)
+    
     var body: some View {
         VStack{
             VStack{
@@ -8,14 +11,14 @@ struct ProfileView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 120, height: 120)
-                Text("Andrei")
+                Text(profile.nume)
                     .font(.largeTitle)
                     .foregroundColor(.black)
                     .bold()
                 HStack{
                     Text("Role:")
-                    .foregroundColor(.gray)
-                    Text("Ios Dev")
+                        .foregroundColor(.gray)
+                    Text(profile.role)
                 }
                 .font(.title2)
             }
@@ -27,7 +30,7 @@ struct ProfileView: View {
                         HStack{
                             Text("Gender:")
                             Spacer()
-                            Text("Male")
+                            Text(profile.gender)
                         }
                     }
                 }
@@ -36,7 +39,7 @@ struct ProfileView: View {
                         HStack{
                             Text("Date of birth:")
                             Spacer()
-                            Text("20.05.2003")
+                            Text(formatDate(profile.dateOfBirth))
                         }
                     }
                 }
@@ -45,7 +48,7 @@ struct ProfileView: View {
                         HStack{
                             Text("Email:")
                             Spacer()
-                            Text("andrei.stanciu@idea-bank.ro")
+                            Text(profile.email)
                         }
                     }
                 }
@@ -53,10 +56,25 @@ struct ProfileView: View {
             Spacer()
         }
     }
+    func formatDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .none
+        return formatter.string(from: date)
+    }
 }
 
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
+struct ProfileView: View {
+    @StateObject var profileStore: ActivityStore
+
+    var body: some View {
+        VStack {
+            if let person = profileStore.profiles.first {
+                ProfileCard(profile: person)
+            } else {
+                Text("No profile found")
+            }
+        }
+
     }
 }

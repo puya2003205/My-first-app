@@ -6,7 +6,7 @@ struct TabItem: View {
     @State private var selectedTab = 1
     @State private var isPresentingNewActivityView = false
     @State private var selected: Pozitie = .frontend
-    
+    @State private var isPresentingEditProfile = false
     
     var pozitie: String {
         switch selected {
@@ -59,7 +59,7 @@ struct TabItem: View {
                         }
                         .tag(1)
                     
-                    ProfileView()
+                    ProfileView(profileStore: activityStore)
                         .tabItem {
                             Label("Profile", systemImage: "person.crop.circle.fill")
                         }
@@ -142,6 +142,19 @@ struct TabItem: View {
                             .padding(5)
                         }
                     }
+                    if selectedTab == 2 {
+                        
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(action: {
+                                isPresentingEditProfile = true
+                            }) {
+                                Image(systemName: "square.and.pencil.circle.fill")
+                            }
+                            .accessibilityLabel("Edit Profile")
+                            .font(.system(size: 20))
+                            .padding(5)
+                        }
+                    }
                 }
                 
                 .onChange(of: selectedTab) { tab in
@@ -152,12 +165,21 @@ struct TabItem: View {
                                 try await activityStore.loadFavorite()
                             }
                         }
+                    case 2:
+                        Task{
+                            do {
+                                try await activityStore.loadProfile()
+                            }
+                        }
                     default:
                         break
                     }
                 }
                 .sheet(isPresented: $isPresentingNewActivityView){
                     NewActivitySheet(isPresentingNewScrumView: $isPresentingNewActivityView, activityStore: activityStore, pozitie: pozitie)
+                }
+                .sheet(isPresented: $isPresentingEditProfile) {
+                    ProfileFormView(isPresentingEditProfile: $isPresentingEditProfile, profileStore: activityStore)
                 }
             }
         }
