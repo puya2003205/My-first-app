@@ -9,12 +9,13 @@ struct FavoritesView: View {
                 if (activityStore.favorite == []) {
                     FavoriteViewNil()
                 } else {
-                        Section(header: Text("Frontend")) {
-                            if activityStore.favorite.filter ({ $0.role == "frontend" }).count == 0 {
-                                FavoritesCategoryNil()
-                            } else {
-                                ForEach(activityStore.favorite, id: \.title) { activity in
-                                    if activity.role == "frontend" {
+                    Section(header: Text("Frontend")) {
+                        if activityStore.favorite.filter ({ $0.role == "frontend" }).count == 0 {
+                            FavoritesCategoryNil()
+                        } else {
+                            ForEach(activityStore.favorite, id: \.title) { activity in
+                                if activity.role == "frontend" {
+                                    NavigationLink(destination: ActivityDetailsView(activity: activity)) {
                                         ActivityCard(activity: activity, color: .blue)
                                     }
                                 }
@@ -64,13 +65,13 @@ struct FavoritesView: View {
                                 }
                             }
                         }
+                    }
                 }
             }
+            .padding(.horizontal, 10)
         }
-        .padding(.horizontal, 10)
     }
 }
-
 struct FavoriteViewNil: View {
     var body: some View {
         HStack {

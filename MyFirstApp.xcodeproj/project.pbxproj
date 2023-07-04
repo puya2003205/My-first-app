@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC124DD12A544F5000D63D23 /* ActivityDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC124DD02A544F5000D63D23 /* ActivityDetailsView.swift */; };
 		AC5359602A4EE5B50046B5A1 /* ProfileStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC53595F2A4EE5B50046B5A1 /* ProfileStruct.swift */; };
 		AC6126102A4C20CE002C3ED7 /* ActivityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61260F2A4C20CE002C3ED7 /* ActivityStore.swift */; };
 		AC6126122A4C27B1002C3ED7 /* NewActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6126112A4C27B1002C3ED7 /* NewActivity.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC124DD02A544F5000D63D23 /* ActivityDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsView.swift; sourceTree = "<group>"; };
 		AC53595F2A4EE5B50046B5A1 /* ProfileStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStruct.swift; sourceTree = "<group>"; };
 		AC61260F2A4C20CE002C3ED7 /* ActivityStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStore.swift; sourceTree = "<group>"; };
 		AC6126112A4C27B1002C3ED7 /* NewActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewActivity.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				ACA6F4DD2A497A7800724276 /* Activity.swift */,
 				ACA6F4E32A499C4800724276 /* FavoritesView.swift */,
 				AC6126112A4C27B1002C3ED7 /* NewActivity.swift */,
+				AC124DD02A544F5000D63D23 /* ActivityDetailsView.swift */,
 			);
 			path = "Activities + Favorite";
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 				ACC6A3702A52E2D2003C7156 /* ProfileFormView.swift in Sources */,
 				ACF0C1412A49D2F5008D10A8 /* TabItem.swift in Sources */,
 				ACA6F4E02A497F7E00724276 /* ActivityCard.swift in Sources */,
+				AC124DD12A544F5000D63D23 /* ActivityDetailsView.swift in Sources */,
 				ACA6F4E42A499C4800724276 /* FavoritesView.swift in Sources */,
 				ACF0C1432A4AD35F008D10A8 /* ActivityCardWithAnimation.swift in Sources */,
 				ACA6F4E22A4996F400724276 /* ProfileView.swift in Sources */,

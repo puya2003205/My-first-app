@@ -66,10 +66,13 @@ class ActivityStore: ObservableObject {
                     try updatedData.write(to: fileURL)
                 }
                 try await loadFavorite()
-                favorite.append(activity)
-                let outfile = try fileFavoriteURL()
-                let favoriteData = try JSONEncoder().encode(favorite)
-                try favoriteData.write(to: outfile)
+                let isActivityInFavorite = favorite.contains { $0.id == activity.id }
+                if !isActivityInFavorite {
+                    favorite.append(activity)
+                    let outfile = try fileFavoriteURL()
+                    let favoriteData = try JSONEncoder().encode(favorite)
+                    try favoriteData.write(to: outfile)
+                } 
             } catch {
                 print(error)
             }

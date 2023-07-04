@@ -20,3 +20,5 @@
 "activity_significance_urgent" = "Urgenta";
 "no_profile_found" = "Niciun profil gasit, creeaza unul nou!";
 "update_profile_contact_information" = "Informatii de contact";
+"enter_comment" = "Introdu comentariul";
+"send_text" = "Trimite";

@@ -20,3 +20,5 @@
 "activity_significance_urgent" = "Urgent";
 "no_profile_found" = "No profile found, create a new one!";
 "update_profile_contact_information" = "Contact Information";
+"enter_comment" = "Enter comment";
+"send_text" = "Send";
