@@ -65,7 +65,7 @@ struct ProfileCard: View {
 }
 
 struct ProfileView: View {
-    @ObservedObject var profileStore: DataStore
+    @ObservedObject var profileStore: ProfileStore
 
     var body: some View {
         VStack {

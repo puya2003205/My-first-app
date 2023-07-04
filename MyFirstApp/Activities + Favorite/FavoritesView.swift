@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct FavoritesView: View {
-    @StateObject var activityStore: DataStore
+    @ObservedObject var activityStore: ActivityStore
     
     var body: some View {
         ScrollView {

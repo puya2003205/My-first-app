@@ -44,11 +44,3 @@ struct ActivityCard: View {
         .shadow(radius: 3)
     }
 }
-
-struct ActivityCard_Previews: PreviewProvider {
-    static var activity = Activity.sampleData[0]
-    
-    static var previews: some View {
-        ActivityCard(activity: activity, color: .blue)
-    }
-}

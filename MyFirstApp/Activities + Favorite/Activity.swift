@@ -27,15 +27,6 @@ struct Activity: Identifiable, Codable, Equatable{
 }
 
 extension Activity {
-    static let sampleData: [Activity] =
-    [
-        Activity(titlu: "Pucioasa1", importanta: "medie", durata: 12, status: false, pozitie: "android"),
-        Activity(titlu: "Pucioasa2", importanta: "mica", durata: 11, status: true, pozitie: "android"),
-        Activity(titlu: "Pucioasa3", importanta: "mare", durata: 4, status: false, pozitie: "android"),
-        Activity(titlu: "Pucioasa4", importanta: "urgenta", durata: 6, status: true, pozitie: "android"),
-        Activity(titlu: "Pucioasa5", importanta: "mica", durata: 19, status: false, pozitie: "android")
-    ]
-    
     static var emptyActivity: Activity {
         Activity(titlu: "", importanta: "", durata: 0, status: false, pozitie: "")
     }

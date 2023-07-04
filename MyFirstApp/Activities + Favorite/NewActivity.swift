@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 struct ActivityView: View {
     @Binding var activity: Activity
     @State private var selectedOption: String = ""
@@ -64,7 +63,7 @@ struct ActivityView: View {
 struct NewActivitySheet: View {
     @State private var newActivity = Activity.emptyActivity
     @Binding var isPresentingNewActivity: Bool
-    @StateObject var activityStore: DataStore
+    @ObservedObject var activityStore: ActivityStore
     @State var pozitie: String = ""
     
     var body: some View {

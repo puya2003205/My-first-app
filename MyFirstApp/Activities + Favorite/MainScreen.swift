@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct MainScreen: View {
-    @StateObject var activityStore: DataStore
+    @StateObject var activityStore: ActivityStore
     
     var body: some View {
         VStack {

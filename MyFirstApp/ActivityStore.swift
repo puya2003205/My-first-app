@@ -1,36 +1,29 @@
 import SwiftUI
 
 @MainActor
-class DataStore: ObservableObject {
+class ActivityStore: ObservableObject {
     @Published var activitati: [Activity] = []
     @Published var favorite: [Activity] = []
-    @Published var profile: ProfileStruct?
     
-// Creare nume fisisere activitati pe categorie
+    // Creare nume fisisere activitati pe categorie
     var name: String = "frontend"
     var filename: String {
         return name + ".data"
     }
-
-// FileURL pentru fisierele cu activitati
+    
+    // FileURL pentru fisierele cu activitati
     private func fileURL() throws -> URL {
         try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             .appendingPathComponent(filename)
     }
     
-// FileURL pentru fisierul cu activitatile favorite
+    // FileURL pentru fisierul cu activitatile favorite
     private func fileFavoriteURL() throws -> URL {
         try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             .appendingPathComponent("favorite.data")
     }
     
-// FileURL pentru fisierul unde este stocat profilul
-    private func profileFileURL() throws -> URL {
-        try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            .appendingPathComponent("profile.date")
-    }
-
-// Functia load pentru incarcarea activitatilor
+    // Functia load pentru incarcarea activitatilor
     func loadActivity() async throws {
         let task = Task<[Activity], Error> {
             let fileURL = try fileURL()
@@ -44,7 +37,7 @@ class DataStore: ObservableObject {
         self.activitati = activitati
     }
     
-// Functia save pentru salvarea activitatilor noi
+    // Functia save pentru salvarea activitatilor noi
     func saveActivity(_ activitate: Activity) async throws {
         let task = Task {
             do{
@@ -61,7 +54,7 @@ class DataStore: ObservableObject {
         _ = await task.value
     }
     
-// Functia care face update statusului cu valoarea "true" la swipe right
+    // Functia care face update statusului cu valoarea "true" la swipe right
     func updateActivityStatusTrue(for activity: Activity) async throws {
         Task {
             do {
@@ -83,7 +76,7 @@ class DataStore: ObservableObject {
         }
     }
     
-// Functia care face update statusului cu valoarea "false" la swipe left
+    // Functia care face update statusului cu valoarea "false" la swipe left
     func updateActivityStatusFalse(for activity: Activity) async throws {
         Task {
             do {
@@ -100,7 +93,7 @@ class DataStore: ObservableObject {
         }
     }
     
-// Functia loadActivities care se foloseste in update
+    // Functia loadActivities care se foloseste in update
     private func loadActivities() throws -> [Activity] {
         let fileURL = try fileURL()
         guard let data = try? Data(contentsOf: fileURL) else {
@@ -110,7 +103,7 @@ class DataStore: ObservableObject {
         return activities
     }
     
-// Functia care da load la activitatile cu statusul true in pagina favorite
+    // Functia care da load la activitatile cu statusul true in pagina favorite
     func loadFavorite() async throws {
         let task = Task<[Activity], Error> {
             let fileFavoriteURL = try fileFavoriteURL()
@@ -124,7 +117,7 @@ class DataStore: ObservableObject {
         self.favorite = activitati
     }
     
-// Functia care goleste pagina de favorite
+    // Functia care goleste pagina de favorite
     func clearFavorites() async throws {
         let task = Task {
             do {
@@ -137,34 +130,4 @@ class DataStore: ObservableObject {
         }
         _ = await task.value
     }
-    
-// Functia care incarca profilul
-    func loadProfile() async throws {
-        let task = Task<ProfileStruct?, Error> {
-            let fileURL = try profileFileURL()
-            guard let data = try? Data(contentsOf: fileURL) else {
-                return nil
-            }
-            return try JSONDecoder().decode(ProfileStruct.self, from: data)
-        }
-        profile = try await task.value
-        
-        print("profil")
-    }
-    
-// Functia care updateaza profilul
-    func updateProfile(_ newProfile: ProfileStruct) async throws {
-        let task = Task {
-            do {
-                let data = try JSONEncoder().encode(newProfile)
-                let outfile = try profileFileURL()
-                try data.write(to: outfile)
-            } catch {
-                print(error)
-            }
-        }
-        _ = await task.value
-        profile = newProfile
-    }
 }
-

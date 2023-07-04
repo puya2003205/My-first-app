@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct TabItem: View {
-    @ObservedObject var activityStore: DataStore
-    @Environment(\.scenePhase) private var scenePhase
+    @ObservedObject var activityStore: ActivityStore
+    @ObservedObject var profileStore: ProfileStore
     @State private var selectedTab = 1
     @State private var isPresentingNewActivityView = false
     @State private var selected: Pozitie = .frontend
@@ -58,7 +58,7 @@ struct TabItem: View {
                         }
                         .tag(1)
                     
-                    ProfileView(profileStore: activityStore)
+                    ProfileView(profileStore: profileStore)
                         .tabItem {
                             Label("Profile", systemImage: "person.crop.circle.fill")
                         }
@@ -168,7 +168,7 @@ struct TabItem: View {
                     NewActivitySheet(isPresentingNewActivity: $isPresentingNewActivityView, activityStore: activityStore, pozitie: pozitie)
                 }
                 .sheet(isPresented: $isPresentingEditProfile) {
-                    ProfileFormView(isPresentingEditProfile: $isPresentingEditProfile, profileStore: activityStore)
+                    ProfileFormView(isPresentingEditProfile: $isPresentingEditProfile, profileStore: profileStore)
                 }
             }
         }

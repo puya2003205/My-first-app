@@ -8,7 +8,7 @@ struct ProfileFormView: View {
     @State private var email: String = ""
     @Binding var isPresentingEditProfile: Bool
     
-    @ObservedObject var profileStore: DataStore
+    @ObservedObject var profileStore: ProfileStore
     
     var body: some View {
         NavigationView {

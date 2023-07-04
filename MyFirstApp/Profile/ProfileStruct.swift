@@ -17,9 +17,3 @@ struct ProfileStruct: Identifiable, Codable, Equatable {
         self.email = email
     }
 }
-
-extension ProfileStruct{
-    static let sampleData: [ProfileStruct] =
-    [ProfileStruct(name: "Andrei", role: "Ios Dev", gender: "Male", dateOfBirth: Date.now, email: "andrei.stanciu@idea-bank.ro")]
-}
-
