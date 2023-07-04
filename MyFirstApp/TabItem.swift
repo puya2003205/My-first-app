@@ -160,18 +160,12 @@ struct TabItem: View {
                                 try await activityStore.loadFavorite()
                             }
                         }
-                    case 2:
-                        Task{
-                            do {
-                                try await activityStore.loadProfile()
-                            }
-                        }
                     default:
                         break
                     }
                 }
                 .sheet(isPresented: $isPresentingNewActivityView){
-                    NewActivitySheet(isPresentingNewScrumView: $isPresentingNewActivityView, activityStore: activityStore, pozitie: pozitie)
+                    NewActivitySheet(isPresentingNewActivity: $isPresentingNewActivityView, activityStore: activityStore, pozitie: pozitie)
                 }
                 .sheet(isPresented: $isPresentingEditProfile) {
                     ProfileFormView(isPresentingEditProfile: $isPresentingEditProfile, profileStore: activityStore)

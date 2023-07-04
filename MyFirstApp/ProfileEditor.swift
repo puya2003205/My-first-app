@@ -28,9 +28,7 @@ struct ProfileFormView: View {
                 Section {
                     Button("Save Profile") {
                         Task {
-                            await saveProfile()
-                            print("ok")
-                            try await profileStore.loadProfile()
+                           await saveProfile()
                         }
                     }
                 }
@@ -41,12 +39,13 @@ struct ProfileFormView: View {
     
     private func saveProfile() async {
         let person = Person(nume: nume, role: role, gender: gender, dateOfBirth: dateOfBirth, email: email)
-        
-        do {
-            try await profileStore.createProfile(profile: person)
-            isPresentingEditProfile = false
-        } catch {
-            print(error)
+        Task {
+            do {
+                try await profileStore.createProfile(profile: person)
+                isPresentingEditProfile = false
+            } catch {
+                print(error)
+            }
         }
     }
 }

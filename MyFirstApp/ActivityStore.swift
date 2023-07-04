@@ -123,7 +123,7 @@ class ActivityStore: ObservableObject {
     
     private func profileFileURL() throws -> URL {
         try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            .appendingPathComponent("profile.date")
+            .appendingPathComponent("profile2.date")
     }
     
     func loadProfile() async throws {
@@ -137,12 +137,13 @@ class ActivityStore: ObservableObject {
         }
         let profiles = try await task.value
         self.profiles = profiles
+        print("profil")
     }
     
     func createProfile(profile: Person) async throws {
         let task = Task {
             do{
-                try await loadProfile()
+
                 profiles.append(profile)
                 let data = try JSONEncoder().encode(profile)
                 let outfile = try profileFileURL()

@@ -63,7 +63,7 @@ struct ActivityView: View {
 
 struct NewActivitySheet: View {
     @State private var newActivity = Activity.emptyActivity
-    @Binding var isPresentingNewScrumView: Bool
+    @Binding var isPresentingNewActivity: Bool
     @StateObject var activityStore: ActivityStore
     @State var pozitie: String = ""
     
@@ -73,7 +73,7 @@ struct NewActivitySheet: View {
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
                         Button("Dismiss") {
-                            isPresentingNewScrumView = false
+                            isPresentingNewActivity = false
                         }
                     }
                     ToolbarItem(placement: .confirmationAction) {
@@ -85,7 +85,7 @@ struct NewActivitySheet: View {
                                         Task {
                                             try await activityStore.save(activitate: newActivity)
                                         }
-                                        isPresentingNewScrumView = false
+                                        isPresentingNewActivity = false
                                     }
                                 }
                             }
