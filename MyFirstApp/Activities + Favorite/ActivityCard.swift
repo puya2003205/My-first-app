@@ -9,9 +9,9 @@ struct ActivityCard: View {
         VStack(spacing: 10) {
             HStack {
                 Spacer()
-                Text("Titlu:")
+                Text(LocalizedStringKey("activity_title"))
                     .font(.title)
-                Text(activity.titlu)
+                Text(activity.title)
                     .font(.title2)
                 Spacer()
             }
@@ -19,9 +19,9 @@ struct ActivityCard: View {
             
             HStack {
                 Spacer()
-                Text("Importanta:")
+                Text(LocalizedStringKey("activity_significance"))
                     .font(.title)
-                Text(activity.importanta)
+                Text(LocalizedStringKey(activity.significance?.rawValue ?? ""))
                     .font(.title2)
                 Spacer()
             }
@@ -29,9 +29,12 @@ struct ActivityCard: View {
             
             HStack {
                 Spacer()
-                Text("Durata:")
+                Text(LocalizedStringKey("activity_duration"))
                     .font(.title)
-                Text("\(activity.durata) ore")
+                HStack {
+                    Text("\(activity.duration)")
+                    Text(LocalizedStringKey("activity_duration_unity_of_measure"))
+                }
                     .font(.title2)
                 Spacer()
             }

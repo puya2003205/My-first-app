@@ -179,7 +179,7 @@ struct TabItem: View {
             return
         }
         
-        let alertController = UIAlertController(title: "Confirmation", message: "Esti sigur ca vrei sa stergi toate favoritele?", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Confirmation", message: NSLocalizedString("favorites_delete_message", comment: ""), preferredStyle: .alert)
         
         let confirmAction = UIAlertAction(title: "Confirm", style: .destructive) { _ in
             Task {

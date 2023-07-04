@@ -10,55 +10,55 @@ struct FavoritesView: View {
                     FavoriteViewNil()
                 } else {
                         Section(header: Text("Frontend")) {
-                            if activityStore.favorite.filter ({ $0.pozitie == "frontend" }).count == 0 {
+                            if activityStore.favorite.filter ({ $0.role == "frontend" }).count == 0 {
                                 FavoritesCategoryNil()
                             } else {
-                                ForEach(activityStore.favorite, id: \.titlu) { activity in
-                                    if activity.pozitie == "frontend" {
+                                ForEach(activityStore.favorite, id: \.title) { activity in
+                                    if activity.role == "frontend" {
                                         ActivityCard(activity: activity, color: .blue)
                                     }
                                 }
                             }
                         }
                         Section(header: Text("Backend")) {
-                            if activityStore.favorite.filter({ $0.pozitie == "backend" }).count == 0 {
+                            if activityStore.favorite.filter({ $0.role == "backend" }).count == 0 {
                                 FavoritesCategoryNil()
                             } else {
-                                ForEach(activityStore.favorite, id: \.titlu) { activity in
-                                    if activity.pozitie == "backend" {
+                                ForEach(activityStore.favorite, id: \.title) { activity in
+                                    if activity.role == "backend" {
                                         ActivityCard(activity: activity, color: .blue)
                                     }
                                 }
                             }
                         }
                         Section(header: Text("DevOps")) {
-                            if activityStore.favorite.filter({ $0.pozitie == "devops" }).count == 0 {
+                            if activityStore.favorite.filter({ $0.role == "devops" }).count == 0 {
                                 FavoritesCategoryNil()
                             } else {
-                                ForEach(activityStore.favorite, id: \.titlu) { activity in
-                                    if activity.pozitie == "devops" {
+                                ForEach(activityStore.favorite, id: \.title) { activity in
+                                    if activity.role == "devops" {
                                         ActivityCard(activity: activity, color: .blue)
                                     }
                                 }
                             }
                         }
                         Section(header: Text("Android")) {
-                            if activityStore.favorite.filter({ $0.pozitie == "android" }).count == 0 {
+                            if activityStore.favorite.filter({ $0.role == "android" }).count == 0 {
                                 FavoritesCategoryNil()
                             } else {
-                                ForEach(activityStore.favorite, id: \.titlu) { activity in
-                                    if activity.pozitie == "android" {
+                                ForEach(activityStore.favorite, id: \.title) { activity in
+                                    if activity.role == "android" {
                                         ActivityCard(activity: activity, color: .blue)
                                     }
                                 }
                             }
                         }
                         Section(header: Text("IOS")) {
-                            if activityStore.favorite.filter({ $0.pozitie == "ios" }).count == 0 {
+                            if activityStore.favorite.filter({ $0.role == "ios" }).count == 0 {
                                 FavoritesCategoryNil()
                             } else {
-                                ForEach(activityStore.favorite, id: \.titlu) { activity in
-                                    if activity.pozitie == "ios" {
+                                ForEach(activityStore.favorite, id: \.title) { activity in
+                                    if activity.role == "ios" {
                                         ActivityCard(activity: activity, color: .blue)
                                     }
                                 }
@@ -74,7 +74,7 @@ struct FavoritesView: View {
 struct FavoriteViewNil: View {
     var body: some View {
         HStack {
-            Text("Din pacate inca nu ai introdus nicio activitate in categoria favorite, te poti intoarce pe pagina explore si sa dai swipe right activitatilor pe care vrei sa le faci azi!")
+            Text(LocalizedStringKey("favorites_no_activity"))
             .multilineTextAlignment(.center)
             .padding(50)
             .font(.title2)
@@ -87,7 +87,7 @@ struct FavoritesCategoryNil: View {
         VStack(spacing: 10) {
             HStack {
                 Spacer()
-                Text("Inca nu ai adaugat nicio activitate la aceasta categorie")
+                Text(LocalizedStringKey("favorites_no_activity_on_category"))
                     .font(.title)
                     .multilineTextAlignment(.center)
                   

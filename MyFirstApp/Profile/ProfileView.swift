@@ -16,7 +16,7 @@ struct ProfileCard: View {
                     .foregroundColor(.black)
                     .bold()
                 HStack{
-                    Text("Role:")
+                    Text(LocalizedStringKey("profile_role"))
                         .foregroundColor(.gray)
                     Text(profile.role)
                 }
@@ -28,7 +28,7 @@ struct ProfileCard: View {
                 VStack{
                     Section{
                         HStack{
-                            Text("Gender:")
+                            Text(LocalizedStringKey("profile_gender"))
                             Spacer()
                             Text(profile.gender)
                         }
@@ -37,7 +37,7 @@ struct ProfileCard: View {
                 VStack{
                     Section{
                         HStack{
-                            Text("Date of birth:")
+                            Text(LocalizedStringKey("profile_date_of_birth"))
                             Spacer()
                             Text(formatDate(profile.dateOfBirth))
                         }
@@ -46,7 +46,7 @@ struct ProfileCard: View {
                 VStack{
                     Section{
                         HStack{
-                            Text("Email:")
+                            Text(LocalizedStringKey("profile_email"))
                             Spacer()
                             Text(profile.email)
                         }

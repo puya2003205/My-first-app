@@ -20,6 +20,8 @@
 		ACA6F4E42A499C4800724276 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA6F4E32A499C4800724276 /* FavoritesView.swift */; };
 		ACC6A3702A52E2D2003C7156 /* ProfileFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC6A36F2A52E2D2003C7156 /* ProfileFormView.swift */; };
 		ACC6A3742A540520003C7156 /* ProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC6A3732A540520003C7156 /* ProfileStore.swift */; };
+		ACD11A012A541F570046ECB6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ACD11A032A541F570046ECB6 /* Localizable.strings */; };
+		ACD11A0D2A5420F50046ECB6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ACD11A0F2A5420F50046ECB6 /* Localizable.strings */; };
 		ACF0C1412A49D2F5008D10A8 /* TabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF0C1402A49D2F5008D10A8 /* TabItem.swift */; };
 		ACF0C1432A4AD35F008D10A8 /* ActivityCardWithAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF0C1422A4AD35F008D10A8 /* ActivityCardWithAnimation.swift */; };
 /* End PBXBuildFile section */
@@ -39,6 +41,9 @@
 		ACA6F4E32A499C4800724276 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		ACC6A36F2A52E2D2003C7156 /* ProfileFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFormView.swift; sourceTree = "<group>"; };
 		ACC6A3732A540520003C7156 /* ProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStore.swift; sourceTree = "<group>"; };
+		ACD119FE2A541EF90046ECB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		ACD11A022A541F570046ECB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ACD11A0E2A5420F50046ECB6 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ACF0C1402A49D2F5008D10A8 /* TabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItem.swift; sourceTree = "<group>"; };
 		ACF0C1422A4AD35F008D10A8 /* ActivityCardWithAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCardWithAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,14 +78,17 @@
 		ACA6F4CC2A49764C00724276 /* MyFirstApp */ = {
 			isa = PBXGroup;
 			children = (
+				ACD119FE2A541EF90046ECB6 /* Info.plist */,
 				ACC6A3722A53FD4A003C7156 /* Activities + Favorite */,
 				ACC6A3712A53FD2C003C7156 /* Profile */,
 				ACF0C1402A49D2F5008D10A8 /* TabItem.swift */,
 				AC61260F2A4C20CE002C3ED7 /* ActivityStore.swift */,
+				ACC6A3732A540520003C7156 /* ProfileStore.swift */,
 				ACA6F4CD2A49764C00724276 /* MyFirstAppApp.swift */,
+				ACD11A032A541F570046ECB6 /* Localizable.strings */,
+				ACD11A0F2A5420F50046ECB6 /* Localizable.strings */,
 				ACA6F4D12A49764D00724276 /* Assets.xcassets */,
 				ACA6F4D32A49764D00724276 /* Preview Content */,
-				ACC6A3732A540520003C7156 /* ProfileStore.swift */,
 			);
 			path = MyFirstApp;
 			sourceTree = "<group>";
@@ -158,6 +166,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ro,
 			);
 			mainGroup = ACA6F4C12A49764C00724276;
 			productRefGroup = ACA6F4CB2A49764C00724276 /* Products */;
@@ -175,6 +184,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACA6F4D52A49764D00724276 /* Preview Assets.xcassets in Resources */,
+				ACD11A0D2A5420F50046ECB6 /* Localizable.strings in Resources */,
+				ACD11A012A541F570046ECB6 /* Localizable.strings in Resources */,
 				ACA6F4D22A49764D00724276 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -203,6 +214,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		ACD11A032A541F570046ECB6 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ACD11A022A541F570046ECB6 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		ACD11A0F2A5420F50046ECB6 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ACD11A0E2A5420F50046ECB6 /* ro */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		ACA6F4D62A49764D00724276 /* Debug */ = {
@@ -329,6 +359,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MyFirstApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyFirstApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -357,6 +388,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MyFirstApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyFirstApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -1,33 +1,44 @@
 import Foundation
 
+enum ActivitySignificance: String, Codable, CaseIterable, Identifiable {
+    var id: Self {
+        return self
+    }
+    
+    case lower = "activity_significance_lower"
+    case medium = "activity_significance_medium"
+    case higher = "activity_significance_higher"
+    case urgent = "activity_significance_urgent"
+}
+
 struct Activity: Identifiable, Codable, Equatable{
     let id: UUID
-    var titlu: String
-    var importanta: String
-    var durata: Int
+    var title: String
+    var significance: ActivitySignificance?
+    var duration: Int
     var status: Bool
-    var pozitie: String?
-    var durataDouble: Double {
+    var role: String?
+    var durationDouble: Double {
         get {
-            Double(durata)
+            Double(duration)
         }
         set {
-            durata = Int(newValue)
+            duration = Int(newValue)
         }
     }
     
-    init(id: UUID = UUID(), titlu: String, importanta: String, durata: Int, status: Bool, pozitie: String) {
+    init(id: UUID = UUID(), title: String, significance: ActivitySignificance?, duration: Int, status: Bool, role: String) {
         self.id = id
-        self.titlu = titlu
-        self.importanta = importanta
-        self.durata = durata
+        self.title = title
+        self.significance = significance
+        self.duration = duration
         self.status = status
-        self.pozitie = pozitie
+        self.role = role
     }
 }
 
 extension Activity {
     static var emptyActivity: Activity {
-        Activity(titlu: "", importanta: "", durata: 0, status: false, pozitie: "")
+        Activity(title: "", significance: nil, duration: 0, status: false, role: "")
     }
 }

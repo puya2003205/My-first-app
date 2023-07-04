@@ -2,53 +2,41 @@ import SwiftUI
 
 struct ActivityView: View {
     @Binding var activity: Activity
-    @State private var selectedOption: String = ""
+    @State private var selectedOption: ActivitySignificance?
     
     var body: some View {
         Form {
-            Section(header: Text("Activity Info")) {
-                TextField("Titlu", text: $activity.titlu)
+            Section(header: Text(LocalizedStringKey("create_activity_label"))) {
+                TextField(LocalizedStringKey("activity_title"), text: $activity.title)
             }
             Section{
                 HStack{
-                    Menu("Importanta") {
-                        Button(action: {
-                            selectedOption = "Mica"
-                            setImportantaValue()
-                        }) {
-                            Text("Mica")
-                        }
-                        Button(action: {
-                            selectedOption = "Medie"
-                            setImportantaValue()
-                        }) {
-                            Text("Medie")
-                        }
-                        Button(action: {
-                            selectedOption = "Mare"
-                            setImportantaValue()
-                        }) {
-                            Text("Mare")
-                        }
-                        Button(action: {
-                            selectedOption = "Urgenta"
-                            setImportantaValue()
-                        }) {
-                            Text("Urgenta")
+                    Menu(LocalizedStringKey("activity_significance")) {
+                        
+                        ForEach(ActivitySignificance.allCases) { activitySignificance in
+                            Button(action: {
+                                selectedOption = activitySignificance
+                                setImportantaValue()
+                            }) {
+                                Text(LocalizedStringKey(activitySignificance.rawValue))
+                            }
                         }
                     }
                     Spacer()
-                    Text(selectedOption)
+                    Text(LocalizedStringKey(selectedOption?.rawValue ?? ""))
                 }
             }
             Section {
                 HStack{
-                    Text("Durata")
-                    Slider(value: $activity.durataDouble, in: 0...8, step: 0.5) {
-                        Text("Durata")
+                    Text(LocalizedStringKey("activity_duration"))
+                    Slider(value: $activity.durationDouble, in: 0...8, step: 0.5) {
+                        Text(LocalizedStringKey("activity_duration"))
                     }
                     Spacer()
-                    Text("\(activity.durata) ore")
+                    HStack {
+                        Text("\(activity.duration)")
+                        Text(LocalizedStringKey("activity_duration_unity_of_measure"))
+                    }
                         .accessibilityHidden(true)
                 }
             }
@@ -56,7 +44,7 @@ struct ActivityView: View {
     }
     
     func setImportantaValue() {
-        activity.importanta = selectedOption
+        activity.significance = selectedOption
         }
 }
 
@@ -77,9 +65,9 @@ struct NewActivitySheet: View {
                     }
                     ToolbarItem(placement: .confirmationAction) {
                         Button("Add") {
-                            if newActivity.titlu != "" {
-                                if newActivity.importanta != "" {
-                                    if newActivity.durata > 0 {
+                            if newActivity.title != "" {
+                                if newActivity.significance != nil {
+                                    if newActivity.duration > 0 {
                                         setPozitie()
                                         Task {
                                             try await activityStore.saveActivity(newActivity)
@@ -94,6 +82,6 @@ struct NewActivitySheet: View {
         }
     }
     func setPozitie() {
-        newActivity.pozitie = pozitie
+        newActivity.role = pozitie
         }
 }

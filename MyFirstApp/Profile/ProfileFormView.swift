@@ -13,27 +13,27 @@ struct ProfileFormView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Personal Information")) {
-                    TextField("Name", text: $nume)
-                    TextField("Role", text: $role)
-                    TextField("Gender", text: $gender)
-                    DatePicker("Date of Birth", selection: $dateOfBirth, displayedComponents: .date)
+                Section(header: Text(LocalizedStringKey("update_profile_personal_information"))) {
+                    TextField(LocalizedStringKey("update_profile_name"), text: $nume)
+                    TextField(LocalizedStringKey("profile_role"), text: $role)
+                    TextField(LocalizedStringKey("profile_gender"), text: $gender)
+                    DatePicker(LocalizedStringKey("profile_date_of_birth"), selection: $dateOfBirth, displayedComponents: .date)
                         .datePickerStyle(WheelDatePickerStyle())
                 }
                 
-                Section(header: Text("Contact Information")) {
-                    TextField("Email", text: $email)
+                Section(header: Text(LocalizedStringKey("update_profile_contact_information"))) {
+                    TextField(LocalizedStringKey("profile_email"), text: $email)
                 }
                 
                 Section {
-                    Button("Save Profile") {
+                    Button(LocalizedStringKey("update_profile_save_profile")) {
                         Task {
                            await saveProfile()
                         }
                     }
                 }
             }
-            .navigationBarTitle("Create Profile")
+            .navigationBarTitle(LocalizedStringKey("update_profile_update_profile"))
         }
     }
     
