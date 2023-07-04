@@ -1,17 +1,17 @@
 import SwiftUI
 
 struct ProfileCard: View {
-    @State var profile: Person
+    let profile: ProfileStruct
     @State var dailyReminderTime = Date(timeIntervalSince1970: 0)
     
     var body: some View {
-        VStack{
-            VStack{
+        VStack {
+            VStack {
                 Image(systemName: "person.crop.circle")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 120, height: 120)
-                Text(profile.nume)
+                Text(profile.name)
                     .font(.largeTitle)
                     .foregroundColor(.black)
                     .bold()
@@ -65,11 +65,11 @@ struct ProfileCard: View {
 }
 
 struct ProfileView: View {
-    @StateObject var profileStore: ActivityStore
+    @ObservedObject var profileStore: DataStore
 
     var body: some View {
         VStack {
-            if let person = profileStore.profiles.first {
+            if let person = profileStore.profile {
                 ProfileCard(profile: person)
             } else {
                 Text("No profile found")

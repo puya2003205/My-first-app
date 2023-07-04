@@ -2,7 +2,7 @@ import SwiftUI
 
 @main
 struct MyFirstAppApp: App {
-    @StateObject private var store = ActivityStore()
+    @StateObject private var store = DataStore()
    
     var body: some Scene {
     
@@ -10,7 +10,7 @@ struct MyFirstAppApp: App {
             TabItem(activityStore: store)
             .task {
                 do {
-                    try await store.load()
+                    try await store.loadActivity()
                     try await store.loadProfile()
                 } catch {
                     print(error)

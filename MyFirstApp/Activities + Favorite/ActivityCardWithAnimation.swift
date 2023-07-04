@@ -7,7 +7,7 @@ enum SwipeDirection {
 }
 
 struct ActivityCardWithAnimation: View {
-    @StateObject var activityStore = ActivityStore()
+    @StateObject var activityStore = DataStore()
     var activity: Activity
     @State private var offset = CGSize.zero
     @State private var color: Color = .blue
@@ -56,7 +56,7 @@ struct ActivityCardWithAnimation: View {
                 do {
                     try await activityStore.updateActivityStatusFalse(for: activity)
                     changeColor(width: offset.width)
-                    try await activityStore.load()
+                    try await activityStore.loadActivity()
                 } catch {
                     print(error)
                 }
@@ -67,7 +67,7 @@ struct ActivityCardWithAnimation: View {
                 do {
                     try await activityStore.updateActivityStatusTrue(for: activity)
                     changeColor(width: offset.width)
-                    try await activityStore.load()
+                    try await activityStore.loadActivity()
                 } catch {
                     print(error)
                 }

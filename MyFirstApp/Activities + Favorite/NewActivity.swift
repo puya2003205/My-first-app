@@ -64,7 +64,7 @@ struct ActivityView: View {
 struct NewActivitySheet: View {
     @State private var newActivity = Activity.emptyActivity
     @Binding var isPresentingNewActivity: Bool
-    @StateObject var activityStore: ActivityStore
+    @StateObject var activityStore: DataStore
     @State var pozitie: String = ""
     
     var body: some View {
@@ -83,7 +83,7 @@ struct NewActivitySheet: View {
                                     if newActivity.durata > 0 {
                                         setPozitie()
                                         Task {
-                                            try await activityStore.save(activitate: newActivity)
+                                            try await activityStore.saveActivity(newActivity)
                                         }
                                         isPresentingNewActivity = false
                                     }

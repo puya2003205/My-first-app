@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct TabItem: View {
-    @StateObject var activityStore: ActivityStore
+    @ObservedObject var activityStore: DataStore
     @Environment(\.scenePhase) private var scenePhase
     @State private var selectedTab = 1
     @State private var isPresentingNewActivityView = false
@@ -71,7 +71,7 @@ struct TabItem: View {
                                 Button(action: { selected = .frontend
                                     activityStore.name = "frontend"
                                     Task {
-                                        try await activityStore.load()
+                                        try await activityStore.loadActivity()
                                     }
                                 }) {
                                     Label("Frontend", systemImage: selected == .frontend ? "checkmark.circle.fill" : "circle")
@@ -79,7 +79,7 @@ struct TabItem: View {
                                 Button(action: { selected = .backend
                                     activityStore.name = "backend"
                                     Task {
-                                        try await activityStore.load()
+                                        try await activityStore.loadActivity()
                                     }
                                 }) {
                                     Label("Backend", systemImage: selected == .backend ? "checkmark.circle.fill" : "circle")
@@ -87,7 +87,7 @@ struct TabItem: View {
                                 Button(action: { selected = .devops
                                     activityStore.name = "devops"
                                     Task {
-                                        try await activityStore.load()
+                                        try await activityStore.loadActivity()
                                     }
                                 }) {
                                     Label("DevOps", systemImage: selected == .devops ? "checkmark.circle.fill" : "circle")
@@ -95,7 +95,7 @@ struct TabItem: View {
                                 Button(action: { selected = .android
                                     activityStore.name = "android"
                                     Task {
-                                        try await activityStore.load()
+                                        try await activityStore.loadActivity()
                                     }
                                 }) {
                                     Label("Android", systemImage: selected == .android ? "checkmark.circle.fill" : "circle")
@@ -103,7 +103,7 @@ struct TabItem: View {
                                 Button(action: { selected = .ios
                                     activityStore.name = "ios"
                                     Task {
-                                        try await activityStore.load()
+                                        try await activityStore.loadActivity()
                                     }
                                 }) {
                                     Label("IOS", systemImage: selected == .ios ? "checkmark.circle.fill" : "circle")

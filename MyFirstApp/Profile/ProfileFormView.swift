@@ -8,7 +8,7 @@ struct ProfileFormView: View {
     @State private var email: String = ""
     @Binding var isPresentingEditProfile: Bool
     
-    @ObservedObject var profileStore: ActivityStore
+    @ObservedObject var profileStore: DataStore
     
     var body: some View {
         NavigationView {
@@ -38,10 +38,10 @@ struct ProfileFormView: View {
     }
     
     private func saveProfile() async {
-        let person = Person(nume: nume, role: role, gender: gender, dateOfBirth: dateOfBirth, email: email)
+        let person = ProfileStruct(name: nume, role: role, gender: gender, dateOfBirth: dateOfBirth, email: email)
         Task {
             do {
-                try await profileStore.createProfile(profile: person)
+                try await profileStore.updateProfile(person)
                 isPresentingEditProfile = false
             } catch {
                 print(error)

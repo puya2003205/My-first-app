@@ -1,26 +1,37 @@
 import SwiftUI
 
 @MainActor
-class ActivityStore: ObservableObject {
+class DataStore: ObservableObject {
     @Published var activitati: [Activity] = []
     @Published var favorite: [Activity] = []
-    @Published var profiles: [Person] = []
+    @Published var profile: ProfileStruct?
     
+// Creare nume fisisere activitati pe categorie
     var name: String = "frontend"
     var filename: String {
         return name + ".data"
     }
-    
+
+// FileURL pentru fisierele cu activitati
     private func fileURL() throws -> URL {
         try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             .appendingPathComponent(filename)
     }
+    
+// FileURL pentru fisierul cu activitatile favorite
     private func fileFavoriteURL() throws -> URL {
         try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             .appendingPathComponent("favorite.data")
     }
     
-    func load() async throws {
+// FileURL pentru fisierul unde este stocat profilul
+    private func profileFileURL() throws -> URL {
+        try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            .appendingPathComponent("profile.date")
+    }
+
+// Functia load pentru incarcarea activitatilor
+    func loadActivity() async throws {
         let task = Task<[Activity], Error> {
             let fileURL = try fileURL()
             guard let data = try? Data(contentsOf: fileURL) else {
@@ -33,10 +44,11 @@ class ActivityStore: ObservableObject {
         self.activitati = activitati
     }
     
-    func save(activitate: Activity) async throws {
+// Functia save pentru salvarea activitatilor noi
+    func saveActivity(_ activitate: Activity) async throws {
         let task = Task {
             do{
-                try await load()
+                try await loadActivity()
                 activitati.append(activitate)
                 let data = try JSONEncoder().encode(activitati)
                 let outfile = try fileURL()
@@ -45,10 +57,11 @@ class ActivityStore: ObservableObject {
                 print(error)
             }
         }
-        try await load()
+        try await loadActivity()
         _ = await task.value
     }
     
+// Functia care face update statusului cu valoarea "true" la swipe right
     func updateActivityStatusTrue(for activity: Activity) async throws {
         Task {
             do {
@@ -70,6 +83,7 @@ class ActivityStore: ObservableObject {
         }
     }
     
+// Functia care face update statusului cu valoarea "false" la swipe left
     func updateActivityStatusFalse(for activity: Activity) async throws {
         Task {
             do {
@@ -86,6 +100,7 @@ class ActivityStore: ObservableObject {
         }
     }
     
+// Functia loadActivities care se foloseste in update
     private func loadActivities() throws -> [Activity] {
         let fileURL = try fileURL()
         guard let data = try? Data(contentsOf: fileURL) else {
@@ -95,6 +110,7 @@ class ActivityStore: ObservableObject {
         return activities
     }
     
+// Functia care da load la activitatile cu statusul true in pagina favorite
     func loadFavorite() async throws {
         let task = Task<[Activity], Error> {
             let fileFavoriteURL = try fileFavoriteURL()
@@ -108,6 +124,7 @@ class ActivityStore: ObservableObject {
         self.favorite = activitati
     }
     
+// Functia care goleste pagina de favorite
     func clearFavorites() async throws {
         let task = Task {
             do {
@@ -121,39 +138,33 @@ class ActivityStore: ObservableObject {
         _ = await task.value
     }
     
-    private func profileFileURL() throws -> URL {
-        try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            .appendingPathComponent("profile2.date")
-    }
-    
+// Functia care incarca profilul
     func loadProfile() async throws {
-        let task = Task<[Person], Error> {
+        let task = Task<ProfileStruct?, Error> {
             let fileURL = try profileFileURL()
             guard let data = try? Data(contentsOf: fileURL) else {
-                return []
+                return nil
             }
-            let firstProfile = try JSONDecoder().decode(Person.self, from: data)
-            return [firstProfile]
+            return try JSONDecoder().decode(ProfileStruct.self, from: data)
         }
-        let profiles = try await task.value
-        self.profiles = profiles
+        profile = try await task.value
+        
         print("profil")
     }
     
-    func createProfile(profile: Person) async throws {
+// Functia care updateaza profilul
+    func updateProfile(_ newProfile: ProfileStruct) async throws {
         let task = Task {
-            do{
-
-                profiles.append(profile)
-                let data = try JSONEncoder().encode(profile)
+            do {
+                let data = try JSONEncoder().encode(newProfile)
                 let outfile = try profileFileURL()
                 try data.write(to: outfile)
             } catch {
                 print(error)
             }
         }
-        try await loadProfile()
         _ = await task.value
+        profile = newProfile
     }
 }
 
