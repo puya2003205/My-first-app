@@ -6,42 +6,19 @@ struct TabItem: View {
     @ObservedObject var commentsStore: ActivityDetailStore
     @State private var selectedTab = 1
     @State private var isPresentingNewActivityView = false
-    @State private var selected: Pozitie = .frontend
+    @State private var selected: ActivityRole = .frontend
     @State private var isPresentingEditProfile = false
-    
-    var pozitie: String {
-        switch selected {
-        case .frontend:
-            return "frontend"
-        case .backend:
-            return "backend"
-        case .devops:
-            return "devops"
-        case .android:
-            return "android"
-        case .ios:
-            return "ios"
-        }
-    }
-    
-    enum Pozitie {
-        case frontend
-        case backend
-        case devops
-        case android
-        case ios
-    }
     
     var body: some View {
         NavigationView{
             VStack{
                 if selectedTab == 1 {
                     if selected == .ios {
-                        Text(pozitie.uppercased())
+                        Text(selected.rawValue.uppercased())
                             .padding(.top, 20)
                             .font(.title)
                     } else {
-                        Text(pozitie.capitalized)
+                        Text(selected.rawValue.capitalized)
                             .padding(.top, 20)
                             .font(.title)
                     }
@@ -69,45 +46,28 @@ struct TabItem: View {
                     if selectedTab == 1 {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Menu {
-                                Button(action: { selected = .frontend
-                                    activityStore.name = "frontend"
-                                    Task {
-                                        try await activityStore.loadActivity()
+                                ForEach(ActivityRole.allCases, id: \.self) { activityRole in
+                                    Button(action: { selected = activityRole
+                                        activityStore.name = activityRole.rawValue
+                                        Task {
+                                            do {
+                                                try await activityStore.loadActivity()
+                                            } catch {
+                                                print(error)
+                                            }
+                                        }
+                                    }) {
+                                        Label(
+                                            title: { Text(activityRole.rawValue.capitalized) },
+                                            icon: {
+                                                if selected == activityRole {
+                                                    Image(systemName: "checkmark.circle.fill")
+                                                } else {
+                                                    Image(systemName: "circle")
+                                                }
+                                            }
+                                        )
                                     }
-                                }) {
-                                    Label("Frontend", systemImage: selected == .frontend ? "checkmark.circle.fill" : "circle")
-                                }
-                                Button(action: { selected = .backend
-                                    activityStore.name = "backend"
-                                    Task {
-                                        try await activityStore.loadActivity()
-                                    }
-                                }) {
-                                    Label("Backend", systemImage: selected == .backend ? "checkmark.circle.fill" : "circle")
-                                }
-                                Button(action: { selected = .devops
-                                    activityStore.name = "devops"
-                                    Task {
-                                        try await activityStore.loadActivity()
-                                    }
-                                }) {
-                                    Label("DevOps", systemImage: selected == .devops ? "checkmark.circle.fill" : "circle")
-                                }
-                                Button(action: { selected = .android
-                                    activityStore.name = "android"
-                                    Task {
-                                        try await activityStore.loadActivity()
-                                    }
-                                }) {
-                                    Label("Android", systemImage: selected == .android ? "checkmark.circle.fill" : "circle")
-                                }
-                                Button(action: { selected = .ios
-                                    activityStore.name = "ios"
-                                    Task {
-                                        try await activityStore.loadActivity()
-                                    }
-                                }) {
-                                    Label("IOS", systemImage: selected == .ios ? "checkmark.circle.fill" : "circle")
                                 }
                             }
                         label: {
@@ -166,7 +126,7 @@ struct TabItem: View {
                     }
                 }
                 .sheet(isPresented: $isPresentingNewActivityView){
-                    NewActivitySheet(isPresentingNewActivity: $isPresentingNewActivityView, activityStore: activityStore, pozitie: pozitie)
+                    NewActivitySheet(isPresentingNewActivity: $isPresentingNewActivityView, activityStore: activityStore, pozitie: selected.rawValue)
                 }
                 .sheet(isPresented: $isPresentingEditProfile) {
                     ProfileFormView(isPresentingEditProfile: $isPresentingEditProfile, profileStore: profileStore)
