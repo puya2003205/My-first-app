@@ -38,7 +38,19 @@ struct FavoritesView: View {
                             } else {
                                 ForEach(activityStore.favorite, id: \.title) { activity in
                                     if activity.role == "backend" {
-                                        ActivityCard(activity: activity, color: .blue)
+                                        NavigationLink(destination: ActivityDetailsView(activity: activity, commentsStore: commentsStore)) {
+                                            ActivityCard(activity: activity, color: .blue)
+                                        }
+                                        .onAppear {
+                                            commentsStore.nameActivity = activity.id.uuidString
+                                            Task {
+                                                do {
+                                                    try await commentsStore.loadComments()
+                                                } catch {
+                                                    print(error)
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -49,7 +61,19 @@ struct FavoritesView: View {
                             } else {
                                 ForEach(activityStore.favorite, id: \.title) { activity in
                                     if activity.role == "devops" {
-                                        ActivityCard(activity: activity, color: .blue)
+                                        NavigationLink(destination: ActivityDetailsView(activity: activity, commentsStore: commentsStore)) {
+                                            ActivityCard(activity: activity, color: .blue)
+                                        }
+                                        .onAppear {
+                                            commentsStore.nameActivity = activity.id.uuidString
+                                            Task {
+                                                do {
+                                                    try await commentsStore.loadComments()
+                                                } catch {
+                                                    print(error)
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -60,7 +84,19 @@ struct FavoritesView: View {
                             } else {
                                 ForEach(activityStore.favorite, id: \.title) { activity in
                                     if activity.role == "android" {
-                                        ActivityCard(activity: activity, color: .blue)
+                                        NavigationLink(destination: ActivityDetailsView(activity: activity, commentsStore: commentsStore)) {
+                                            ActivityCard(activity: activity, color: .blue)
+                                        }
+                                        .onAppear {
+                                            commentsStore.nameActivity = activity.id.uuidString
+                                            Task {
+                                                do {
+                                                    try await commentsStore.loadComments()
+                                                } catch {
+                                                    print(error)
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -71,7 +107,19 @@ struct FavoritesView: View {
                             } else {
                                 ForEach(activityStore.favorite, id: \.title) { activity in
                                     if activity.role == "ios" {
-                                        ActivityCard(activity: activity, color: .blue)
+                                        NavigationLink(destination: ActivityDetailsView(activity: activity, commentsStore: commentsStore)) {
+                                            ActivityCard(activity: activity, color: .blue)
+                                        }
+                                        .onAppear {
+                                            commentsStore.nameActivity = activity.id.uuidString
+                                            Task {
+                                                do {
+                                                    try await commentsStore.loadComments()
+                                                } catch {
+                                                    print(error)
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
