@@ -44,7 +44,8 @@ struct ActivityDetailsView: View {
                     VStack(alignment: .trailing) {
                         ForEach(comments, id: \.self) { comment in
                             Text(comment)
-                                .padding(20)
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 5)
                                 .background(Color.gray)
                                 .cornerRadius(10)
                                 .foregroundColor(.white)
