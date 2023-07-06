@@ -21,7 +21,7 @@ struct FavoritesView: View {
                                         NavigationLink(destination: ActivityDetailsView(activity: activity, commentsStore: commentsStore)) {
                                             ActivityCard(activity: activity, color: .blue)
                                         }
-                                        .onAppear {
+                                        .simultaneousGesture(TapGesture().onEnded{
                                             commentsStore.nameForDetailsFile = activity.id.uuidString
                                             Task {
                                                 do {
@@ -30,7 +30,7 @@ struct FavoritesView: View {
                                                     print(error)
                                                 }
                                             }
-                                        }
+                                        })
                                     }
                                 }
                             }
