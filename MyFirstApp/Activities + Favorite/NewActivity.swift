@@ -82,6 +82,8 @@ struct NewActivitySheet: View {
         }
     }
     func setPozitie() {
-        newActivity.role = pozitie
+        if let role = ActivityRole(rawValue: pozitie){
+            newActivity.role = role
         }
+    }
 }

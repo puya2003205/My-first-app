@@ -4,14 +4,14 @@ import SwiftUI
 class ActivityDetailStore: ObservableObject {
     @Published var comments: [CommentStruct] = []
     
-    var nameActivity: String = ""
-    var fileNameActivity: String {
-        return nameActivity + ".data"
+    var nameForDetailsFile: String = ""
+    var fileNameDetails: String {
+        return nameForDetailsFile + ".data"
     }
     
     private func fileURL() throws -> URL {
         try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            .appendingPathComponent(fileNameActivity)
+            .appendingPathComponent(fileNameDetails)
     }
     
     func loadComments() async throws {

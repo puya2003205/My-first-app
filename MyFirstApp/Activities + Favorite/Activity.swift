@@ -11,13 +11,21 @@ enum ActivitySignificance: String, Codable, CaseIterable, Identifiable {
     case urgent = "activity_significance_urgent"
 }
 
+enum ActivityRole: String, Codable, CaseIterable {
+    case frontend = "frontend"
+    case backend = "backend"
+    case devops = "devops"
+    case android = "android"
+    case ios = "ios"
+}
+
 struct Activity: Identifiable, Codable, Equatable {
     let id: UUID
     var title: String
     var significance: ActivitySignificance?
     var duration: Int
     var status: Bool
-    var role: String?
+    var role: ActivityRole?
     var durationDouble: Double {
         get {
             Double(duration)
@@ -27,7 +35,7 @@ struct Activity: Identifiable, Codable, Equatable {
         }
     }
     
-    init(id: UUID = UUID(), title: String, significance: ActivitySignificance?, duration: Int, status: Bool, role: String) {
+    init(id: UUID = UUID(), title: String, significance: ActivitySignificance?, duration: Int, status: Bool, role: ActivityRole?) {
         self.id = id
         self.title = title
         self.significance = significance
@@ -39,6 +47,6 @@ struct Activity: Identifiable, Codable, Equatable {
 
 extension Activity {
     static var emptyActivity: Activity {
-        Activity(title: "", significance: nil, duration: 0, status: false, role: "")
+        Activity(title: "", significance: nil, duration: 0, status: false, role: nil)
     }
 }
