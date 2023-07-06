@@ -58,7 +58,13 @@ struct TabItem: View {
                                         }
                                     }) {
                                         Label(
-                                            title: { Text(activityRole.rawValue.capitalized) },
+                                            title: {
+                                                if activityRole == .ios {
+                                                    Text(activityRole.rawValue.uppercased())
+                                                } else {
+                                                    Text(activityRole.rawValue.capitalized)
+                                                }
+                                            },
                                             icon: {
                                                 if selected == activityRole {
                                                     Image(systemName: "checkmark.circle.fill")
