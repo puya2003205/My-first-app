@@ -11,7 +11,7 @@ enum ActivitySignificance: String, Codable, CaseIterable, Identifiable {
     case urgent = "activity_significance_urgent"
 }
 
-struct Activity: Identifiable, Codable, Equatable{
+struct Activity: Identifiable, Codable, Equatable {
     let id: UUID
     var title: String
     var significance: ActivitySignificance?

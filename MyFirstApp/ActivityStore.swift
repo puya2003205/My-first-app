@@ -40,7 +40,7 @@ class ActivityStore: ObservableObject {
     // Functia save pentru salvarea activitatilor noi
     func saveActivity(_ activitate: Activity) async throws {
         let task = Task {
-            do{
+            do {
                 try await loadActivity()
                 activitati.append(activitate)
                 let data = try JSONEncoder().encode(activitati)

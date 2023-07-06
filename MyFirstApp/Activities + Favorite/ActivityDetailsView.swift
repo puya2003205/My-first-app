@@ -1,12 +1,9 @@
 import SwiftUI
 
-
-
 struct ActivityDetailsView: View {
     let activity: Activity
-    @State private var comments: [String] = []
+    @ObservedObject var commentsStore: ActivityDetailStore
     @State private var newComment: String = ""
-    
     
     var body: some View {
         VStack {
@@ -35,15 +32,13 @@ struct ActivityDetailsView: View {
         .padding(.vertical, 20)
         .font(.title2)
         
-        
-        
         ScrollView {
             VStack {
                 HStack {
                     Spacer()
                     VStack(alignment: .trailing) {
-                        ForEach(comments, id: \.self) { comment in
-                            Text(comment)
+                        ForEach(commentsStore.comments, id: \.id) { comment in
+                            Text(comment.comment)
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 5)
                                 .background(Color.gray)
@@ -55,12 +50,14 @@ struct ActivityDetailsView: View {
                 .padding(.trailing, 20)
             }
         }
-        HStack{
+        
+        HStack {
             TextField(LocalizedStringKey("enter_comment"), text: $newComment)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
                 .background(Color.white)
         }
+        
         Button(action: {
             sendComment()
         }) {
@@ -74,8 +71,15 @@ struct ActivityDetailsView: View {
             return
         }
         
-        comments.append(newComment)
-        newComment = ""
+        let currentDate = DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .short)
+        let newComment = CommentStruct(comment: self.newComment, date: currentDate)
+        Task {
+            do {
+                try await commentsStore.saveComment(newComment)
+                self.newComment = ""
+            } catch {
+                print(error)
+            }
+        }
     }
 }
-

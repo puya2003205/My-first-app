@@ -2,6 +2,7 @@ import SwiftUI
 
 struct FavoritesView: View {
     @ObservedObject var activityStore: ActivityStore
+    @ObservedObject var commentsStore: ActivityDetailStore
     
     var body: some View {
         ScrollView {
@@ -15,8 +16,18 @@ struct FavoritesView: View {
                         } else {
                             ForEach(activityStore.favorite, id: \.title) { activity in
                                 if activity.role == "frontend" {
-                                    NavigationLink(destination: ActivityDetailsView(activity: activity)) {
+                                    NavigationLink(destination: ActivityDetailsView(activity: activity, commentsStore: commentsStore)) {
                                         ActivityCard(activity: activity, color: .blue)
+                                    }
+                                    .onAppear {
+                                        commentsStore.nameActivity = activity.id.uuidString
+                                        Task {
+                                            do {
+                                                try await commentsStore.loadComments()
+                                            } catch {
+                                                print(error)
+                                            }
+                                        }
                                     }
                                 }
                             }

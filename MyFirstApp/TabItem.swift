@@ -3,6 +3,7 @@ import SwiftUI
 struct TabItem: View {
     @ObservedObject var activityStore: ActivityStore
     @ObservedObject var profileStore: ProfileStore
+    @ObservedObject var commentsStore: ActivityDetailStore
     @State private var selectedTab = 1
     @State private var isPresentingNewActivityView = false
     @State private var selected: Pozitie = .frontend
@@ -46,7 +47,7 @@ struct TabItem: View {
                     }
                 }
                 TabView(selection: $selectedTab) {
-                    FavoritesView(activityStore: activityStore)
+                    FavoritesView(activityStore: activityStore, commentsStore: commentsStore)
                         .tabItem {
                             Label("Favorites", systemImage: "star")
                         }

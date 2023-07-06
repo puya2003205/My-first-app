@@ -11,6 +11,8 @@
 		AC5359602A4EE5B50046B5A1 /* ProfileStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC53595F2A4EE5B50046B5A1 /* ProfileStruct.swift */; };
 		AC6126102A4C20CE002C3ED7 /* ActivityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61260F2A4C20CE002C3ED7 /* ActivityStore.swift */; };
 		AC6126122A4C27B1002C3ED7 /* NewActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6126112A4C27B1002C3ED7 /* NewActivity.swift */; };
+		AC665B552A5692DC0061DD14 /* ActivityDetailStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC665B542A5692DC0061DD14 /* ActivityDetailStore.swift */; };
+		AC665B572A5697B00061DD14 /* CommentStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC665B562A5697B00061DD14 /* CommentStruct.swift */; };
 		ACA6F4CE2A49764C00724276 /* MyFirstAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA6F4CD2A49764C00724276 /* MyFirstAppApp.swift */; };
 		ACA6F4D22A49764D00724276 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACA6F4D12A49764D00724276 /* Assets.xcassets */; };
 		ACA6F4D52A49764D00724276 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACA6F4D42A49764D00724276 /* Preview Assets.xcassets */; };
@@ -32,6 +34,8 @@
 		AC53595F2A4EE5B50046B5A1 /* ProfileStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStruct.swift; sourceTree = "<group>"; };
 		AC61260F2A4C20CE002C3ED7 /* ActivityStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStore.swift; sourceTree = "<group>"; };
 		AC6126112A4C27B1002C3ED7 /* NewActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewActivity.swift; sourceTree = "<group>"; };
+		AC665B542A5692DC0061DD14 /* ActivityDetailStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailStore.swift; sourceTree = "<group>"; };
+		AC665B562A5697B00061DD14 /* CommentStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentStruct.swift; sourceTree = "<group>"; };
 		ACA6F4CA2A49764C00724276 /* MyFirstApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFirstApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACA6F4CD2A49764C00724276 /* MyFirstAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFirstAppApp.swift; sourceTree = "<group>"; };
 		ACA6F4D12A49764D00724276 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -85,6 +89,7 @@
 				ACC6A3712A53FD2C003C7156 /* Profile */,
 				ACF0C1402A49D2F5008D10A8 /* TabItem.swift */,
 				AC61260F2A4C20CE002C3ED7 /* ActivityStore.swift */,
+				AC665B542A5692DC0061DD14 /* ActivityDetailStore.swift */,
 				ACC6A3732A540520003C7156 /* ProfileStore.swift */,
 				ACA6F4CD2A49764C00724276 /* MyFirstAppApp.swift */,
 				ACD11A032A541F570046ECB6 /* Localizable.strings */,
@@ -123,6 +128,7 @@
 				ACA6F4E32A499C4800724276 /* FavoritesView.swift */,
 				AC6126112A4C27B1002C3ED7 /* NewActivity.swift */,
 				AC124DD02A544F5000D63D23 /* ActivityDetailsView.swift */,
+				AC665B562A5697B00061DD14 /* CommentStruct.swift */,
 			);
 			path = "Activities + Favorite";
 			sourceTree = "<group>";
@@ -209,9 +215,11 @@
 				AC124DD12A544F5000D63D23 /* ActivityDetailsView.swift in Sources */,
 				ACA6F4E42A499C4800724276 /* FavoritesView.swift in Sources */,
 				ACF0C1432A4AD35F008D10A8 /* ActivityCardWithAnimation.swift in Sources */,
+				AC665B572A5697B00061DD14 /* CommentStruct.swift in Sources */,
 				ACA6F4E22A4996F400724276 /* ProfileView.swift in Sources */,
 				AC6126122A4C27B1002C3ED7 /* NewActivity.swift in Sources */,
 				AC5359602A4EE5B50046B5A1 /* ProfileStruct.swift in Sources */,
+				AC665B552A5692DC0061DD14 /* ActivityDetailStore.swift in Sources */,
 				ACA6F4CE2A49764C00724276 /* MyFirstAppApp.swift in Sources */,
 				AC6126102A4C20CE002C3ED7 /* ActivityStore.swift in Sources */,
 			);
