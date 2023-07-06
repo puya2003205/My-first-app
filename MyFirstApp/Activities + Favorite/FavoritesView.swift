@@ -10,7 +10,6 @@ struct FavoritesView: View {
                 if (activityStore.favorite == []) {
                     FavoriteViewNil()
                 } else {
-                    
                     ForEach(ActivityRole.allCases, id: \.self) { activityRole in
                         Section(header: Text(activityRole.rawValue)) {
                             if activityStore.favorite.filter ({ $0.role == activityRole }).count == 0 {

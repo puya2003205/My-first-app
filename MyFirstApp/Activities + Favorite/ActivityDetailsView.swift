@@ -38,12 +38,16 @@ struct ActivityDetailsView: View {
                     Spacer()
                     VStack(alignment: .trailing) {
                         ForEach(commentsStore.comments, id: \.id) { comment in
-                            Text(comment.comment)
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 5)
-                                .background(Color.gray)
-                                .cornerRadius(10)
-                                .foregroundColor(.white)
+                            HStack {
+                                Text(comment.date)
+                                Spacer()
+                                Text(comment.comment)
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 5)
+                                    .background(Color.gray)
+                                    .cornerRadius(10)
+                                    .foregroundColor(.white)
+                            }
                         }
                     }
                 }
@@ -70,9 +74,11 @@ struct ActivityDetailsView: View {
         guard !newComment.isEmpty else {
             return
         }
-        
-        let currentDate = DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .short)
-        let newComment = CommentStruct(comment: self.newComment, date: currentDate)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .none
+        dateFormatter.timeStyle = .short
+        let currentTime = dateFormatter.string(from: Date())
+        let newComment = CommentStruct(comment: self.newComment, date: currentTime)
         Task {
             do {
                 try await commentsStore.saveComment(newComment)
