@@ -5,6 +5,8 @@ struct ProfileCard: View {
     @ObservedObject var commentsStore: ActivityDetailStore
     @State var dailyReminderTime = Date(timeIntervalSince1970: 0)
     @State private var isPresentingComments = false
+    @State private var showComments = false
+
     var body: some View {
         VStack {
             VStack {
@@ -26,7 +28,9 @@ struct ProfileCard: View {
             .padding(.top, 30)
             HStack {
                 Spacer()
-                Button(action: {}) {
+                Button(action: {
+                    showComments = false
+                }) {
                     Text("Profile")
                         .frame(width: 100, height: 40)
                         .background(Color.green)
@@ -35,14 +39,7 @@ struct ProfileCard: View {
                 }
                 Spacer()
                 Button(action: {
-                    isPresentingComments = true
-                    Task {
-                        do {
-                            try await commentsStore.loadAllComments()
-                        } catch {
-                            print(error)
-                        }
-                    }
+                    showComments = true
                 }) {
                     Text("Comments")
                         .frame(width: 100, height: 40)
@@ -53,39 +50,40 @@ struct ProfileCard: View {
                 Spacer()
             }
             Spacer()
-            List{
-                VStack{
-                    Section{
-                        HStack{
-                            Text(LocalizedStringKey("profile_gender"))
-                            Spacer()
-                            Text(profile.gender)
+            if showComments {
+                AllComments(commentsStore: commentsStore)
+            } else {
+                List {
+                    VStack{
+                        Section{
+                            HStack{
+                                Text(LocalizedStringKey("profile_gender"))
+                                Spacer()
+                                Text(profile.gender)
+                            }
                         }
                     }
-                }
-                VStack{
-                    Section{
-                        HStack{
-                            Text(LocalizedStringKey("profile_date_of_birth"))
-                            Spacer()
-                            Text(formatDate(profile.dateOfBirth))
+                    VStack{
+                        Section{
+                            HStack{
+                                Text(LocalizedStringKey("profile_date_of_birth"))
+                                Spacer()
+                                Text(formatDate(profile.dateOfBirth))
+                            }
                         }
                     }
-                }
-                VStack{
-                    Section{
-                        HStack{
-                            Text(LocalizedStringKey("profile_email"))
-                            Spacer()
-                            Text(profile.email)
+                    VStack{
+                        Section{
+                            HStack{
+                                Text(LocalizedStringKey("profile_email"))
+                                Spacer()
+                                Text(profile.email)
+                            }
                         }
                     }
                 }
             }
             Spacer()
-        }
-        .sheet(isPresented: $isPresentingComments) {
-            AllComments(commentsStore: commentsStore)
         }
     }
     func formatDate(_ date: Date) -> String {
@@ -108,6 +106,5 @@ struct ProfileView: View {
                 Text("No profile found")
             }
         }
-
     }
 }
