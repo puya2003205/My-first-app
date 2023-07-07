@@ -78,11 +78,13 @@ struct ActivityDetailsView: View {
         dateFormatter.dateStyle = .none
         dateFormatter.timeStyle = .short
         let currentTime = dateFormatter.string(from: Date())
-        let newComment = CommentStruct(comment: self.newComment, date: currentTime)
+        let newComment = CommentStruct(comment: self.newComment, date: currentTime, activity: self.activity)
         Task {
             do {
                 try await commentsStore.saveComment(newComment)
+                try await commentsStore.saveCommentInAllComments(newComment)
                 self.newComment = ""
+                try await commentsStore.loadComments()
             } catch {
                 print(error)
             }
