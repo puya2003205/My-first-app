@@ -4,7 +4,6 @@ struct ProfileCard: View {
     let profile: ProfileStruct
     @ObservedObject var commentsStore: ActivityDetailStore
     @State var dailyReminderTime = Date(timeIntervalSince1970: 0)
-    @State private var isPresentingComments = false
     @State private var showComments = false
 
     var body: some View {
@@ -40,6 +39,11 @@ struct ProfileCard: View {
                 Spacer()
                 Button(action: {
                     showComments = true
+                    Task {
+                        do {
+                            try await commentsStore.loadAllComments()
+                        }
+                    }
                 }) {
                     Text("Comments")
                         .frame(width: 100, height: 40)
@@ -49,6 +53,7 @@ struct ProfileCard: View {
                 }
                 Spacer()
             }
+            .padding(.bottom, 10)
             Spacer()
             if showComments {
                 AllComments(commentsStore: commentsStore)

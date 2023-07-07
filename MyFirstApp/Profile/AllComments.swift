@@ -1,10 +1,3 @@
-//
-//  AllComments.swift
-//  MyFirstApp
-//
-//  Created by Andrei Stanciu on 07.07.2023.
-//
-
 import SwiftUI
 
 struct AllComments: View {
@@ -14,7 +7,7 @@ struct AllComments: View {
     var body: some View {
         VStack(alignment: .trailing) {
             List {
-                ForEach(commentsStore.comments, id: \.id) { comment in
+                ForEach(commentsStore.allComments.reversed(), id: \.id) { comment in
                     HStack {
                         Text(comment.date)
                         Spacer()

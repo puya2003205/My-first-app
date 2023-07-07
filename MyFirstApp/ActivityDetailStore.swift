@@ -48,6 +48,19 @@ class ActivityDetailStore: ObservableObject {
         _ = await task.value
     }
     
+    func loadAllComments() async throws {
+        let task = Task<[CommentStruct], Error> {
+            let fileURL = try allCommentsFileURL()
+            guard let data = try? Data(contentsOf: fileURL) else {
+                return []
+            }
+            let comments = try JSONDecoder().decode([CommentStruct].self, from: data)
+            return comments
+        }
+        let comments = try await task.value
+        self.allComments = comments
+    }
+    
     func saveCommentInAllComments(_ comment: CommentStruct) async throws {
         let task = Task {
             do {
@@ -61,18 +74,5 @@ class ActivityDetailStore: ObservableObject {
             }
         }
         _ = await task.value
-    }
-    
-    func loadAllComments() async throws {
-        let task = Task<[CommentStruct], Error> {
-            let fileURL = try allCommentsFileURL()
-            guard let data = try? Data(contentsOf: fileURL) else {
-                return []
-            }
-            let comments = try JSONDecoder().decode([CommentStruct].self, from: data)
-            return comments
-        }
-        let comments = try await task.value
-        self.allComments = comments
     }
 }
