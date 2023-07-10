@@ -8,7 +8,7 @@ struct FavoritesView: View {
         ScrollView {
             VStack {
                 if activityStore.favorite.isEmpty {
-                    FavoriteViewNil()
+                    favoriteNil
                 } else {
                     ForEach(ActivityRole.allCases, id: \.self) { activityRole in
                         createSection(for: activityRole)
@@ -22,7 +22,7 @@ struct FavoritesView: View {
     @ViewBuilder private func createSection(for activityRole: ActivityRole) -> some View {
         Section(header: Text(activityRole.rawValue.capitalized)) {
             if activityStore.favorite.filter ({ $0.role == activityRole }).count == 0 {
-                FavoritesCategoryNil()
+                favoriteCategoryNil
             } else {
                 createNavigationLink(for: activityRole)
             }
@@ -39,9 +39,7 @@ struct FavoritesView: View {
         }
     }
     
-}
-struct FavoriteViewNil: View {
-    var body: some View {
+    @ViewBuilder private var favoriteNil: some View {
         HStack {
             Text(LocalizedStringKey("favorites_no_activity"))
             .multilineTextAlignment(.center)
@@ -49,10 +47,8 @@ struct FavoriteViewNil: View {
             .font(.title2)
         }
     }
-}
-
-struct FavoritesCategoryNil: View {
-    var body: some View {
+    
+    @ViewBuilder private var favoriteCategoryNil: some View {
         VStack(spacing: 10) {
             HStack {
                 Spacer()
