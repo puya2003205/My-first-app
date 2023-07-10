@@ -16,7 +16,7 @@ struct ActivityView: View {
                         ForEach(ActivitySignificance.allCases) { activitySignificance in
                             Button(action: {
                                 selectedOption = activitySignificance
-                                setImportantaValue()
+                                activity.significance = selectedOption
                             }) {
                                 Text(LocalizedStringKey(activitySignificance.rawValue))
                             }
@@ -42,10 +42,6 @@ struct ActivityView: View {
             }
         }
     }
-    
-    func setImportantaValue() {
-        activity.significance = selectedOption
-        }
 }
 
 struct NewActivitySheet: View {
