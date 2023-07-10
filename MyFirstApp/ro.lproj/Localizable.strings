@@ -22,3 +22,9 @@
 "update_profile_contact_information" = "Informatii de contact";
 "enter_comment" = "Introdu comentariul";
 "send_text" = "Trimite";
+"new_activity_title_error_title" = "Titlu lipsa";
+"new_activity_title_error_message" = "Te rog introdu un titlu";
+"new_activity_significance_error_title" = "Importanta neselectata";
+"new_activity_significance_error_message" = "Te rog selecteaza importanta taskului";
+"new_activity_duration_error_title" = "Durata neselectata";
+"new_activity_duration_error_message" = "Te rog selecteaza o durata";

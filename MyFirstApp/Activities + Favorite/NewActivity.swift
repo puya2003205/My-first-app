@@ -49,6 +49,9 @@ struct NewActivitySheet: View {
     @Binding var isPresentingNewActivity: Bool
     @ObservedObject var activityStore: ActivityStore
     @State var pozitie: String = ""
+    @State private var showAlert = false
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
     
     var body: some View {
         NavigationStack {
@@ -61,9 +64,12 @@ struct NewActivitySheet: View {
                     }
                     ToolbarItem(placement: .confirmationAction) {
                         Button("Add") {
-                            guard !newActivity.title.isEmpty else { return }
-                            guard newActivity.significance != nil else { return }
-                            guard newActivity.duration > 0 else { return }
+                            guard !newActivity.title.isEmpty else { showAlert(title: NSLocalizedString("new_activity_title_error_title", comment: ""), message: NSLocalizedString("new_activity_title_error_message", comment: ""))
+                                return }
+                            guard newActivity.significance != nil else { showAlert(title: NSLocalizedString("new_activity_significance_error_title", comment: ""), message: NSLocalizedString("new_activity_significance_error_message", comment: ""))
+                                return }
+                            guard newActivity.duration > 0 else { showAlert(title: NSLocalizedString("new_activity_duration_error_title", comment: ""), message: NSLocalizedString("new_activity_duration_error_message", comment: ""))
+                                return }
                             
                             setPozitie()
                             Task {
@@ -74,8 +80,18 @@ struct NewActivitySheet: View {
                         
                     }
                 }
+                .alert(isPresented: $showAlert) {
+                                    Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                                }
         }
     }
+    
+    func showAlert(title: String, message: String) {
+        alertTitle = title
+        alertMessage = message
+        showAlert = true
+    }
+    
     func setPozitie() {
         if let role = ActivityRole(rawValue: pozitie){
             newActivity.role = role

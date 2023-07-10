@@ -22,3 +22,9 @@
 "update_profile_contact_information" = "Contact Information";
 "enter_comment" = "Enter comment";
 "send_text" = "Send";
+"new_activity_title_error_title" = "Missing title";
+"new_activity_title_error_message" = "Please input a title for task!";
+"new_activity_significance_error_title" = "Missing significance";
+"new_activity_significance_error_message" = "Please select task significance!";
+"new_activity_duration_error_title" = "Duration invalid";
+"new_activity_duration_error_message" = "Please select a valid duration for task!";
