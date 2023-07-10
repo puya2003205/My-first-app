@@ -5,25 +5,19 @@ class ActivityDetailStore: ObservableObject {
     @Published var comments: [CommentStruct] = []
     @Published var allComments: [CommentStruct] = []
     
-    var nameForDetailsFile: String = ""
-    var fileNameDetails: String {
-        return nameForDetailsFile + ".data"
-    }
-    
-    private func fileURL() throws -> URL {
-        try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            .appendingPathComponent(fileNameDetails)
-    }
-    
     private func allCommentsFileURL() throws -> URL {
         try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             .appendingPathComponent("allComments.data")
     }
     
-    func loadComments() async throws {
+    func fileURL(nameForDetailsFile: String) throws -> URL {
+        try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+            .appendingPathComponent(nameForDetailsFile + ".data")
+    }
+    
+    func loadComments(for url: URL) async throws {
         let task = Task<[CommentStruct], Error> {
-            let fileURL = try fileURL()
-            guard let data = try? Data(contentsOf: fileURL) else {
+            guard let data = try? Data(contentsOf: url) else {
                 return []
             }
             let comments = try JSONDecoder().decode([CommentStruct].self, from: data)
@@ -33,14 +27,13 @@ class ActivityDetailStore: ObservableObject {
         self.comments = comments
     }
     
-    func saveComment(_ comment: CommentStruct) async throws {
+    func saveComment(_ comment: CommentStruct, for url: URL) async throws {
         let task = Task {
             do {
-                try await loadComments()
+                try await loadComments(for: url)
                 comments.append(comment)
                 let data = try JSONEncoder().encode(comments)
-                let outfile = try fileURL()
-                try data.write(to: outfile)
+                try data.write(to: url)
             } catch {
                 print(error)
             }

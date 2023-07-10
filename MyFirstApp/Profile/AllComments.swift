@@ -8,18 +8,9 @@ struct AllComments: View {
         VStack(alignment: .trailing) {
             List {
                 ForEach(commentsStore.allComments.reversed(), id: \.id) { commentInAllComments in
-                    
                     NavigationLink(destination: ActivityDetailsView(activity: commentInAllComments.activity, commentsStore: commentsStore)) {
                         CommentCard(activityInStore: commentInAllComments)
                     }
-                    .simultaneousGesture(TapGesture().onEnded{
-                        commentsStore.nameForDetailsFile = commentInAllComments.activity.id.uuidString
-                        Task {
-                            do {
-                                try await commentsStore.loadComments()
-                            }
-                        }
-                    })
                     .padding(.vertical, 5)
                 }
             }
