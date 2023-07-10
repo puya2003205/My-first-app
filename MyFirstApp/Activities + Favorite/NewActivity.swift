@@ -61,18 +61,17 @@ struct NewActivitySheet: View {
                     }
                     ToolbarItem(placement: .confirmationAction) {
                         Button("Add") {
-                            if newActivity.title != "" {
-                                if newActivity.significance != nil {
-                                    if newActivity.duration > 0 {
-                                        setPozitie()
-                                        Task {
-                                            try await activityStore.saveActivity(newActivity)
-                                        }
-                                        isPresentingNewActivity = false
-                                    }
-                                }
+                            guard !newActivity.title.isEmpty else { return }
+                            guard newActivity.significance != nil else { return }
+                            guard newActivity.duration > 0 else { return }
+                            
+                            setPozitie()
+                            Task {
+                                try await activityStore.saveActivity(newActivity)
                             }
+                            isPresentingNewActivity = false
                         }
+                        
                     }
                 }
         }
