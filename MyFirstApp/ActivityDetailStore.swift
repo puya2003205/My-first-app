@@ -2,8 +2,8 @@ import SwiftUI
 
 @MainActor
 class ActivityDetailStore: ObservableObject {
-    @Published var comments: [CommentStruct] = []
-    @Published var allComments: [CommentStruct] = []
+    @Published var comments: [Comment] = []
+    @Published var allComments: [Comment] = []
     
     private func allCommentsFileURL() throws -> URL {
         try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
@@ -16,18 +16,18 @@ class ActivityDetailStore: ObservableObject {
     }
     
     func loadComments(for url: URL) async throws {
-        let task = Task<[CommentStruct], Error> {
+        let task = Task<[Comment], Error> {
             guard let data = try? Data(contentsOf: url) else {
                 return []
             }
-            let comments = try JSONDecoder().decode([CommentStruct].self, from: data)
+            let comments = try JSONDecoder().decode([Comment].self, from: data)
             return comments
         }
         let comments = try await task.value
         self.comments = comments
     }
     
-    func saveComment(_ comment: CommentStruct, for url: URL) async throws {
+    func saveComment(_ comment: Comment, for url: URL) async throws {
         let task = Task {
             do {
                 try await loadComments(for: url)
@@ -42,19 +42,19 @@ class ActivityDetailStore: ObservableObject {
     }
     
     func loadAllComments() async throws {
-        let task = Task<[CommentStruct], Error> {
+        let task = Task<[Comment], Error> {
             let fileURL = try allCommentsFileURL()
             guard let data = try? Data(contentsOf: fileURL) else {
                 return []
             }
-            let comments = try JSONDecoder().decode([CommentStruct].self, from: data)
+            let comments = try JSONDecoder().decode([Comment].self, from: data)
             return comments
         }
         let comments = try await task.value
         self.allComments = comments
     }
     
-    func saveCommentInAllComments(_ comment: CommentStruct) async throws {
+    func saveCommentInAllComments(_ comment: Comment) async throws {
         let task = Task {
             do {
                 try await loadAllComments()

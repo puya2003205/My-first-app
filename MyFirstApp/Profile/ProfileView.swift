@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ProfileCard: View {
-    let profile: ProfileStruct
+    let profile: Profile
     @ObservedObject var commentsStore: ActivityDetailStore
     @State var dailyReminderTime = Date(timeIntervalSince1970: 0)
     @State private var showComments = false

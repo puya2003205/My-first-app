@@ -19,7 +19,7 @@ struct AllComments: View {
 }
 
 struct CommentCard: View {
-    @State var activityInStore: CommentStruct
+    @State var activityInStore: Comment
     
     var body: some View {
         HStack {

@@ -38,7 +38,7 @@ struct ProfileFormView: View {
     }
     
     private func saveProfile() async {
-        let person = ProfileStruct(name: nume, role: role, gender: gender, dateOfBirth: dateOfBirth, email: email)
+        let person = Profile(name: nume, role: role, gender: gender, dateOfBirth: dateOfBirth, email: email)
         Task {
             do {
                 try await profileStore.updateProfile(person)

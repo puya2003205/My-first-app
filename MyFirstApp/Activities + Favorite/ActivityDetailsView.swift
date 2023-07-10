@@ -87,7 +87,7 @@ struct ActivityDetailsView: View {
         dateFormatter.dateStyle = .none
         dateFormatter.timeStyle = .short
         let currentTime = dateFormatter.string(from: Date())
-        let newComment = CommentStruct(comment: self.newComment, date: currentTime, activity: self.activity)
+        let newComment = Comment(comment: self.newComment, date: currentTime, activity: self.activity)
         Task {
             do {
                 let fileURL = try commentsStore.fileURL(nameForDetailsFile: activity.id.uuidString)
