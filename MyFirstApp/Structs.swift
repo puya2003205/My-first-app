@@ -16,6 +16,10 @@ struct Profile: Identifiable, Codable, Equatable {
         self.dateOfBirth = dateOfBirth
         self.email = email
     }
+    
+    static var emptyProfile: Profile {
+        Profile(name: "", role: "", gender: "", dateOfBirth: Date.now, email: "")
+    }
 }
 
 enum ActivitySignificance: String, Codable, CaseIterable, Identifiable {

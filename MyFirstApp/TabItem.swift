@@ -4,10 +4,12 @@ struct TabItem: View {
     @ObservedObject var activityStore: ActivityStore
     @ObservedObject var profileStore: ProfileStore
     @ObservedObject var commentsStore: ActivityDetailStore
+    
     @State private var selectedTab = 1
     @State private var isPresentingNewActivityView = false
     @State private var selected: ActivityRole = .frontend
     @State private var isPresentingEditProfile = false
+    @State private var editingProfile = Profile.emptyProfile
     
     var body: some View {
         NavigationView{
@@ -110,6 +112,9 @@ struct TabItem: View {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button(action: {
                                 isPresentingEditProfile = true
+                                if profileStore.profile != nil {
+                                    editingProfile = profileStore.profile!
+                                }
                             }) {
                                 Image(systemName: "square.and.pencil.circle.fill")
                             }
@@ -135,7 +140,7 @@ struct TabItem: View {
                     NewActivitySheet(isPresentingNewActivity: $isPresentingNewActivityView, activityStore: activityStore, pozitie: selected.rawValue)
                 }
                 .sheet(isPresented: $isPresentingEditProfile) {
-                    ProfileFormView(isPresentingEditProfile: $isPresentingEditProfile, profileStore: profileStore)
+                    ProfileFormView(profile: $editingProfile, profileStore: profileStore, isPresentingEditProfile: $isPresentingEditProfile)
                 }
             }
         }
