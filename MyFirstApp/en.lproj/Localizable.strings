@@ -28,3 +28,5 @@
 "new_activity_significance_error_message" = "Please select task significance!";
 "new_activity_duration_error_title" = "Duration invalid";
 "new_activity_duration_error_message" = "Please select a valid duration for task!";
+"profile_gender_male" = "male";
+"profile_gender_female" = "female";

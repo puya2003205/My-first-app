@@ -20,7 +20,7 @@ struct ProfileCard: View {
                 HStack{
                     Text(LocalizedStringKey("profile_role"))
                         .foregroundColor(.gray)
-                    Text(profile.role?.rawValue ?? "")
+                    Text(profile.role?.rawValue.capitalized ?? "")
                 }
                 .font(.title2)
             }
@@ -64,7 +64,7 @@ struct ProfileCard: View {
                             HStack{
                                 Text(LocalizedStringKey("profile_gender"))
                                 Spacer()
-                                Text(profile.gender?.rawValue ?? "")
+                                Text(profile.gender?.rawValue.capitalized ?? "")
                             }
                         }
                     }

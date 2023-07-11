@@ -28,3 +28,5 @@
 "new_activity_significance_error_message" = "Te rog selecteaza importanta taskului";
 "new_activity_duration_error_title" = "Durata neselectata";
 "new_activity_duration_error_message" = "Te rog selecteaza o durata";
+"profile_gender_male" = "barbat";
+"profile_gender_female" = "femeie";

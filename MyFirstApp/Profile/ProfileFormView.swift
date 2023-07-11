@@ -11,26 +11,39 @@ struct ProfileFormView: View {
             Form {
                 Section(header: Text(LocalizedStringKey("update_profile_personal_information"))) {
                     TextField(LocalizedStringKey("update_profile_name"), text: $profile.name)
-                    Menu(LocalizedStringKey("profile_role")) {
-                        
-                        ForEach(ActivityRole.allCases) { profileRole in
-                            Button(action: {
-                                selectedRole = profileRole
-                                profile.role = selectedRole
-                            }) {
-                                Text(profileRole.rawValue)
+                    HStack{
+                        Text(profile.role?.rawValue.capitalized ?? "")
+                        Spacer()
+                        Menu {
+                            ForEach(ActivityRole.allCases) { profileRole in
+                                Button(action: {
+                                    selectedRole = profileRole
+                                    profile.role = selectedRole
+                                }) {
+                                    Text(profileRole.rawValue.capitalized)
+                                }
                             }
                         }
+                        label: {
+                            Image(systemName: "arrow.down")
+                        }
                     }
-                    Menu(LocalizedStringKey("profile_gender")) {
-                        
-                        ForEach(ProfileGender.allCases) { profileGender in
-                            Button(action: {
-                                selectedGender = profileGender
-                                profile.gender = selectedGender
-                            }) {
-                                Text(profileGender.rawValue)
+                    HStack{
+                        Text(profile.gender?.rawValue.capitalized ?? "")
+                        Spacer()
+                        Menu {
+                            
+                            ForEach(ProfileGender.allCases) { profileGender in
+                                Button(action: {
+                                    selectedGender = profileGender
+                                    profile.gender = selectedGender
+                                }) {
+                                    Text(profileGender.rawValue.capitalized)
+                                }
                             }
+                        }
+                        label: {
+                            Image(systemName: "arrow.down")
                         }
                     }
                     DatePicker(LocalizedStringKey("profile_date_of_birth"), selection: $profile.dateOfBirth, displayedComponents: .date)
