@@ -1,14 +1,23 @@
 import Foundation
 
+enum ProfileGender: String, Codable, CaseIterable, Identifiable {
+    var id: Self {
+        return self
+    }
+    
+    case male = "male"
+    case female = "female"
+}
+
 struct Profile: Identifiable, Codable, Equatable {
     let id: UUID
     var name: String
-    var role: String
-    var gender: String
+    var role: ActivityRole?
+    var gender: ProfileGender?
     var dateOfBirth: Date
     var email: String
     
-    init(id: UUID = UUID(), name: String, role: String, gender: String, dateOfBirth: Date, email: String) {
+    init(id: UUID = UUID(), name: String, role: ActivityRole?, gender: ProfileGender?, dateOfBirth: Date, email: String) {
         self.id = id
         self.name = name
         self.role = role
@@ -18,7 +27,7 @@ struct Profile: Identifiable, Codable, Equatable {
     }
     
     static var emptyProfile: Profile {
-        Profile(name: "", role: "", gender: "", dateOfBirth: Date.now, email: "")
+        Profile(name: "", role: nil, gender: nil, dateOfBirth: Date.now, email: "")
     }
 }
 
@@ -33,7 +42,11 @@ enum ActivitySignificance: String, Codable, CaseIterable, Identifiable {
     case urgent = "activity_significance_urgent"
 }
 
-enum ActivityRole: String, Codable, CaseIterable {
+enum ActivityRole: String, Codable, CaseIterable, Identifiable {
+    var id: Self {
+        return self
+    }
+    
     case frontend = "frontend"
     case backend = "backend"
     case devops = "devops"

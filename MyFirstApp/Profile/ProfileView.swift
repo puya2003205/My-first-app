@@ -20,7 +20,7 @@ struct ProfileCard: View {
                 HStack{
                     Text(LocalizedStringKey("profile_role"))
                         .foregroundColor(.gray)
-                    Text(profile.role)
+                    Text(profile.role?.rawValue ?? "")
                 }
                 .font(.title2)
             }
@@ -64,7 +64,7 @@ struct ProfileCard: View {
                             HStack{
                                 Text(LocalizedStringKey("profile_gender"))
                                 Spacer()
-                                Text(profile.gender)
+                                Text(profile.gender?.rawValue ?? "")
                             }
                         }
                     }
