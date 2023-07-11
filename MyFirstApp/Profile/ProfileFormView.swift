@@ -101,11 +101,7 @@ struct ProfileFormView: View {
     }
     
     private func createAlert(for localizeId: String) {
-        showAlert(message: NSLocalizedString(localizeId, comment: ""))
-    }
-    
-    private func showAlert(message: String) {
-        alertMessage = message
+        alertMessage = NSLocalizedString(localizeId, comment: "")
         showAlert = true
     }
     
