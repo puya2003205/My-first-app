@@ -12,7 +12,7 @@ struct ProfileFormView: View {
                 Section(header: Text(LocalizedStringKey("update_profile_personal_information"))) {
                     TextField(LocalizedStringKey("update_profile_name"), text: $profile.name)
                     HStack{
-                        Text(profile.role?.rawValue.capitalized ?? "")
+                        Text(profile.role?.rawValue.capitalized ?? NSLocalizedString("profile_role", comment: ""))
                         Spacer()
                         Menu {
                             ForEach(ActivityRole.allCases) { profileRole in
@@ -29,7 +29,7 @@ struct ProfileFormView: View {
                         }
                     }
                     HStack{
-                        Text(profile.gender?.rawValue.capitalized ?? "")
+                        Text(profile.gender?.rawValue.capitalized ?? NSLocalizedString("profile_gender", comment: ""))
                         Spacer()
                         Menu {
                             
