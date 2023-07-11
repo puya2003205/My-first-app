@@ -6,11 +6,15 @@ struct ProfileFormView: View {
     @Binding var isPresentingEditProfile: Bool
     @State private var selectedGender: ProfileGender?
     @State private var selectedRole: ActivityRole?
+    @State private var showAlert = false
+    @State private var alertMessage = ""
+    
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text(LocalizedStringKey("update_profile_personal_information"))) {
                     TextField(LocalizedStringKey("update_profile_name"), text: $profile.name)
+                        .autocorrectionDisabled()
                     HStack{
                         Text(profile.role?.rawValue.capitalized ?? NSLocalizedString("profile_role", comment: ""))
                         Spacer()
@@ -32,7 +36,6 @@ struct ProfileFormView: View {
                         Text(profile.gender?.rawValue.capitalized ?? NSLocalizedString("profile_gender", comment: ""))
                         Spacer()
                         Menu {
-                            
                             ForEach(ProfileGender.allCases) { profileGender in
                                 Button(action: {
                                     selectedGender = profileGender
@@ -52,18 +55,70 @@ struct ProfileFormView: View {
                 
                 Section(header: Text(LocalizedStringKey("update_profile_contact_information"))) {
                     TextField(LocalizedStringKey("profile_email"), text: $profile.email)
+                        .autocapitalization(.none)
+                        .autocorrectionDisabled()
                 }
                 
                 Section {
                     Button(LocalizedStringKey("update_profile_save_profile")) {
+                        guard profile.name.count >= 2 else {
+                            createAlert(for: "profile_error_name_minimum_letters")
+                            return
+                        }
+                        
+                        guard profile.name.count <= 35 else {
+                            createAlert(for: "profile_error_name_maximum_letters")
+                            return
+                        }
+                        
+                        guard profile.role != nil else {
+                            createAlert(for: "profile_error_role_selection")
+                            return
+                        }
+                        
+                        guard profile.gender != nil else {
+                            createAlert(for: "profile_error_gender_selection")
+                            return
+                        }
+                        
+                        guard isValidEmailAddress(emailAddress: profile.email) else {
+                            createAlert(for: "profile_error_email")
+                            return
+                        }
+                        
                         Task {
                             try await profileStore.updateProfile(profile)
                             isPresentingEditProfile = false
                         }
                     }
+                    .alert(isPresented: $showAlert) {
+                        Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                    }
                 }
             }
             .navigationBarTitle(LocalizedStringKey("update_profile_update_profile"))
+        }
+    }
+    
+    private func createAlert(for localizeId: String) {
+        showAlert(message: NSLocalizedString(localizeId, comment: ""))
+    }
+    
+    private func showAlert(message: String) {
+        alertMessage = message
+        showAlert = true
+    }
+    
+    private func isValidEmailAddress(emailAddress: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z.-_]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}$"
+        
+        do {
+            let regex = try NSRegularExpression(pattern: emailRegEx)
+            let results = regex.matches(in: emailAddress, range: NSRange(location: 0, length: emailAddress.count))
+            
+            return !results.isEmpty
+        } catch {
+            return false
         }
     }
 }

@@ -30,3 +30,8 @@
 "new_activity_duration_error_message" = "Please select a valid duration for task!";
 "profile_gender_male" = "male";
 "profile_gender_female" = "female";
+"profile_error_name_minimum_letters" = "Your name is too short";
+"profile_error_name_maximum_letters" = "Your name is too long";
+"profile_error_gender_selection" = "Please select your gender";
+"profile_error_role_selection" = "Please select your role";
+"profile_error_email" = "Invalid Email";

@@ -30,3 +30,8 @@
 "new_activity_duration_error_message" = "Te rog selecteaza o durata";
 "profile_gender_male" = "barbat";
 "profile_gender_female" = "femeie";
+"profile_error_name_minimum_letters" = "Numele este prea scurt";
+"profile_error_name_maximum_letters" = "Numele este prea lung";
+"profile_error_gender_selection" = "Te rog selecteaza-ti genul";
+"profile_error_role_selection" = "Te rog selecteaza-ti rolul";
+"profile_error_email" = "Email invalid";
