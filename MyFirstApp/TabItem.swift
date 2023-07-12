@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct TabView: View {
+struct TabItem: View {
     @ObservedObject var activityStore: ActivityStore
     @ObservedObject var profileStore: ProfileStore
     @ObservedObject var commentsStore: ActivityDetailStore
