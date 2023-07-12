@@ -9,7 +9,7 @@ struct MyFirstAppApp: App {
     var body: some Scene {
     
         WindowGroup {
-            TabItem(activityStore: activityStore, profileStore: profileStore, commentsStore: commentsStore)
+            TabView(activityStore: activityStore, profileStore: profileStore, commentsStore: commentsStore)
             .task {
                 do {
                     try await activityStore.loadActivity()
