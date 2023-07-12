@@ -1,9 +1,6 @@
 import Foundation
 
-enum SaveEditedProfileAlert: String, Codable, CaseIterable, Identifiable {
-    var id: Self {
-        return self
-    }
+enum SaveEditedProfileAlert: CaseIterable {
     
     case minimumLetters
     case maximumLetters

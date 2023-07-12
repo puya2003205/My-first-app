@@ -1,11 +1,5 @@
 import SwiftUI
 
-enum SwipeDirection {
-    case left(CGSize)
-    case right(CGSize)
-    case none
-}
-
 struct ActivityCardWithAnimation: View {
     @ObservedObject var activityStore = ActivityStore()
     var activity: Activity
@@ -14,6 +8,10 @@ struct ActivityCardWithAnimation: View {
     @State private var isAnimating = false
     
     var body: some View {
+        activityCardWithAnimation
+    }
+    
+    @ViewBuilder private var activityCardWithAnimation: some View {
         VStack {
             ActivityCard(activity: activity, color: color)
         }
@@ -37,7 +35,7 @@ struct ActivityCardWithAnimation: View {
         )
     }
     
-    func determineSwipeDirection(width: CGFloat) -> SwipeDirection {
+    private func determineSwipeDirection(width: CGFloat) -> SwipeDirection {
         switch width {
         case -500...(-150):
             return .left(CGSize(width: -500, height: 0))
@@ -48,7 +46,7 @@ struct ActivityCardWithAnimation: View {
         }
     }
     
-    func handleSwipe(_ swipeDirection: SwipeDirection) {
+    private func handleSwipe(_ swipeDirection: SwipeDirection) {
         switch swipeDirection {
         case .left(let offset):
             self.offset = offset
@@ -77,7 +75,7 @@ struct ActivityCardWithAnimation: View {
         }
     }
 
-    func changeColor(width: CGFloat) {
+    private func changeColor(width: CGFloat) {
         switch width {
         case -500...(-130):
             color = .red

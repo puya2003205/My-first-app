@@ -1,6 +1,6 @@
 import Foundation
 
-enum SaveNewActivityAlert {
+enum SaveNewActivityAlert: CaseIterable {
     case title
     case significance
     case duration

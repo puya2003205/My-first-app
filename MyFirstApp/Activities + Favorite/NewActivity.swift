@@ -64,19 +64,11 @@ struct NewActivitySheet: View {
                     }
                     ToolbarItem(placement: .confirmationAction) {
                         Button("Add") {
-                            guard !newActivity.title.isEmpty else {
-                                createSaveNewActivityAlert(ofType: .title)
-                                return
-                            }
-                            
-                            guard newActivity.significance != nil else {
-                                createSaveNewActivityAlert(ofType: .significance)
-                                return
-                            }
-                            
-                            guard newActivity.duration > 0 else {
-                                createSaveNewActivityAlert(ofType: .duration)
-                                return
+                            for buttonGuardCondition in SaveNewActivityAlert.allCases {
+                                guard evaluateButtonGuardCondition(buttonGuardCondition) else {
+                                    createSaveNewActivityAlert(ofType: buttonGuardCondition)
+                                    return
+                                }
                             }
                             
                             setPozitie()
@@ -91,6 +83,17 @@ struct NewActivitySheet: View {
                 .alert(isPresented: $showAlert) {
                                     Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
                                 }
+        }
+    }
+    
+    private func evaluateButtonGuardCondition(_ buttonGuardCondition: SaveNewActivityAlert) -> Bool {
+        switch buttonGuardCondition {
+        case .title:
+            return !newActivity.title.isEmpty
+        case .significance:
+            return newActivity.significance != nil
+        case .duration:
+            return newActivity.duration > 0
         }
     }
     

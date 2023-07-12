@@ -52,3 +52,9 @@ struct Activity: Identifiable, Codable, Equatable {
         Activity(title: "", significance: nil, duration: 0, status: false, role: nil)
     }
 }
+
+enum SwipeDirection {
+    case left(CGSize)
+    case right(CGSize)
+    case none
+}
