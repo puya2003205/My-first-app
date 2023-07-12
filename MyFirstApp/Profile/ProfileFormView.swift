@@ -13,67 +13,18 @@ struct ProfileFormView: View {
         NavigationView {
             Form {
                 Section(header: Text(LocalizedStringKey("update_profile_personal_information"))) {
-                    TextField(LocalizedStringKey("update_profile_name"), text: $profile.name)
-                        .autocorrectionDisabled()
-                    HStack{
-                        Text(profile.role?.rawValue.capitalized ?? NSLocalizedString("profile_role", comment: ""))
-                        Spacer()
-                        Menu {
-                            ForEach(ActivityRole.allCases) { profileRole in
-                                Button(action: {
-                                    selectedRole = profileRole
-                                    profile.role = selectedRole
-                                }) {
-                                    Text(profileRole.rawValue.capitalized)
-                                }
-                            }
-                        }
-                    label: {
-                        Image(systemName: "arrow.down")
-                    }
-                    }
-                    HStack{
-                        Text(profile.gender?.rawValue.capitalized ?? NSLocalizedString("profile_gender", comment: ""))
-                        Spacer()
-                        Menu {
-                            ForEach(ProfileGender.allCases) { profileGender in
-                                Button(action: {
-                                    selectedGender = profileGender
-                                    profile.gender = selectedGender
-                                }) {
-                                    Text(profileGender.rawValue.capitalized)
-                                }
-                            }
-                        }
-                    label: {
-                        Image(systemName: "arrow.down")
-                    }
-                    }
-                    DatePicker(LocalizedStringKey("profile_date_of_birth"), selection: $profile.dateOfBirth, displayedComponents: .date)
-                        .datePickerStyle(WheelDatePickerStyle())
+                    updateName
+                    updateRole
+                    updateGender
+                    updateBirthDate
                 }
                 
                 Section(header: Text(LocalizedStringKey("update_profile_contact_information"))) {
-                    TextField(LocalizedStringKey("profile_email"), text: $profile.email)
-                        .autocapitalization(.none)
-                        .autocorrectionDisabled()
+                    updateEmail
                 }
                 
                 Section {
-                    Button(LocalizedStringKey("update_profile_save_profile")) {
-                        for buttonGuardCondition in SaveEditedProfileAlert.allCases {
-                            guard evaluateButtonGuardCondition(buttonGuardCondition) else {
-                                createSaveEditedProfileAlert(ofType: buttonGuardCondition)
-                                return
-                            }
-                        }
-                        
-                        
-                        Task {
-                            try await profileStore.updateProfile(profile)
-                            isPresentingEditProfile = false
-                        }
-                    }
+                    saveButton
                 }
                 .alert(isPresented: $showAlert) {
                     Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("OK")))
@@ -84,20 +35,88 @@ struct ProfileFormView: View {
         .navigationBarTitle(LocalizedStringKey("update_profile_update_profile"))
     }
     
-    private func evaluateButtonGuardCondition(_ buttonGuardCondition: SaveEditedProfileAlert) -> Bool {
-            switch buttonGuardCondition {
-            case .minimumLetters:
-                return profile.name.count >= 2
-            case .maximumLetters:
-                return profile.name.count <= 35
-            case .role:
-                return profile.role != nil
-            case .gender:
-                return profile.gender != nil
-            case .validEmail:
-                return isValidEmailAddress(emailAddress: profile.email)
+    @ViewBuilder private var updateName: some View {
+        TextField(LocalizedStringKey("update_profile_name"), text: $profile.name)
+            .autocorrectionDisabled()
+    }
+    
+    @ViewBuilder private var updateRole: some View {
+        HStack{
+            Text(profile.role?.rawValue.capitalized ?? NSLocalizedString("profile_role", comment: ""))
+            Spacer()
+            Menu {
+                ForEach(ActivityRole.allCases) { profileRole in
+                    Button(action: {
+                        selectedRole = profileRole
+                        profile.role = selectedRole
+                    }) {
+                        Text(profileRole.rawValue.capitalized)
+                    }
+                }
+            }
+        label: { Image(systemName: "arrow.down") }
+        }
+    }
+    
+    @ViewBuilder private var updateGender: some View {
+        HStack{
+            Text(profile.gender?.rawValue.capitalized ?? NSLocalizedString("profile_gender", comment: ""))
+            Spacer()
+            Menu {
+                ForEach(ProfileGender.allCases) { profileGender in
+                    Button(action: {
+                        selectedGender = profileGender
+                        profile.gender = selectedGender
+                    }) {
+                        Text(profileGender.rawValue.capitalized)
+                    }
+                }
+            }
+        label: { Image(systemName: "arrow.down") }
+        }
+    }
+    
+    @ViewBuilder private var updateBirthDate: some View {
+        DatePicker(LocalizedStringKey("profile_date_of_birth"), selection: $profile.dateOfBirth, displayedComponents: .date)
+            .datePickerStyle(WheelDatePickerStyle())
+    }
+    
+    @ViewBuilder private var updateEmail: some View {
+        TextField(LocalizedStringKey("profile_email"), text: $profile.email)
+            .autocapitalization(.none)
+            .autocorrectionDisabled()
+    }
+    
+    @ViewBuilder private var saveButton: some View {
+        Button(LocalizedStringKey("update_profile_save_profile")) {
+            for buttonGuardCondition in SaveEditedProfileAlert.allCases {
+                guard evaluateButtonGuardCondition(buttonGuardCondition) else {
+                    createSaveEditedProfileAlert(ofType: buttonGuardCondition)
+                    return
+                }
+            }
+            
+            Task {
+                try await profileStore.updateProfile(profile)
+                isPresentingEditProfile = false
             }
         }
+    }
+    
+    private func evaluateButtonGuardCondition(_ buttonGuardCondition: SaveEditedProfileAlert) -> Bool {
+        switch buttonGuardCondition {
+        case .minimumLetters:
+            return profile.name.count >= 2
+        case .maximumLetters:
+            return profile.name.count <= 35
+        case .role:
+            return profile.role != nil
+        case .gender:
+            return profile.gender != nil
+        case .validEmail:
+            return isValidEmailAddress(emailAddress: profile.email)
+        }
+    }
     
     private func createSaveEditedProfileAlert(ofType: SaveEditedProfileAlert) {
         alertMessage = NSLocalizedString(ofType.message, comment: "")
