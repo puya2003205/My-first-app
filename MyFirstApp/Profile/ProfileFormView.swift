@@ -62,27 +62,27 @@ struct ProfileFormView: View {
                 Section {
                     Button(LocalizedStringKey("update_profile_save_profile")) {
                         guard profile.name.count >= 2 else {
-                            createAlert(for: "profile_error_name_minimum_letters")
+                            createSaveEditedProfileAlert(ofType: .minimumLetters)
                             return
                         }
                         
                         guard profile.name.count <= 35 else {
-                            createAlert(for: "profile_error_name_maximum_letters")
+                            createSaveEditedProfileAlert(ofType: .maximumLetters)
                             return
                         }
                         
                         guard profile.role != nil else {
-                            createAlert(for: "profile_error_role_selection")
+                            createSaveEditedProfileAlert(ofType: .role)
                             return
                         }
                         
                         guard profile.gender != nil else {
-                            createAlert(for: "profile_error_gender_selection")
+                            createSaveEditedProfileAlert(ofType: .gender)
                             return
                         }
                         
                         guard isValidEmailAddress(emailAddress: profile.email) else {
-                            createAlert(for: "profile_error_email")
+                            createSaveEditedProfileAlert(ofType: .validEmail)
                             return
                         }
                         
@@ -100,8 +100,8 @@ struct ProfileFormView: View {
         }
     }
     
-    private func createAlert(for localizeId: String) {
-        alertMessage = NSLocalizedString(localizeId, comment: "")
+    private func createSaveEditedProfileAlert(ofType: SaveEditedProfileAlert) {
+        alertMessage = NSLocalizedString(ofType.message, comment: "")
         showAlert = true
     }
     

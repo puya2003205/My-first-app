@@ -1,36 +1,5 @@
 import Foundation
 
-enum ProfileGender: String, Codable, CaseIterable, Identifiable {
-    var id: Self {
-        return self
-    }
-    
-    case male = "male"
-    case female = "female"
-}
-
-struct Profile: Identifiable, Codable, Equatable {
-    let id: UUID
-    var name: String
-    var role: ActivityRole?
-    var gender: ProfileGender?
-    var dateOfBirth: Date
-    var email: String
-    
-    init(id: UUID = UUID(), name: String, role: ActivityRole?, gender: ProfileGender?, dateOfBirth: Date, email: String) {
-        self.id = id
-        self.name = name
-        self.role = role
-        self.gender = gender
-        self.dateOfBirth = dateOfBirth
-        self.email = email
-    }
-    
-    static var emptyProfile: Profile {
-        Profile(name: "", role: nil, gender: nil, dateOfBirth: Date.now, email: "")
-    }
-}
-
 enum ActivitySignificance: String, Codable, CaseIterable, Identifiable {
     var id: Self {
         return self
@@ -78,24 +47,8 @@ struct Activity: Identifiable, Codable, Equatable {
         self.status = status
         self.role = role
     }
-}
-
-extension Activity {
+    
     static var emptyActivity: Activity {
         Activity(title: "", significance: nil, duration: 0, status: false, role: nil)
-    }
-}
-
-struct Comment: Identifiable, Codable, Equatable {
-    let id: UUID
-    var comment: String
-    var date: String
-    var activity: Activity
-    
-    init(id: UUID = UUID(), comment: String, date: String, activity: Activity) {
-        self.id = id
-        self.comment = comment
-        self.date = date
-        self.activity = activity
     }
 }

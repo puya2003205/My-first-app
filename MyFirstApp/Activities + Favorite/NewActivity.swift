@@ -64,12 +64,20 @@ struct NewActivitySheet: View {
                     }
                     ToolbarItem(placement: .confirmationAction) {
                         Button("Add") {
-                            guard !newActivity.title.isEmpty else { showAlert(title: NSLocalizedString("new_activity_title_error_title", comment: ""), message: NSLocalizedString("new_activity_title_error_message", comment: ""))
-                                return }
-                            guard newActivity.significance != nil else { showAlert(title: NSLocalizedString("new_activity_significance_error_title", comment: ""), message: NSLocalizedString("new_activity_significance_error_message", comment: ""))
-                                return }
-                            guard newActivity.duration > 0 else { showAlert(title: NSLocalizedString("new_activity_duration_error_title", comment: ""), message: NSLocalizedString("new_activity_duration_error_message", comment: ""))
-                                return }
+                            guard !newActivity.title.isEmpty else {
+                                createSaveNewActivityAlert(ofType: .title)
+                                return
+                            }
+                            
+                            guard newActivity.significance != nil else {
+                                createSaveNewActivityAlert(ofType: .significance)
+                                return
+                            }
+                            
+                            guard newActivity.duration > 0 else {
+                                createSaveNewActivityAlert(ofType: .duration)
+                                return
+                            }
                             
                             setPozitie()
                             Task {
@@ -86,13 +94,13 @@ struct NewActivitySheet: View {
         }
     }
     
-    func showAlert(title: String, message: String) {
-        alertTitle = title
-        alertMessage = message
+    private func createSaveNewActivityAlert(ofType: SaveNewActivityAlert) {
+        alertTitle = NSLocalizedString(ofType.title, comment: "")
+        alertMessage = NSLocalizedString(ofType.message, comment: "")
         showAlert = true
     }
     
-    func setPozitie() {
+    private func setPozitie() {
         if let role = ActivityRole(rawValue: pozitie){
             newActivity.role = role
         }
