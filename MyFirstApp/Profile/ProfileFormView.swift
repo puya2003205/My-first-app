@@ -28,9 +28,9 @@ struct ProfileFormView: View {
                                 }
                             }
                         }
-                        label: {
-                            Image(systemName: "arrow.down")
-                        }
+                    label: {
+                        Image(systemName: "arrow.down")
+                    }
                     }
                     HStack{
                         Text(profile.gender?.rawValue.capitalized ?? NSLocalizedString("profile_gender", comment: ""))
@@ -45,9 +45,9 @@ struct ProfileFormView: View {
                                 }
                             }
                         }
-                        label: {
-                            Image(systemName: "arrow.down")
-                        }
+                    label: {
+                        Image(systemName: "arrow.down")
+                    }
                     }
                     DatePicker(LocalizedStringKey("profile_date_of_birth"), selection: $profile.dateOfBirth, displayedComponents: .date)
                         .datePickerStyle(WheelDatePickerStyle())
@@ -61,44 +61,43 @@ struct ProfileFormView: View {
                 
                 Section {
                     Button(LocalizedStringKey("update_profile_save_profile")) {
-                        guard profile.name.count >= 2 else {
-                            createSaveEditedProfileAlert(ofType: .minimumLetters)
-                            return
+                        for buttonGuardCondition in SaveEditedProfileAlert.allCases {
+                            guard evaluateButtonGuardCondition(buttonGuardCondition) else {
+                                createSaveEditedProfileAlert(ofType: buttonGuardCondition)
+                                return
+                            }
                         }
                         
-                        guard profile.name.count <= 35 else {
-                            createSaveEditedProfileAlert(ofType: .maximumLetters)
-                            return
-                        }
-                        
-                        guard profile.role != nil else {
-                            createSaveEditedProfileAlert(ofType: .role)
-                            return
-                        }
-                        
-                        guard profile.gender != nil else {
-                            createSaveEditedProfileAlert(ofType: .gender)
-                            return
-                        }
-                        
-                        guard isValidEmailAddress(emailAddress: profile.email) else {
-                            createSaveEditedProfileAlert(ofType: .validEmail)
-                            return
-                        }
                         
                         Task {
                             try await profileStore.updateProfile(profile)
                             isPresentingEditProfile = false
                         }
                     }
-                    .alert(isPresented: $showAlert) {
-                        Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("OK")))
-                    }
                 }
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                }
+                
             }
-            .navigationBarTitle(LocalizedStringKey("update_profile_update_profile"))
         }
+        .navigationBarTitle(LocalizedStringKey("update_profile_update_profile"))
     }
+    
+    private func evaluateButtonGuardCondition(_ buttonGuardCondition: SaveEditedProfileAlert) -> Bool {
+            switch buttonGuardCondition {
+            case .minimumLetters:
+                return profile.name.count >= 2
+            case .maximumLetters:
+                return profile.name.count <= 35
+            case .role:
+                return profile.role != nil
+            case .gender:
+                return profile.gender != nil
+            case .validEmail:
+                return isValidEmailAddress(emailAddress: profile.email)
+            }
+        }
     
     private func createSaveEditedProfileAlert(ofType: SaveEditedProfileAlert) {
         alertMessage = NSLocalizedString(ofType.message, comment: "")
@@ -118,3 +117,4 @@ struct ProfileFormView: View {
         }
     }
 }
+

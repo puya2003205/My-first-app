@@ -1,6 +1,10 @@
 import Foundation
 
-enum SaveEditedProfileAlert {
+enum SaveEditedProfileAlert: String, Codable, CaseIterable, Identifiable {
+    var id: Self {
+        return self
+    }
+    
     case minimumLetters
     case maximumLetters
     case role
