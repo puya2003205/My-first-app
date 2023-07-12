@@ -5,16 +5,19 @@ class ActivityDetailStore: ObservableObject {
     @Published var comments: [Comment] = []
     @Published var allComments: [Comment] = []
     
+    //Creare URL pentru fisierul cu toate comentariile
     private func allCommentsFileURL() throws -> URL {
         try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             .appendingPathComponent("allComments.data")
     }
     
+    //Creare URL separat pentru fiecare fisier cu comentarii de la fiecare activitate
     func fileURL(nameForDetailsFile: String) throws -> URL {
         try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             .appendingPathComponent(nameForDetailsFile + ".data")
     }
     
+    //Functia pentru incarcarea comentariilor separate pe activitati
     func loadComments(for url: URL) async throws {
         let task = Task<[Comment], Error> {
             guard let data = try? Data(contentsOf: url) else {
@@ -27,6 +30,7 @@ class ActivityDetailStore: ObservableObject {
         self.comments = comments
     }
     
+    //Functia pentru salvarea unui comentariu in fisiere separate pe activitati
     func saveComment(_ comment: Comment, for url: URL) async throws {
         let task = Task {
             do {
@@ -41,6 +45,7 @@ class ActivityDetailStore: ObservableObject {
         _ = await task.value
     }
     
+    //Functia pentru incarcarea comentariilor din fisierul care le contine pe toate
     func loadAllComments() async throws {
         let task = Task<[Comment], Error> {
             let fileURL = try allCommentsFileURL()
@@ -54,6 +59,7 @@ class ActivityDetailStore: ObservableObject {
         self.allComments = comments
     }
     
+    //Functia pentru salvarea comentariilor la comun
     func saveCommentInAllComments(_ comment: Comment) async throws {
         let task = Task {
             do {

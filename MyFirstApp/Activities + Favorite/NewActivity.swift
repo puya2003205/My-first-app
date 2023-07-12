@@ -1,49 +1,5 @@
 import SwiftUI
 
-struct ActivityView: View {
-    @Binding var activity: Activity
-    @State private var selectedOption: ActivitySignificance?
-    
-    var body: some View {
-        Form {
-            Section(header: Text(LocalizedStringKey("create_activity_label"))) {
-                TextField(LocalizedStringKey("activity_title"), text: $activity.title)
-            }
-            Section{
-                HStack{
-                    Menu(LocalizedStringKey("activity_significance")) {
-                        
-                        ForEach(ActivitySignificance.allCases) { activitySignificance in
-                            Button(action: {
-                                selectedOption = activitySignificance
-                                activity.significance = selectedOption
-                            }) {
-                                Text(LocalizedStringKey(activitySignificance.rawValue))
-                            }
-                        }
-                    }
-                    Spacer()
-                    Text(LocalizedStringKey(selectedOption?.rawValue ?? ""))
-                }
-            }
-            Section {
-                HStack{
-                    Text(LocalizedStringKey("activity_duration"))
-                    Slider(value: $activity.durationDouble, in: 0...8, step: 0.5) {
-                        Text(LocalizedStringKey("activity_duration"))
-                    }
-                    Spacer()
-                    HStack {
-                        Text("\(activity.duration)")
-                        Text(LocalizedStringKey("activity_duration_unity_of_measure"))
-                    }
-                        .accessibilityHidden(true)
-                }
-            }
-        }
-    }
-}
-
 struct NewActivitySheet: View {
     @State private var newActivity = Activity.emptyActivity
     @Binding var isPresentingNewActivity: Bool
@@ -55,34 +11,40 @@ struct NewActivitySheet: View {
     
     var body: some View {
         NavigationStack {
-            ActivityView(activity: $newActivity)
+            ActivityForm(activity: $newActivity)
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
-                        Button("Dismiss") {
-                            isPresentingNewActivity = false
-                        }
+                        dismissButton
                     }
                     ToolbarItem(placement: .confirmationAction) {
-                        Button("Add") {
-                            for buttonGuardCondition in SaveNewActivityAlert.allCases {
-                                guard evaluateButtonGuardCondition(buttonGuardCondition) else {
-                                    createSaveNewActivityAlert(ofType: buttonGuardCondition)
-                                    return
-                                }
-                            }
-                            
-                            setPozitie()
-                            Task {
-                                try await activityStore.saveActivity(newActivity)
-                            }
-                            isPresentingNewActivity = false
-                        }
-                        
+                        addButton
                     }
                 }
                 .alert(isPresented: $showAlert) {
                                     Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
                                 }
+        }
+    }
+    
+    @ViewBuilder private var dismissButton: some View {
+        Button("Dismiss") {
+            isPresentingNewActivity = false
+        }
+    }
+    
+    @ViewBuilder private var addButton: some View {
+        Button("Add") {
+            for buttonGuardCondition in SaveNewActivityAlert.allCases {
+                guard evaluateButtonGuardCondition(buttonGuardCondition) else {
+                    createSaveNewActivityAlert(ofType: buttonGuardCondition)
+                    return
+                }
+            }
+            setPozitie()
+            Task {
+                try await activityStore.saveActivity(newActivity)
+            }
+            isPresentingNewActivity = false
         }
     }
     

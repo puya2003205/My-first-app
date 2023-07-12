@@ -25,102 +25,24 @@ struct TabItem: View {
                             .font(.title)
                     }
                 }
-                TabView(selection: $selectedTab) {
-                    FavoritesView(activityStore: activityStore, commentsStore: commentsStore)
-                        .tabItem {
-                            Label("Favorites", systemImage: "star")
-                        }
-                        .tag(0)
-                    
-                    MainScreen(activityStore: activityStore)
-                        .tabItem {
-                            Label("Explore", systemImage: "safari.fill")
-                        }
-                        .tag(1)
-                    
-                    ProfileView(profileStore: profileStore, comments: commentsStore)
-                        .tabItem {
-                            Label("Profile", systemImage: "person.crop.circle.fill")
-                        }
-                        .tag(2)
-                }
+                tabView
                 .toolbar {
                     if selectedTab == 1 {
                         ToolbarItem(placement: .navigationBarLeading) {
-                            Menu {
-                                ForEach(ActivityRole.allCases, id: \.self) { activityRole in
-                                    Button(action: { selected = activityRole
-                                        activityStore.name = activityRole.rawValue
-                                        Task {
-                                            do {
-                                                try await activityStore.loadActivity()
-                                            } catch {
-                                                print(error)
-                                            }
-                                        }
-                                    }) {
-                                        Label(
-                                            title: {
-                                                if activityRole == .ios {
-                                                    Text(activityRole.rawValue.uppercased())
-                                                } else {
-                                                    Text(activityRole.rawValue.capitalized)
-                                                }
-                                            },
-                                            icon: {
-                                                if selected == activityRole {
-                                                    Image(systemName: "checkmark.circle.fill")
-                                                } else {
-                                                    Image(systemName: "circle")
-                                                }
-                                            }
-                                        )
-                                    }
-                                }
-                            }
-                        label: {
-                            Image(systemName: "arrow.up.arrow.down.circle")
-                        }
-                        .accessibilityLabel("Selectie")
-                        .font(.system(size: 20))
-                        .padding(5)
+                            menu
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            Button(action: {
-                                isPresentingNewActivityView = true
-                            }) {
-                                Image(systemName: "plus")
-                            }
-                            .accessibilityLabel("New Activity")
-                            .font(.system(size: 20))
-                            .padding(5)
+                            addNewActivityButton
                         }
                     }
                     if selectedTab == 0 {
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            Button(action: {
-                                confirmationAlert()
-                            }) {
-                                Image(systemName: "trash.circle")
-                            }
-                            .accessibilityLabel("New Activity")
-                            .font(.system(size: 20))
-                            .padding(5)
+                            deleteFavoritesButton
                         }
                     }
                     if selectedTab == 2 {
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            Button(action: {
-                                isPresentingEditProfile = true
-                                if profileStore.profile != nil {
-                                    editingProfile = profileStore.profile!
-                                }
-                            }) {
-                                Image(systemName: "square.and.pencil.circle.fill")
-                            }
-                            .accessibilityLabel("Edit Profile")
-                            .font(.system(size: 20))
-                            .padding(5)
+                            editProfileButton
                         }
                     }
                 }
@@ -144,6 +66,102 @@ struct TabItem: View {
                 }
             }
         }
+    }
+    
+    @ViewBuilder private var tabView: some View {
+        TabView(selection: $selectedTab) {
+            FavoritesView(activityStore: activityStore, commentsStore: commentsStore)
+                .tabItem {
+                    Label("Favorites", systemImage: "star")
+                }
+                .tag(0)
+            
+            MainScreen(activityStore: activityStore)
+                .tabItem {
+                    Label("Explore", systemImage: "safari.fill")
+                }
+                .tag(1)
+            
+            ProfileView(profileStore: profileStore, comments: commentsStore)
+                .tabItem {
+                    Label("Profile", systemImage: "person.crop.circle.fill")
+                }
+                .tag(2)
+        }
+    }
+    
+    @ViewBuilder private var menu: some View {
+        Menu {
+            ForEach(ActivityRole.allCases, id: \.self) { activityRole in
+                Button(action: { selected = activityRole
+                    activityStore.name = activityRole.rawValue
+                    Task {
+                        do {
+                            try await activityStore.loadActivity()
+                        } catch {
+                            print(error)
+                        }
+                    }
+                }) {
+                    Label(
+                        title: {
+                            if activityRole == .ios {
+                                Text(activityRole.rawValue.uppercased())
+                            } else {
+                                Text(activityRole.rawValue.capitalized)
+                            }
+                        },
+                        icon: {
+                            if selected == activityRole {
+                                Image(systemName: "checkmark.circle.fill")
+                            } else {
+                                Image(systemName: "circle")
+                            }
+                        }
+                    )
+                }
+            }
+        }
+    label: { Image(systemName: "arrow.up.arrow.down.circle") }
+    .accessibilityLabel("Selectie")
+    .font(.system(size: 20))
+    .padding(5)
+    }
+    
+    @ViewBuilder private var addNewActivityButton: some View {
+        Button(action: {
+            isPresentingNewActivityView = true
+        }) {
+            Image(systemName: "plus")
+        }
+        .accessibilityLabel("New Activity")
+        .font(.system(size: 20))
+        .padding(5)
+    }
+    
+    @ViewBuilder private var deleteFavoritesButton: some View {
+        Button(action: {
+            confirmationAlert()
+        }) {
+            Image(systemName: "trash.circle")
+        }
+        .accessibilityLabel("New Activity")
+        .font(.system(size: 20))
+        .padding(5)
+    }
+    
+    @ViewBuilder private var editProfileButton: some View {
+        Button(action: {
+            isPresentingEditProfile = true
+            if profileStore.profile != nil {
+                editingProfile = profileStore.profile!
+            }
+        }) {
+            Image(systemName: "square.and.pencil.circle.fill")
+        }
+        .accessibilityLabel("Edit Profile")
+        .font(.system(size: 20))
+        .padding(5)
     }
     
     func confirmationAlert() {

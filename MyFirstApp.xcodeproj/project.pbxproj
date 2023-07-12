@@ -19,6 +19,7 @@
 		ACA326802A5E81B300B4EBA2 /* SaveEditedProfileAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA3267F2A5E81B300B4EBA2 /* SaveEditedProfileAlert.swift */; };
 		ACA326822A5E914F00B4EBA2 /* ProfileCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA326812A5E914F00B4EBA2 /* ProfileCard.swift */; };
 		ACA326842A5E919100B4EBA2 /* CommentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA326832A5E919100B4EBA2 /* CommentCard.swift */; };
+		ACA326862A5E95A900B4EBA2 /* ActivityForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA326852A5E95A900B4EBA2 /* ActivityForm.swift */; };
 		ACA6F4CE2A49764C00724276 /* MyFirstAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA6F4CD2A49764C00724276 /* MyFirstAppApp.swift */; };
 		ACA6F4D22A49764D00724276 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACA6F4D12A49764D00724276 /* Assets.xcassets */; };
 		ACA6F4D52A49764D00724276 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACA6F4D42A49764D00724276 /* Preview Assets.xcassets */; };
@@ -47,6 +48,7 @@
 		ACA3267F2A5E81B300B4EBA2 /* SaveEditedProfileAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveEditedProfileAlert.swift; sourceTree = "<group>"; };
 		ACA326812A5E914F00B4EBA2 /* ProfileCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCard.swift; sourceTree = "<group>"; };
 		ACA326832A5E919100B4EBA2 /* CommentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCard.swift; sourceTree = "<group>"; };
+		ACA326852A5E95A900B4EBA2 /* ActivityForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityForm.swift; sourceTree = "<group>"; };
 		ACA6F4CA2A49764C00724276 /* MyFirstApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFirstApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACA6F4CD2A49764C00724276 /* MyFirstAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFirstAppApp.swift; sourceTree = "<group>"; };
 		ACA6F4D12A49764D00724276 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -87,6 +89,16 @@
 			path = Structs;
 			sourceTree = "<group>";
 		};
+		ACA326872A5E969C00B4EBA2 /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				ACC6A3732A540520003C7156 /* ProfileStore.swift */,
+				AC665B542A5692DC0061DD14 /* ActivityDetailStore.swift */,
+				AC61260F2A4C20CE002C3ED7 /* ActivityStore.swift */,
+			);
+			path = Stores;
+			sourceTree = "<group>";
+		};
 		ACA6F4C12A49764C00724276 = {
 			isa = PBXGroup;
 			children = (
@@ -110,10 +122,8 @@
 				ACA326762A5E7C3B00B4EBA2 /* Structs */,
 				ACC6A3722A53FD4A003C7156 /* Activities + Favorite */,
 				ACC6A3712A53FD2C003C7156 /* Profile */,
+				ACA326872A5E969C00B4EBA2 /* Stores */,
 				ACF0C1402A49D2F5008D10A8 /* TabItem.swift */,
-				AC61260F2A4C20CE002C3ED7 /* ActivityStore.swift */,
-				AC665B542A5692DC0061DD14 /* ActivityDetailStore.swift */,
-				ACC6A3732A540520003C7156 /* ProfileStore.swift */,
 				ACA6F4CD2A49764C00724276 /* MyFirstAppApp.swift */,
 				ACD11A032A541F570046ECB6 /* Localizable.strings */,
 				ACD11A0F2A5420F50046ECB6 /* Localizable.strings */,
@@ -152,6 +162,7 @@
 				ACA6F4E32A499C4800724276 /* FavoritesView.swift */,
 				AC6126112A4C27B1002C3ED7 /* NewActivity.swift */,
 				AC124DD02A544F5000D63D23 /* ActivityDetailsView.swift */,
+				ACA326852A5E95A900B4EBA2 /* ActivityForm.swift */,
 			);
 			path = "Activities + Favorite";
 			sourceTree = "<group>";
@@ -241,6 +252,7 @@
 				ACF0C1412A49D2F5008D10A8 /* TabItem.swift in Sources */,
 				ACA6F4E02A497F7E00724276 /* ActivityCard.swift in Sources */,
 				AC124DD12A544F5000D63D23 /* ActivityDetailsView.swift in Sources */,
+				ACA326862A5E95A900B4EBA2 /* ActivityForm.swift in Sources */,
 				ACA6F4E42A499C4800724276 /* FavoritesView.swift in Sources */,
 				ACF0C1432A4AD35F008D10A8 /* ActivityCardWithAnimation.swift in Sources */,
 				ACA6F4E22A4996F400724276 /* ProfileView.swift in Sources */,
