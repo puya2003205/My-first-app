@@ -21,8 +21,8 @@ struct NewActivitySheet: View {
                     }
                 }
                 .alert(isPresented: $showAlert) {
-                                    Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
-                                }
+                    Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                }
         }
     }
     

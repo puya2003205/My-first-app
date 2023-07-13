@@ -50,26 +50,21 @@ struct ActivityDetailsView: View {
     
     @ViewBuilder private var commentsScroll: some View {
         ScrollView {
-            VStack {
-                HStack {
-                    Spacer()
-                    VStack(alignment: .trailing) {
-                        ForEach(commentsStore.comments, id: \.id) { comment in
-                            HStack {
-                                Text(comment.date)
-                                Spacer()
-                                Text(comment.comment)
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 5)
-                                    .background(Color.gray)
-                                    .cornerRadius(10)
-                                    .foregroundColor(.white)
-                            }
-                        }
+            VStack(alignment: .trailing) {
+                ForEach(commentsStore.comments, id: \.id) { comment in
+                    HStack {
+                        Text(comment.date)
+                        Spacer()
+                        Text(comment.comment)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 5)
+                            .background(Color.gray)
+                            .cornerRadius(10)
+                            .foregroundColor(.white)
                     }
                 }
-                .padding(.trailing, 20)
             }
+            .padding(.horizontal, 20)
         }
     }
     

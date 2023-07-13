@@ -4,10 +4,6 @@ struct CommentCard: View {
     @State var activityInStore: Comment
     
     var body: some View {
-        comment
-    }
-    
-    @ViewBuilder private var comment: some View {
         HStack {
             Text(activityInStore.date)
             Spacer()
@@ -25,4 +21,5 @@ struct CommentCard: View {
         .cornerRadius(10)
         .shadow(radius: 3)
     }
+    
 }

@@ -5,16 +5,22 @@ struct TabItem: View {
     @ObservedObject var profileStore: ProfileStore
     @ObservedObject var commentsStore: ActivityDetailStore
     
-    @State private var selectedTab = 1
+    @State private var selectedTab: TabItemElement = .explore
     @State private var isPresentingNewActivityView = false
     @State private var selected: ActivityRole = .frontend
     @State private var isPresentingEditProfile = false
     @State private var editingProfile = Profile.emptyProfile
     
+    private enum TabItemElement: Int, CaseIterable, Hashable {
+        case favorites
+        case explore
+        case profile
+    }
+    
     var body: some View {
-        NavigationView{
-            VStack{
-                if selectedTab == 1 {
+        NavigationView {
+            VStack {
+                if selectedTab == .explore {
                     if selected == .ios {
                         Text(selected.rawValue.uppercased())
                             .padding(.top, 20)
@@ -27,35 +33,30 @@ struct TabItem: View {
                 }
                 tabView
                 .toolbar {
-                    if selectedTab == 1 {
+                    switch selectedTab {
+                    case .favorites:
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            deleteFavoritesButton
+                        }
+                        
+                    case .explore:
                         ToolbarItem(placement: .navigationBarLeading) {
                             menu
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
                             addNewActivityButton
                         }
-                    }
-                    if selectedTab == 0 {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            deleteFavoritesButton
-                        }
-                    }
-                    if selectedTab == 2 {
+                    case .profile:
                         ToolbarItem(placement: .navigationBarTrailing) {
                             editProfileButton
                         }
                     }
                 }
                 .onChange(of: selectedTab) { tab in
-                    switch tab {
-                    case 0:
-                        Task{
-                            do {
-                                try await activityStore.loadFavorite()
-                            }
+                    if tab == .favorites {
+                        Task {
+                            try? await activityStore.loadFavorite()
                         }
-                    default:
-                        break
                     }
                 }
                 .sheet(isPresented: $isPresentingNewActivityView){
@@ -74,19 +75,19 @@ struct TabItem: View {
                 .tabItem {
                     Label("Favorites", systemImage: "star")
                 }
-                .tag(0)
+                .tag(TabItemElement.favorites)
             
             MainScreen(activityStore: activityStore)
                 .tabItem {
                     Label("Explore", systemImage: "safari.fill")
                 }
-                .tag(1)
+                .tag(TabItemElement.explore)
             
             ProfileView(profileStore: profileStore, comments: commentsStore)
                 .tabItem {
                     Label("Profile", systemImage: "person.crop.circle.fill")
                 }
-                .tag(2)
+                .tag(TabItemElement.profile)
         }
     }
     
@@ -164,7 +165,7 @@ struct TabItem: View {
         .padding(5)
     }
     
-    func confirmationAlert() {
+    private func confirmationAlert() {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
             return
         }

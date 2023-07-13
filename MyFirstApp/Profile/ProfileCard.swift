@@ -74,7 +74,7 @@ struct ProfileCard: View {
     
     @ViewBuilder private var profileExtendedDetails: some View {
         List {
-            VStack{
+            VStack {
                 Section{
                     HStack{
                         Text(LocalizedStringKey("profile_gender"))
@@ -83,7 +83,7 @@ struct ProfileCard: View {
                     }
                 }
             }
-            VStack{
+            VStack {
                 Section{
                     HStack{
                         Text(LocalizedStringKey("profile_date_of_birth"))
@@ -92,7 +92,7 @@ struct ProfileCard: View {
                     }
                 }
             }
-            VStack{
+            VStack {
                 Section{
                     HStack{
                         Text(LocalizedStringKey("profile_email"))

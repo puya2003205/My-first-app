@@ -29,7 +29,6 @@ struct ProfileFormView: View {
                 .alert(isPresented: $showAlert) {
                     Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("OK")))
                 }
-                
             }
         }
         .navigationBarTitle(LocalizedStringKey("update_profile_update_profile"))
@@ -41,9 +40,11 @@ struct ProfileFormView: View {
     }
     
     @ViewBuilder private var updateRole: some View {
-        HStack{
+        HStack {
             Text(profile.role?.rawValue.capitalized ?? NSLocalizedString("profile_role", comment: ""))
+            
             Spacer()
+            
             Menu {
                 ForEach(ActivityRole.allCases) { profileRole in
                     Button(action: {
@@ -59,9 +60,11 @@ struct ProfileFormView: View {
     }
     
     @ViewBuilder private var updateGender: some View {
-        HStack{
+        HStack {
             Text(profile.gender?.rawValue.capitalized ?? NSLocalizedString("profile_gender", comment: ""))
+            
             Spacer()
+            
             Menu {
                 ForEach(ProfileGender.allCases) { profileGender in
                     Button(action: {

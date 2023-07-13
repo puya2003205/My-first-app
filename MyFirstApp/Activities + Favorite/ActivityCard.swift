@@ -6,7 +6,16 @@ struct ActivityCard: View {
     var color: Color
     
     var body: some View {
-        activityDetails
+        VStack(spacing: 10) {
+            activityTitle
+            activitySignificance
+            activityDuration
+        }
+        .padding(20)
+        .background(color)
+        .foregroundColor(.white)
+        .cornerRadius(10)
+        .shadow(radius: 3)
     }
     
     @ViewBuilder private var activityTitle: some View {
@@ -47,18 +56,4 @@ struct ActivityCard: View {
         }
         .padding(.bottom, 10)
     }
-
-    @ViewBuilder private var activityDetails: some View {
-        VStack(spacing: 10) {
-            activityTitle
-            activitySignificance
-            activityDuration
-        }
-        .padding(20)
-        .background(color)
-        .foregroundColor(.white)
-        .cornerRadius(10)
-        .shadow(radius: 3)
-    }
-
 }
