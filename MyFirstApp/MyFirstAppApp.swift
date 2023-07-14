@@ -18,6 +18,7 @@ struct MyFirstAppApp: App {
                     print(error)
                 }
             }
+         //   HelloScreenView()
         }
     }
 }

@@ -20,6 +20,9 @@
 		ACA326822A5E914F00B4EBA2 /* ProfileCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA326812A5E914F00B4EBA2 /* ProfileCard.swift */; };
 		ACA326842A5E919100B4EBA2 /* CommentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA326832A5E919100B4EBA2 /* CommentCard.swift */; };
 		ACA326862A5E95A900B4EBA2 /* ActivityForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA326852A5E95A900B4EBA2 /* ActivityForm.swift */; };
+		ACA3268A2A61627500B4EBA2 /* HelloScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA326892A61627500B4EBA2 /* HelloScreenView.swift */; };
+		ACA3268C2A616CCD00B4EBA2 /* LoginScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA3268B2A616CCD00B4EBA2 /* LoginScreenView.swift */; };
+		ACA3268E2A616CD800B4EBA2 /* RegisterScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA3268D2A616CD800B4EBA2 /* RegisterScreenView.swift */; };
 		ACA6F4CE2A49764C00724276 /* MyFirstAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA6F4CD2A49764C00724276 /* MyFirstAppApp.swift */; };
 		ACA6F4D22A49764D00724276 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACA6F4D12A49764D00724276 /* Assets.xcassets */; };
 		ACA6F4D52A49764D00724276 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACA6F4D42A49764D00724276 /* Preview Assets.xcassets */; };
@@ -49,6 +52,9 @@
 		ACA326812A5E914F00B4EBA2 /* ProfileCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCard.swift; sourceTree = "<group>"; };
 		ACA326832A5E919100B4EBA2 /* CommentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCard.swift; sourceTree = "<group>"; };
 		ACA326852A5E95A900B4EBA2 /* ActivityForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityForm.swift; sourceTree = "<group>"; };
+		ACA326892A61627500B4EBA2 /* HelloScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloScreenView.swift; sourceTree = "<group>"; };
+		ACA3268B2A616CCD00B4EBA2 /* LoginScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenView.swift; sourceTree = "<group>"; };
+		ACA3268D2A616CD800B4EBA2 /* RegisterScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreenView.swift; sourceTree = "<group>"; };
 		ACA6F4CA2A49764C00724276 /* MyFirstApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFirstApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACA6F4CD2A49764C00724276 /* MyFirstAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFirstAppApp.swift; sourceTree = "<group>"; };
 		ACA6F4D12A49764D00724276 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -99,6 +105,16 @@
 			path = Stores;
 			sourceTree = "<group>";
 		};
+		ACA326882A61625B00B4EBA2 /* Login and SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				ACA326892A61627500B4EBA2 /* HelloScreenView.swift */,
+				ACA3268B2A616CCD00B4EBA2 /* LoginScreenView.swift */,
+				ACA3268D2A616CD800B4EBA2 /* RegisterScreenView.swift */,
+			);
+			path = "Login and SignUp";
+			sourceTree = "<group>";
+		};
 		ACA6F4C12A49764C00724276 = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +134,7 @@
 		ACA6F4CC2A49764C00724276 /* MyFirstApp */ = {
 			isa = PBXGroup;
 			children = (
+				ACA326882A61625B00B4EBA2 /* Login and SignUp */,
 				ACD119FE2A541EF90046ECB6 /* Info.plist */,
 				ACA326762A5E7C3B00B4EBA2 /* Structs */,
 				ACC6A3722A53FD4A003C7156 /* Activities + Favorite */,
@@ -244,8 +261,11 @@
 				ACA326802A5E81B300B4EBA2 /* SaveEditedProfileAlert.swift in Sources */,
 				ACA326782A5E7C5500B4EBA2 /* SaveNewActivityAlert.swift in Sources */,
 				ACC6A3742A540520003C7156 /* ProfileStore.swift in Sources */,
+				ACA3268E2A616CD800B4EBA2 /* RegisterScreenView.swift in Sources */,
+				ACA3268C2A616CCD00B4EBA2 /* LoginScreenView.swift in Sources */,
 				ACA6F4DC2A49766400724276 /* MainScreen.swift in Sources */,
 				AC79C0DF2A57EA54007ED87D /* AllComments.swift in Sources */,
+				ACA3268A2A61627500B4EBA2 /* HelloScreenView.swift in Sources */,
 				ACA3267C2A5E7CDE00B4EBA2 /* Activity.swift in Sources */,
 				ACA326842A5E919100B4EBA2 /* CommentCard.swift in Sources */,
 				ACC6A3702A52E2D2003C7156 /* ProfileFormView.swift in Sources */,
