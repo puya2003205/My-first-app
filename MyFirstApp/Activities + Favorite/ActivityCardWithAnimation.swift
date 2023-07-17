@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ActivityCardWithAnimation: View {
-    @ObservedObject var activityStore = ActivityStore()
+    @ObservedObject var activityStore: ActivityStore
     var activity: Activity
     @State private var offset = CGSize.zero
     @State private var color: Color = .blue
@@ -84,5 +84,14 @@ struct ActivityCardWithAnimation: View {
         default:
             color = .blue
         }
+    }
+}
+
+struct ActivityCardWithAnimation_Previews: PreviewProvider {
+    static var previews: some View {
+        let activityStore = ActivityStore()
+        let activity = Activity.emptyActivity
+        
+        ActivityCardWithAnimation(activityStore: activityStore, activity: activity)
     }
 }

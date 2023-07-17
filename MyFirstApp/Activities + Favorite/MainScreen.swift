@@ -12,7 +12,7 @@ struct MainScreen: View {
             Spacer()
             ZStack {
                 ForEach(activityStore.activitati) { activity in
-                        ActivityCardWithAnimation(activity: activity)
+                        ActivityCardWithAnimation(activityStore: activityStore, activity: activity)
                     }
                 }
             Spacer()
