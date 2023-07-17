@@ -33,7 +33,7 @@ struct HelloScreenView: View {
                     Spacer()
                     
                     NavigationLink {
-                        RegisterScreenView()
+                        RegisterScreenView(profileStore: profileStore)
                     } label: {
                         Text("Register")
                             .frame(minWidth: 0, maxWidth: 100)

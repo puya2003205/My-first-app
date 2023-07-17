@@ -7,12 +7,16 @@ struct LoginScreenView: View {
     @State var email = ""
     @State var parola = ""
     @State private var valid = false
+    @State private var showAlert = false
     
     var body: some View {
         NavigationStack {
             ZStack {
                 loginForm
                 loginButton
+                    .alert(isPresented: $showAlert) {
+                        Alert(title: Text(""), message: Text("info gresite"), dismissButton: .default(Text("OK")))
+                    }
             }
             .navigationDestination(isPresented: $valid) {
                 TabItem(activityStore: activityStore, profileStore: profileStore, commentsStore: commentsStore)
@@ -31,6 +35,10 @@ struct LoginScreenView: View {
                 SecureField(LocalizedStringKey("profile_password"), text: $parola)
                     .autocapitalization(.none)
                     .autocorrectionDisabled()
+            }
+            NavigationLink(destination: RegisterScreenView(profileStore: profileStore)) {
+                Text("Nu am cont")
+                    .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
     }
@@ -61,6 +69,7 @@ struct LoginScreenView: View {
             valid = true
         } else {
             print("fail")
+            showAlert = true
         }
     }
 }
