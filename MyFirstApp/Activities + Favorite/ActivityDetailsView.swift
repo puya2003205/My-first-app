@@ -108,3 +108,12 @@ struct ActivityDetailsView: View {
         }
     }
 }
+
+struct ActivityDetailsView_Previews: PreviewProvider {
+    static var previews: some View {
+        let activity = Activity.emptyActivity
+        let commentsStore = ActivityDetailStore()
+        
+        ActivityDetailsView(activity: activity, commentsStore: commentsStore)
+    }
+}
