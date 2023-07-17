@@ -67,3 +67,11 @@ struct FavoritesView: View {
         .shadow(radius: 3)
     }
 }
+
+struct FavoritesView_Previews: PreviewProvider {
+    static var previews: some View {
+        let activityStore = ActivityStore()
+        let commentsStore = ActivityDetailStore()
+        FavoritesView(activityStore: activityStore, commentsStore: commentsStore)
+    }
+}
