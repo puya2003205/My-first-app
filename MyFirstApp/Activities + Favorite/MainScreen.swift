@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct MainScreen: View {
-    @StateObject var activityStore: ActivityStore
+    @ObservedObject var activityStore: ActivityStore
     
     var body: some View {
         mainScreen
@@ -17,5 +17,13 @@ struct MainScreen: View {
                 }
             Spacer()
         }
+    }
+}
+
+struct MainScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        let activityStore = ActivityStore()
+        
+        MainScreen(activityStore: activityStore)
     }
 }
