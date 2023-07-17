@@ -17,3 +17,11 @@ struct AllComments: View {
     }
     
 }
+
+struct AllComments_Previews: PreviewProvider {
+    static var previews: some View {
+        let commentsStore = ActivityDetailStore()
+        
+        AllComments(commentsStore: commentsStore)
+    }
+}

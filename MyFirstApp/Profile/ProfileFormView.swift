@@ -138,3 +138,14 @@ struct ProfileFormView: View {
         }
     }
 }
+
+struct ProfileFormView_Previews: PreviewProvider {
+    @State static var profile = Profile.emptyProfile
+    @State static var isPresentingEditProfile = true
+    
+    static var previews: some View {
+        let profileStore = ProfileStore()
+        
+        ProfileFormView(profile: $profile, profileStore: profileStore, isPresentingEditProfile: $isPresentingEditProfile)
+    }
+}
