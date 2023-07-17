@@ -57,3 +57,11 @@ struct ActivityCard: View {
         .padding(.bottom, 10)
     }
 }
+
+struct ActivityCard_Previews: PreviewProvider {
+    static var previews: some View {
+        let activity = Activity.emptyActivity
+        let color = Color.blue
+        ActivityCard(activity: activity, color: color)
+    }
+}
