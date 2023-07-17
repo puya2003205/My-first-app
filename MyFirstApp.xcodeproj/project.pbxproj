@@ -19,7 +19,6 @@
 		ACA326802A5E81B300B4EBA2 /* SaveEditedProfileAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA3267F2A5E81B300B4EBA2 /* SaveEditedProfileAlert.swift */; };
 		ACA326822A5E914F00B4EBA2 /* ProfileCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA326812A5E914F00B4EBA2 /* ProfileCard.swift */; };
 		ACA326842A5E919100B4EBA2 /* CommentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA326832A5E919100B4EBA2 /* CommentCard.swift */; };
-		ACA326862A5E95A900B4EBA2 /* ActivityForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA326852A5E95A900B4EBA2 /* ActivityForm.swift */; };
 		ACA3268A2A61627500B4EBA2 /* HelloScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA326892A61627500B4EBA2 /* HelloScreenView.swift */; };
 		ACA3268C2A616CCD00B4EBA2 /* LoginScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA3268B2A616CCD00B4EBA2 /* LoginScreenView.swift */; };
 		ACA3268E2A616CD800B4EBA2 /* RegisterScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA3268D2A616CD800B4EBA2 /* RegisterScreenView.swift */; };
@@ -51,7 +50,6 @@
 		ACA3267F2A5E81B300B4EBA2 /* SaveEditedProfileAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveEditedProfileAlert.swift; sourceTree = "<group>"; };
 		ACA326812A5E914F00B4EBA2 /* ProfileCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCard.swift; sourceTree = "<group>"; };
 		ACA326832A5E919100B4EBA2 /* CommentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCard.swift; sourceTree = "<group>"; };
-		ACA326852A5E95A900B4EBA2 /* ActivityForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityForm.swift; sourceTree = "<group>"; };
 		ACA326892A61627500B4EBA2 /* HelloScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloScreenView.swift; sourceTree = "<group>"; };
 		ACA3268B2A616CCD00B4EBA2 /* LoginScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenView.swift; sourceTree = "<group>"; };
 		ACA3268D2A616CD800B4EBA2 /* RegisterScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreenView.swift; sourceTree = "<group>"; };
@@ -179,7 +177,6 @@
 				ACA6F4E32A499C4800724276 /* FavoritesView.swift */,
 				AC6126112A4C27B1002C3ED7 /* NewActivity.swift */,
 				AC124DD02A544F5000D63D23 /* ActivityDetailsView.swift */,
-				ACA326852A5E95A900B4EBA2 /* ActivityForm.swift */,
 			);
 			path = "Activities + Favorite";
 			sourceTree = "<group>";
@@ -272,7 +269,6 @@
 				ACF0C1412A49D2F5008D10A8 /* TabItem.swift in Sources */,
 				ACA6F4E02A497F7E00724276 /* ActivityCard.swift in Sources */,
 				AC124DD12A544F5000D63D23 /* ActivityDetailsView.swift in Sources */,
-				ACA326862A5E95A900B4EBA2 /* ActivityForm.swift in Sources */,
 				ACA6F4E42A499C4800724276 /* FavoritesView.swift in Sources */,
 				ACF0C1432A4AD35F008D10A8 /* ActivityCardWithAnimation.swift in Sources */,
 				ACA6F4E22A4996F400724276 /* ProfileView.swift in Sources */,

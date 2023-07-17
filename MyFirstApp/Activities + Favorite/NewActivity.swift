@@ -8,10 +8,15 @@ struct NewActivity: View {
     @State private var showAlert = false
     @State private var alertTitle = ""
     @State private var alertMessage = ""
+    @State private var selectedOption: ActivitySignificance?
     
     var body: some View {
         NavigationStack {
-            ActivityForm(activity: $newActivity)
+            Form {
+                activityFormTitle
+                activityFormSignificance
+                activityFormDuration
+            }
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
                         dismissButton
@@ -23,6 +28,49 @@ struct NewActivity: View {
                 .alert(isPresented: $showAlert) {
                     Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
                 }
+        }
+    }
+    
+    @ViewBuilder private var activityFormTitle: some View {
+        Section(header: Text(LocalizedStringKey("create_activity_label"))) {
+            TextField(LocalizedStringKey("activity_title"), text: $newActivity.title)
+        }
+    }
+    
+    @ViewBuilder private var activityFormSignificance: some View {
+        Section{
+            HStack{
+                Menu(LocalizedStringKey("activity_significance")) {
+                    
+                    ForEach(ActivitySignificance.allCases) { activitySignificance in
+                        Button(action: {
+                            selectedOption = activitySignificance
+                            newActivity.significance = selectedOption
+                        }) {
+                            Text(LocalizedStringKey(activitySignificance.rawValue))
+                        }
+                    }
+                }
+                Spacer()
+                Text(LocalizedStringKey(selectedOption?.rawValue ?? ""))
+            }
+        }
+    }
+    
+    @ViewBuilder private var activityFormDuration: some View {
+        Section {
+            HStack{
+                Text(LocalizedStringKey("activity_duration"))
+                Slider(value: $newActivity.durationDouble, in: 0...8, step: 0.5) {
+                    Text(LocalizedStringKey("activity_duration"))
+                }
+                Spacer()
+                HStack {
+                    Text("\(newActivity.duration)")
+                    Text(LocalizedStringKey("activity_duration_unity_of_measure"))
+                }
+                    .accessibilityHidden(true)
+            }
         }
     }
     
