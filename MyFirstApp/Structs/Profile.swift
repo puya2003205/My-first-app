@@ -31,4 +31,8 @@ struct Profile: Identifiable, Codable, Equatable {
     static var emptyProfile: Profile {
         Profile(name: "", role: nil, gender: nil, dateOfBirth: Date.now, email: "", password: "")
     }
+    
+    static var sampleData: Profile {
+        Profile(name: "Andrei", role: ActivityRole.ios, gender: ProfileGender.male, dateOfBirth: Date.now, email: "andrei.stanciu@idea-bank.ro", password: "")
+    }
 }

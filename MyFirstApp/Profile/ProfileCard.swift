@@ -114,7 +114,7 @@ struct ProfileCard: View {
 
 struct ProfileCard_Previews: PreviewProvider {
     static var previews: some View {
-        let profile = Profile.emptyProfile
+        let profile = Profile.sampleData
         let commentsStore = ActivityDetailStore()
         
         ProfileCard(profile: profile, commentsStore: commentsStore)

@@ -56,6 +56,7 @@ struct HelloScreenView_Previews: PreviewProvider {
         let activityStore = ActivityStore()
         let profileStore = ProfileStore()
         let commentsStore = ActivityDetailStore()
+        
         HelloScreenView(activityStore: activityStore, profileStore: profileStore, commentsStore: commentsStore)
     }
 }

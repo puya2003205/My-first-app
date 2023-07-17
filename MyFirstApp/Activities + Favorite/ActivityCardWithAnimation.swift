@@ -90,7 +90,7 @@ struct ActivityCardWithAnimation: View {
 struct ActivityCardWithAnimation_Previews: PreviewProvider {
     static var previews: some View {
         let activityStore = ActivityStore()
-        let activity = Activity.emptyActivity
+        let activity = Activity.sampleData
         
         ActivityCardWithAnimation(activityStore: activityStore, activity: activity)
     }

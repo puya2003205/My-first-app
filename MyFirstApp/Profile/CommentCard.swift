@@ -23,3 +23,11 @@ struct CommentCard: View {
     }
     
 }
+
+struct CommentCard_Previews: PreviewProvider {
+    static var previews: some View {
+        let comment = Comment.sampleData
+        
+        CommentCard(activityInStore: comment)
+    }
+}

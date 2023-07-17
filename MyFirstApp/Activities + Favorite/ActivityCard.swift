@@ -60,8 +60,9 @@ struct ActivityCard: View {
 
 struct ActivityCard_Previews: PreviewProvider {
     static var previews: some View {
-        let activity = Activity.emptyActivity
+        let activity = Activity.sampleData
         let color = Color.blue
+        
         ActivityCard(activity: activity, color: color)
     }
 }

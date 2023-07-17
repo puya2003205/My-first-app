@@ -140,7 +140,7 @@ struct ProfileFormView: View {
 }
 
 struct ProfileFormView_Previews: PreviewProvider {
-    @State static var profile = Profile.emptyProfile
+    @State static var profile = Profile.sampleData
     @State static var isPresentingEditProfile = true
     
     static var previews: some View {

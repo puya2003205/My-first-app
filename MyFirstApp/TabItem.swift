@@ -187,3 +187,13 @@ struct TabItem: View {
         }
     }
 }
+
+struct TabItem_Previews: PreviewProvider {
+    static var previews: some View {
+        let activityStore = ActivityStore()
+        let profileStore = ProfileStore()
+        let commentsStore = ActivityDetailStore()
+        
+        TabItem(activityStore: activityStore, profileStore: profileStore, commentsStore: commentsStore)
+    }
+}

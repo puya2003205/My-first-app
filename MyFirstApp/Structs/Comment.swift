@@ -12,4 +12,8 @@ struct Comment: Identifiable, Codable, Equatable {
         self.date = date
         self.activity = activity
     }
+    
+    static var sampleData: Comment {
+        Comment(comment: "salut", date: "10:45", activity: Activity.sampleData)
+    }
 }

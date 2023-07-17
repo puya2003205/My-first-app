@@ -51,6 +51,10 @@ struct Activity: Identifiable, Codable, Equatable {
     static var emptyActivity: Activity {
         Activity(title: "", significance: nil, duration: 0, status: false, role: nil)
     }
+    
+    static var sampleData: Activity {
+        Activity(title: "Ios1", significance: ActivitySignificance.medium, duration: 5, status: true, role: ActivityRole.ios)
+    }
 }
 
 enum SwipeDirection {

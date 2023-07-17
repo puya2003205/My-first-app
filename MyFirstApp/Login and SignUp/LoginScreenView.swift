@@ -70,6 +70,7 @@ struct LoginScreenView_Previews: PreviewProvider {
         let activityStore = ActivityStore()
         let profileStore = ProfileStore()
         let commentsStore = ActivityDetailStore()
+        
         LoginScreenView(activityStore: activityStore, profileStore: profileStore, commentsStore: commentsStore)
     }
 }
