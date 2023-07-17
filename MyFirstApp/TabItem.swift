@@ -67,6 +67,8 @@ struct TabItem: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden(true)
     }
     
     @ViewBuilder private var tabView: some View {

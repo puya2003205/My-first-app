@@ -23,15 +23,14 @@ struct ProfileFormView: View {
                     updateEmail
                 }
                 
-                Section {
-                    saveButton
-                }
-                .alert(isPresented: $showAlert) {
-                    Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("OK")))
-                }
+                saveButton
+                    .alert(isPresented: $showAlert) {
+                        Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                    }
             }
+            
+            .navigationTitle(Text(LocalizedStringKey("update_profile_update_profile")))
         }
-        .navigationBarTitle(LocalizedStringKey("update_profile_update_profile"))
     }
     
     @ViewBuilder private var updateName: some View {
@@ -139,4 +138,3 @@ struct ProfileFormView: View {
         }
     }
 }
-

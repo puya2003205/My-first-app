@@ -5,6 +5,7 @@
 "profile_gender" = "Gender";
 "profile_date_of_birth" = "Date of birth";
 "profile_email" = "Email";
+"profile_password" = "Password";
 "update_profile_name" = "Name";
 "update_profile_save_profile" = "Save";
 "update_profile_personal_information" = "Personal information";

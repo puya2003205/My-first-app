@@ -16,17 +16,19 @@ struct Profile: Identifiable, Codable, Equatable {
     var gender: ProfileGender?
     var dateOfBirth: Date
     var email: String
+    var password: String
     
-    init(id: UUID = UUID(), name: String, role: ActivityRole?, gender: ProfileGender?, dateOfBirth: Date, email: String) {
+    init(id: UUID = UUID(), name: String, role: ActivityRole?, gender: ProfileGender?, dateOfBirth: Date, email: String, password: String) {
         self.id = id
         self.name = name
         self.role = role
         self.gender = gender
         self.dateOfBirth = dateOfBirth
         self.email = email
+        self.password = password
     }
     
     static var emptyProfile: Profile {
-        Profile(name: "", role: nil, gender: nil, dateOfBirth: Date.now, email: "")
+        Profile(name: "", role: nil, gender: nil, dateOfBirth: Date.now, email: "", password: "")
     }
 }

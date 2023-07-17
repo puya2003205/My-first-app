@@ -1,10 +1,3 @@
-//
-//  RegisterScreenView.swift
-//  MyFirstApp
-//
-//  Created by Andrei Stanciu on 14.07.2023.
-//
-
 import SwiftUI
 
 struct RegisterScreenView: View {

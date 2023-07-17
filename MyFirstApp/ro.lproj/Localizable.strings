@@ -5,6 +5,7 @@
 "profile_gender" = "Gen";
 "profile_date_of_birth" = "Data nasterii";
 "profile_email" = "Email";
+"profile_password" = "Parola";
 "update_profile_name" = "Nume";
 "update_profile_save_profile" = "Salveaza";
 "update_profile_personal_information" = "Informatii personale";

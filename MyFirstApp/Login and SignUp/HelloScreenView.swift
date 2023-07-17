@@ -1,13 +1,9 @@
-//
-//  SwiftUIView.swift
-//  MyFirstApp
-//
-//  Created by Andrei Stanciu on 14.07.2023.
-//
-
 import SwiftUI
 
 struct HelloScreenView: View {
+    @ObservedObject var activityStore: ActivityStore
+    @ObservedObject var profileStore: ProfileStore
+    @ObservedObject var commentsStore: ActivityDetailStore
     var body: some View {
         NavigationView {
             VStack {
@@ -23,7 +19,7 @@ struct HelloScreenView: View {
                     Spacer()
                     
                     NavigationLink {
-                        LoginScreenView()
+                        LoginScreenView(activityStore: activityStore, profileStore: profileStore, commentsStore: commentsStore)
                     } label: {
                         Text("Login")
                             .frame(minWidth: 0, maxWidth: 100)
@@ -57,6 +53,9 @@ struct HelloScreenView: View {
 
 struct HelloScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        HelloScreenView()
+        let activityStore = ActivityStore()
+        let profileStore = ProfileStore()
+        let commentsStore = ActivityDetailStore()
+        HelloScreenView(activityStore: activityStore, profileStore: profileStore, commentsStore: commentsStore)
     }
 }
