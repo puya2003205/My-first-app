@@ -3,7 +3,7 @@ import SwiftUI
 struct ProfileCard: View {
     let profile: Profile
     @ObservedObject var commentsStore: ActivityDetailStore
-    @State var dailyReminderTime = Date(timeIntervalSince1970: 0)
+    @State private var dailyReminderTime = Date(timeIntervalSince1970: 0)
     @State private var showComments = false
 
     var body: some View {
@@ -109,5 +109,14 @@ struct ProfileCard: View {
         formatter.dateStyle = .long
         formatter.timeStyle = .none
         return formatter.string(from: date)
+    }
+}
+
+struct ProfileCard_Previews: PreviewProvider {
+    static var previews: some View {
+        let profile = Profile.emptyProfile
+        let commentsStore = ActivityDetailStore()
+        
+        ProfileCard(profile: profile, commentsStore: commentsStore)
     }
 }
