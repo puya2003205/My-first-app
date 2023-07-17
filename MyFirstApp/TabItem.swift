@@ -60,7 +60,7 @@ struct TabItem: View {
                     }
                 }
                 .sheet(isPresented: $isPresentingNewActivityView){
-                    NewActivitySheet(isPresentingNewActivity: $isPresentingNewActivityView, activityStore: activityStore, pozitie: selected.rawValue)
+                    NewActivity(isPresentingNewActivity: $isPresentingNewActivityView, activityStore: activityStore, pozitie: selected.rawValue)
                 }
                 .sheet(isPresented: $isPresentingEditProfile) {
                     ProfileFormView(profile: $editingProfile, profileStore: profileStore, isPresentingEditProfile: $isPresentingEditProfile)

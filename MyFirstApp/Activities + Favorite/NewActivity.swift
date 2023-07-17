@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct NewActivitySheet: View {
+struct NewActivity: View {
     @State private var newActivity = Activity.emptyActivity
     @Binding var isPresentingNewActivity: Bool
     @ObservedObject var activityStore: ActivityStore
@@ -69,5 +69,15 @@ struct NewActivitySheet: View {
         if let role = ActivityRole(rawValue: pozitie){
             newActivity.role = role
         }
+    }
+}
+
+struct NewActivity_Previews: PreviewProvider {
+    @State static var isPresentingNewActivity = true
+    
+    static var previews: some View {
+        let activityStore = ActivityStore()
+
+        NewActivity(isPresentingNewActivity: $isPresentingNewActivity, activityStore: activityStore)
     }
 }
