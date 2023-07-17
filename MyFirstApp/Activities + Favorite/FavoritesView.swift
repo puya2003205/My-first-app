@@ -42,9 +42,9 @@ struct FavoritesView: View {
     @ViewBuilder private var favoriteNil: some View {
         HStack {
             Text(LocalizedStringKey("favorites_no_activity"))
-            .multilineTextAlignment(.center)
-            .padding(50)
-            .font(.title2)
+                .multilineTextAlignment(.center)
+                .padding(50)
+                .font(.title2)
         }
     }
     
@@ -55,7 +55,7 @@ struct FavoritesView: View {
                 Text(LocalizedStringKey("favorites_no_activity_on_category"))
                     .font(.title)
                     .multilineTextAlignment(.center)
-                  
+                
                 Spacer()
             }
             .padding(.vertical, 5)

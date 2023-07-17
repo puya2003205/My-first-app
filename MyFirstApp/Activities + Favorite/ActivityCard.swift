@@ -41,7 +41,7 @@ struct ActivityCard: View {
         }
         .padding(.bottom, 10)
     }
-
+    
     @ViewBuilder private var activityDuration: some View {
         HStack {
             Spacer()
@@ -51,7 +51,7 @@ struct ActivityCard: View {
                 Text("\(activity.duration)")
                 Text(LocalizedStringKey("activity_duration_unity_of_measure"))
             }
-                .font(.title2)
+            .font(.title2)
             Spacer()
         }
         .padding(.bottom, 10)

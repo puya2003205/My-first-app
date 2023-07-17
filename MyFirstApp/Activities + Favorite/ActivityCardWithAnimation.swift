@@ -74,7 +74,7 @@ struct ActivityCardWithAnimation: View {
             self.offset = .zero
         }
     }
-
+    
     private func changeColor(width: CGFloat) {
         switch width {
         case -500...(-130):

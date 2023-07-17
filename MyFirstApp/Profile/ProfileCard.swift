@@ -5,7 +5,7 @@ struct ProfileCard: View {
     @ObservedObject var commentsStore: ActivityDetailStore
     @State private var dailyReminderTime = Date(timeIntervalSince1970: 0)
     @State private var showComments = false
-
+    
     var body: some View {
         VStack {
             profileGeneralDetails

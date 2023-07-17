@@ -17,17 +17,17 @@ struct NewActivity: View {
                 activityFormSignificance
                 activityFormDuration
             }
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        dismissButton
-                    }
-                    ToolbarItem(placement: .confirmationAction) {
-                        addButton
-                    }
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    dismissButton
                 }
-                .alert(isPresented: $showAlert) {
-                    Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                ToolbarItem(placement: .confirmationAction) {
+                    addButton
                 }
+            }
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+            }
         }
     }
     
@@ -69,7 +69,7 @@ struct NewActivity: View {
                     Text("\(newActivity.duration)")
                     Text(LocalizedStringKey("activity_duration_unity_of_measure"))
                 }
-                    .accessibilityHidden(true)
+                .accessibilityHidden(true)
             }
         }
     }

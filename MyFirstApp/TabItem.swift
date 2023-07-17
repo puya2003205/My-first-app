@@ -32,39 +32,39 @@ struct TabItem: View {
                     }
                 }
                 tabView
-                .toolbar {
-                    switch selectedTab {
-                    case .favorites:
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            deleteFavoritesButton
-                        }
-                        
-                    case .explore:
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            menu
-                        }
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            addNewActivityButton
-                        }
-                    case .profile:
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            editProfileButton
-                        }
-                    }
-                }
-                .onChange(of: selectedTab) { tab in
-                    if tab == .favorites {
-                        Task {
-                            try? await activityStore.loadFavorite()
+                    .toolbar {
+                        switch selectedTab {
+                        case .favorites:
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                deleteFavoritesButton
+                            }
+                            
+                        case .explore:
+                            ToolbarItem(placement: .navigationBarLeading) {
+                                menu
+                            }
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                addNewActivityButton
+                            }
+                        case .profile:
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                editProfileButton
+                            }
                         }
                     }
-                }
-                .sheet(isPresented: $isPresentingNewActivityView){
-                    NewActivity(isPresentingNewActivity: $isPresentingNewActivityView, activityStore: activityStore, pozitie: selected.rawValue)
-                }
-                .sheet(isPresented: $isPresentingEditProfile) {
-                    ProfileFormView(profile: $editingProfile, profileStore: profileStore, isPresentingEditProfile: $isPresentingEditProfile)
-                }
+                    .onChange(of: selectedTab) { tab in
+                        if tab == .favorites {
+                            Task {
+                                try? await activityStore.loadFavorite()
+                            }
+                        }
+                    }
+                    .sheet(isPresented: $isPresentingNewActivityView){
+                        NewActivity(isPresentingNewActivity: $isPresentingNewActivityView, activityStore: activityStore, pozitie: selected.rawValue)
+                    }
+                    .sheet(isPresented: $isPresentingEditProfile) {
+                        ProfileFormView(profile: $editingProfile, profileStore: profileStore, isPresentingEditProfile: $isPresentingEditProfile)
+                    }
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -126,9 +126,9 @@ struct TabItem: View {
             }
         }
     label: { Image(systemName: "arrow.up.arrow.down.circle") }
-    .accessibilityLabel("Selectie")
-    .font(.system(size: 20))
-    .padding(5)
+            .accessibilityLabel("Selectie")
+            .font(.system(size: 20))
+            .padding(5)
     }
     
     @ViewBuilder private var addNewActivityButton: some View {
@@ -176,7 +176,8 @@ struct TabItem: View {
         
         let confirmAction = UIAlertAction(title: "Confirm", style: .destructive) { _ in
             Task {
-                    try await activityStore.clearFavorites()
+                try await activityStore.clearFavorites()
+                try await commentsStore.clearComments()
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
