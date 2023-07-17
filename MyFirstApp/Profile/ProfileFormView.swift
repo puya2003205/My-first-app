@@ -84,7 +84,7 @@ struct ProfileFormView: View {
     }
     
     @ViewBuilder private var updateEmail: some View {
-        TextField(LocalizedStringKey("profile_email"), text: $profile.email)
+        TextField(LocalizedStringKey("profile_email"), text: $profile.account.email)
             .autocapitalization(.none)
             .autocorrectionDisabled()
     }
@@ -116,7 +116,7 @@ struct ProfileFormView: View {
         case .gender:
             return profile.gender != nil
         case .validEmail:
-            return isValidEmailAddress(emailAddress: profile.email)
+            return isValidEmailAddress(emailAddress: profile.account.email)
         }
     }
     

@@ -97,7 +97,7 @@ struct ProfileCard: View {
                     HStack{
                         Text(LocalizedStringKey("profile_email"))
                         Spacer()
-                        Text(profile.email)
+                        Text(profile.account.email)
                     }
                 }
             }

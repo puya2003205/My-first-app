@@ -64,7 +64,7 @@ struct LoginScreenView: View {
             return
         }
         
-        if email == profile.email && parola == profile.password {
+        if email == profile.account.email && parola == profile.account.password {
             print("succes")
             valid = true
         } else {
