@@ -85,7 +85,7 @@ struct TabItem: View {
                 }
                 .tag(TabItemElement.explore)
             
-            ProfileView(profileStore: profileStore, comments: commentsStore)
+            ProfileView(profileStore: profileStore, commentsStore: commentsStore)
                 .tabItem {
                     Label("Profile", systemImage: "person.crop.circle.fill")
                 }
