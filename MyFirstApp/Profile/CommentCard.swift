@@ -1,33 +1,25 @@
 import SwiftUI
 
 struct CommentCard: View {
-    @State var activityInStore: Comment
+    @State var activity: Activity
     
     var body: some View {
         HStack {
-            Text(activityInStore.date)
+//            Text(activity.comments)
+//            Spacer()
+            Text(activity.title)
             Spacer()
-            Text(activityInStore.activity.title)
+            Text(activity.role?.rawValue ?? "")
             Spacer()
-            Text(activityInStore.activity.role?.rawValue ?? "")
-            Spacer()
-            Text(activityInStore.comment)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 5)
-                .background(Color.gray)
-                .cornerRadius(10)
-                .foregroundColor(.white)
+//            Text(activity.comment)
+//                .padding(.horizontal, 10)
+//                .padding(.vertical, 5)
+//                .background(Color.gray)
+//                .cornerRadius(10)
+//                .foregroundColor(.white)
         }
         .cornerRadius(10)
         .shadow(radius: 3)
     }
     
-}
-
-struct CommentCard_Previews: PreviewProvider {
-    static var previews: some View {
-        let comment = Comment.sampleData
-        
-        CommentCard(activityInStore: comment)
-    }
 }

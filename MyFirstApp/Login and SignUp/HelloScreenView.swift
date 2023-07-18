@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct HelloScreenView: View {
-    @ObservedObject var activityStore: ActivityStore
-    @ObservedObject var profileStore: ProfileStore
-    @ObservedObject var commentsStore: ActivityDetailStore
+    @ObservedObject var accountsStore: AccountsStore
+    @State private var showRegistration = false
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -19,7 +19,7 @@ struct HelloScreenView: View {
                     Spacer()
                     
                     NavigationLink {
-                        LoginScreenView(activityStore: activityStore, profileStore: profileStore, commentsStore: commentsStore)
+                        LoginScreenView(accountsStore: accountsStore)
                     } label: {
                         Text("Login")
                             .frame(minWidth: 0, maxWidth: 100)
@@ -33,7 +33,7 @@ struct HelloScreenView: View {
                     Spacer()
                     
                     NavigationLink {
-                        RegisterScreenView(profileStore: profileStore)
+                        RegisterScreenView(accountsStore: accountsStore, showRegistration: $showRegistration)
                     } label: {
                         Text("Register")
                             .frame(minWidth: 0, maxWidth: 100)
@@ -48,15 +48,14 @@ struct HelloScreenView: View {
                 .padding(.top, 50)
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
 struct HelloScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        let activityStore = ActivityStore()
-        let profileStore = ProfileStore()
-        let commentsStore = ActivityDetailStore()
+        let accountsStore = AccountsStore()
         
-        HelloScreenView(activityStore: activityStore, profileStore: profileStore, commentsStore: commentsStore)
+        HelloScreenView(accountsStore: accountsStore)
     }
 }

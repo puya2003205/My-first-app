@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct MainScreen: View {
-    @ObservedObject var activityStore: ActivityStore
+    @ObservedObject var accountsStore: AccountsStore
+    var selectedAccount: Account
+    var selectedRole: ActivityRole
     
     var body: some View {
         mainScreen
@@ -11,19 +13,13 @@ struct MainScreen: View {
         VStack {
             Spacer()
             ZStack {
-                ForEach(activityStore.activitati) { activity in
-                    ActivityCardWithAnimation(activityStore: activityStore, activity: activity)
+                ForEach(selectedAccount.activities) { activity in
+                    if activity.role == selectedRole {
+                        ActivityCardWithAnimation(accountsStore:accountsStore, selectedAccount: selectedAccount, activity: activity)
+                    }
                 }
             }
             Spacer()
         }
-    }
-}
-
-struct MainScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        let activityStore = ActivityStore()
-        
-        MainScreen(activityStore: activityStore)
     }
 }

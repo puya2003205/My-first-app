@@ -1,14 +1,15 @@
 import SwiftUI
 
 struct AllComments: View {
-    @ObservedObject var commentsStore: ActivityDetailStore
+    @ObservedObject var accountsStore: AccountsStore
+    var selectedAccount: Account
     
     var body: some View {
         VStack(alignment: .trailing) {
             List {
-                ForEach(commentsStore.allComments.reversed(), id: \.id) { commentInAllComments in
-                    NavigationLink(destination: ActivityDetailsView(activity: commentInAllComments.activity, commentsStore: commentsStore)) {
-                        CommentCard(activityInStore: commentInAllComments)
+                ForEach(selectedAccount.activities.reversed(), id: \.id) { commentInAllComments in
+                    NavigationLink(destination: ActivityDetailsView(activity: commentInAllComments, accountsStore: accountsStore, selectedAccount: selectedAccount)) {
+                        CommentCard(activity: commentInAllComments)
                     }
                     .padding(.vertical, 5)
                 }
@@ -16,12 +17,4 @@ struct AllComments: View {
         }
     }
     
-}
-
-struct AllComments_Previews: PreviewProvider {
-    static var previews: some View {
-        let commentsStore = ActivityDetailStore()
-        
-        AllComments(commentsStore: commentsStore)
-    }
 }

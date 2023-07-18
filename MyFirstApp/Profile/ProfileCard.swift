@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct ProfileCard: View {
-    let profile: Profile
-    @ObservedObject var commentsStore: ActivityDetailStore
+    var selectedAccount: Account
+    @ObservedObject var accountsStore: AccountsStore
     @State private var dailyReminderTime = Date(timeIntervalSince1970: 0)
     @State private var showComments = false
     
@@ -12,7 +12,7 @@ struct ProfileCard: View {
             buttons
             Spacer()
             if showComments {
-                AllComments(commentsStore: commentsStore)
+                AllComments(accountsStore: accountsStore, selectedAccount: selectedAccount)
             } else {
                 profileExtendedDetails
             }
@@ -26,14 +26,14 @@ struct ProfileCard: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 120, height: 120)
-            Text(profile.name)
+            Text(selectedAccount.profile.name)
                 .font(.largeTitle)
                 .foregroundColor(.black)
                 .bold()
             HStack{
                 Text(LocalizedStringKey("profile_role"))
                     .foregroundColor(.gray)
-                Text(profile.role?.rawValue.capitalized ?? "")
+                Text(selectedAccount.profile.role?.rawValue.capitalized ?? "")
             }
             .font(.title2)
         }
@@ -55,11 +55,6 @@ struct ProfileCard: View {
             Spacer()
             Button(action: {
                 showComments = true
-                Task {
-                    do {
-                        try await commentsStore.loadAllComments()
-                    }
-                }
             }) {
                 Text("Comments")
                     .frame(width: 100, height: 40)
@@ -79,7 +74,7 @@ struct ProfileCard: View {
                     HStack{
                         Text(LocalizedStringKey("profile_gender"))
                         Spacer()
-                        Text(profile.gender?.rawValue.capitalized ?? "")
+                        Text(selectedAccount.profile.gender?.rawValue.capitalized ?? "")
                     }
                 }
             }
@@ -88,7 +83,7 @@ struct ProfileCard: View {
                     HStack{
                         Text(LocalizedStringKey("profile_date_of_birth"))
                         Spacer()
-                        Text(formatDate(profile.dateOfBirth))
+                        Text(formatDate(selectedAccount.profile.dateOfBirth))
                     }
                 }
             }
@@ -97,7 +92,7 @@ struct ProfileCard: View {
                     HStack{
                         Text(LocalizedStringKey("profile_email"))
                         Spacer()
-                        Text(profile.account.email)
+                        Text(selectedAccount.email)
                     }
                 }
             }
@@ -109,14 +104,5 @@ struct ProfileCard: View {
         formatter.dateStyle = .long
         formatter.timeStyle = .none
         return formatter.string(from: date)
-    }
-}
-
-struct ProfileCard_Previews: PreviewProvider {
-    static var previews: some View {
-        let profile = Profile.sampleData
-        let commentsStore = ActivityDetailStore()
-        
-        ProfileCard(profile: profile, commentsStore: commentsStore)
     }
 }

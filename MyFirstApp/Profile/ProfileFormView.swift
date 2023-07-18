@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct ProfileFormView: View {
-    @Binding var profile: Profile
-    @ObservedObject var profileStore: ProfileStore
+    @Binding var selectedAccount: Account
+    @ObservedObject var accountsStore: AccountsStore
     @Binding var isPresentingEditProfile: Bool
     @State private var selectedGender: ProfileGender?
     @State private var selectedRole: ActivityRole?
@@ -34,13 +34,13 @@ struct ProfileFormView: View {
     }
     
     @ViewBuilder private var updateName: some View {
-        TextField(LocalizedStringKey("update_profile_name"), text: $profile.name)
+        TextField(LocalizedStringKey("update_profile_name"), text: $selectedAccount.profile.name)
             .autocorrectionDisabled()
     }
     
     @ViewBuilder private var updateRole: some View {
         HStack {
-            Text(profile.role?.rawValue.capitalized ?? NSLocalizedString("profile_role", comment: ""))
+            Text(selectedAccount.profile.role?.rawValue.capitalized ?? NSLocalizedString("profile_role", comment: ""))
             
             Spacer()
             
@@ -48,7 +48,7 @@ struct ProfileFormView: View {
                 ForEach(ActivityRole.allCases) { profileRole in
                     Button(action: {
                         selectedRole = profileRole
-                        profile.role = selectedRole
+                        selectedAccount.profile.role = selectedRole
                     }) {
                         Text(profileRole.rawValue.capitalized)
                     }
@@ -60,7 +60,7 @@ struct ProfileFormView: View {
     
     @ViewBuilder private var updateGender: some View {
         HStack {
-            Text(profile.gender?.rawValue.capitalized ?? NSLocalizedString("profile_gender", comment: ""))
+            Text(selectedAccount.profile.gender?.rawValue.capitalized ?? NSLocalizedString("profile_gender", comment: ""))
             
             Spacer()
             
@@ -68,7 +68,7 @@ struct ProfileFormView: View {
                 ForEach(ProfileGender.allCases) { profileGender in
                     Button(action: {
                         selectedGender = profileGender
-                        profile.gender = selectedGender
+                        selectedAccount.profile.gender = selectedGender
                     }) {
                         Text(profileGender.rawValue.capitalized)
                     }
@@ -79,12 +79,12 @@ struct ProfileFormView: View {
     }
     
     @ViewBuilder private var updateBirthDate: some View {
-        DatePicker(LocalizedStringKey("profile_date_of_birth"), selection: $profile.dateOfBirth, displayedComponents: .date)
+        DatePicker(LocalizedStringKey("profile_date_of_birth"), selection: $selectedAccount.profile.dateOfBirth, displayedComponents: .date)
             .datePickerStyle(WheelDatePickerStyle())
     }
     
     @ViewBuilder private var updateEmail: some View {
-        TextField(LocalizedStringKey("profile_email"), text: $profile.account.email)
+        TextField(LocalizedStringKey("profile_email"), text: $selectedAccount.email)
             .autocapitalization(.none)
             .autocorrectionDisabled()
     }
@@ -99,7 +99,7 @@ struct ProfileFormView: View {
             }
             
             Task {
-                try await profileStore.updateProfile(profile)
+                try await accountsStore.updateAccountDetails(for: selectedAccount)
                 isPresentingEditProfile = false
             }
         }
@@ -108,15 +108,15 @@ struct ProfileFormView: View {
     private func evaluateButtonGuardCondition(_ buttonGuardCondition: SaveEditedProfileAlert) -> Bool {
         switch buttonGuardCondition {
         case .minimumLetters:
-            return profile.name.count >= 2
+            return selectedAccount.profile.name.count >= 2
         case .maximumLetters:
-            return profile.name.count <= 35
+            return selectedAccount.profile.name.count <= 35
         case .role:
-            return profile.role != nil
+            return selectedAccount.profile.role != nil
         case .gender:
-            return profile.gender != nil
+            return selectedAccount.profile.gender != nil
         case .validEmail:
-            return isValidEmailAddress(emailAddress: profile.account.email)
+            return isValidEmailAddress(emailAddress: selectedAccount.email)
         }
     }
     
@@ -136,16 +136,5 @@ struct ProfileFormView: View {
         } catch {
             return false
         }
-    }
-}
-
-struct ProfileFormView_Previews: PreviewProvider {
-    @State static var profile = Profile.sampleData
-    @State static var isPresentingEditProfile = true
-    
-    static var previews: some View {
-        let profileStore = ProfileStore()
-        
-        ProfileFormView(profile: $profile, profileStore: profileStore, isPresentingEditProfile: $isPresentingEditProfile)
     }
 }

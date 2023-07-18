@@ -3,7 +3,8 @@ import SwiftUI
 struct NewActivity: View {
     @State private var newActivity = Activity.emptyActivity
     @Binding var isPresentingNewActivity: Bool
-    @ObservedObject var activityStore: ActivityStore
+    @ObservedObject var accountsStore: AccountsStore
+    var selectedAccount: Account
     @State var pozitie: String = ""
     @State private var showAlert = false
     @State private var alertTitle = ""
@@ -90,7 +91,7 @@ struct NewActivity: View {
             }
             setPozitie()
             Task {
-                try await activityStore.saveActivity(newActivity)
+                try await accountsStore.saveNewActivity(for: newActivity, in: selectedAccount)
             }
             isPresentingNewActivity = false
         }
@@ -117,15 +118,5 @@ struct NewActivity: View {
         if let role = ActivityRole(rawValue: pozitie){
             newActivity.role = role
         }
-    }
-}
-
-struct NewActivity_Previews: PreviewProvider {
-    @State static var isPresentingNewActivity = true
-    
-    static var previews: some View {
-        let activityStore = ActivityStore()
-
-        NewActivity(isPresentingNewActivity: $isPresentingNewActivity, activityStore: activityStore)
     }
 }

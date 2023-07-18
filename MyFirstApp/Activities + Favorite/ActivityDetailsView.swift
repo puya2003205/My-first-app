@@ -2,7 +2,8 @@ import SwiftUI
 
 struct ActivityDetailsView: View {
     let activity: Activity
-    @ObservedObject var commentsStore: ActivityDetailStore
+    @ObservedObject var accountsStore: AccountsStore
+    var selectedAccount: Account
     @State private var newComment: String = ""
     
     var body: some View {
@@ -13,7 +14,7 @@ struct ActivityDetailsView: View {
         }
         .task {
             do {
-                try await commentsStore.loadComments(for: commentsStore.fileURL(nameForDetailsFile: activity.id.uuidString))
+                try await accountsStore.loadComments(for: activity, in: selectedAccount)
             } catch {
                 print("always handle errors")
             }
@@ -51,7 +52,7 @@ struct ActivityDetailsView: View {
     @ViewBuilder private var commentsScroll: some View {
         ScrollView {
             VStack(alignment: .trailing) {
-                ForEach(commentsStore.comments, id: \.id) { comment in
+                ForEach(selectedAccount.comments, id: \.id) { comment in
                     HStack {
                         Text(comment.date)
                         Spacer()
@@ -93,27 +94,13 @@ struct ActivityDetailsView: View {
         dateFormatter.dateStyle = .none
         dateFormatter.timeStyle = .short
         let currentTime = dateFormatter.string(from: Date())
-        let newComment = Comment(comment: self.newComment, date: currentTime, activity: self.activity)
+        let newComment = Comment(comment: self.newComment, date: currentTime)
         Task {
             do {
-                let fileURL = try commentsStore.fileURL(nameForDetailsFile: activity.id.uuidString)
-                
-                try await commentsStore.saveComment(newComment, for: fileURL)
-                try await commentsStore.saveCommentInAllComments(newComment)
-                self.newComment = ""
-                try await commentsStore.loadComments(for: fileURL)
+                try await accountsStore.saveComment(newComment, for: activity, in: selectedAccount)
             } catch {
                 print(error)
             }
         }
-    }
-}
-
-struct ActivityDetailsView_Previews: PreviewProvider {
-    static var previews: some View {
-        let activity = Activity.sampleData
-        let commentsStore = ActivityDetailStore()
-        
-        ActivityDetailsView(activity: activity, commentsStore: commentsStore)
     }
 }

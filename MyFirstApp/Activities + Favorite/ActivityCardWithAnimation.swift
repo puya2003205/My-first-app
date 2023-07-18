@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct ActivityCardWithAnimation: View {
-    @ObservedObject var activityStore: ActivityStore
+    @ObservedObject var accountsStore: AccountsStore
+    var selectedAccount: Account
     var activity: Activity
     @State private var offset = CGSize.zero
     @State private var color: Color = .blue
@@ -52,9 +53,7 @@ struct ActivityCardWithAnimation: View {
             self.offset = offset
             Task {
                 do {
-                    try await activityStore.updateActivityStatusFalse(for: activity)
-                    changeColor(width: offset.width)
-                    try await activityStore.loadActivity()
+                    try await accountsStore.updateActivityStatusFalse(for: activity, in: selectedAccount)
                 } catch {
                     print(error)
                 }
@@ -63,9 +62,7 @@ struct ActivityCardWithAnimation: View {
             self.offset = offset
             Task {
                 do {
-                    try await activityStore.updateActivityStatusTrue(for: activity)
-                    changeColor(width: offset.width)
-                    try await activityStore.loadActivity()
+                    try await accountsStore.updateActivityStatusTrue(for: activity, in: selectedAccount)
                 } catch {
                     print(error)
                 }
@@ -84,14 +81,5 @@ struct ActivityCardWithAnimation: View {
         default:
             color = .blue
         }
-    }
-}
-
-struct ActivityCardWithAnimation_Previews: PreviewProvider {
-    static var previews: some View {
-        let activityStore = ActivityStore()
-        let activity = Activity.sampleData
-        
-        ActivityCardWithAnimation(activityStore: activityStore, activity: activity)
     }
 }

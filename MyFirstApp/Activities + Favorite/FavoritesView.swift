@@ -1,13 +1,13 @@
 import SwiftUI
 
 struct FavoritesView: View {
-    @ObservedObject var activityStore: ActivityStore
-    @ObservedObject var commentsStore: ActivityDetailStore
+    @ObservedObject var accountsStore: AccountsStore
+    var selectedAccount: Account
     
     var body: some View {
         ScrollView {
             VStack {
-                if activityStore.favorite.isEmpty {
+                if selectedAccount.favorites.isEmpty {
                     favoriteNil
                 } else {
                     ForEach(ActivityRole.allCases, id: \.self) { activityRole in
@@ -21,7 +21,7 @@ struct FavoritesView: View {
     
     @ViewBuilder private func createSection(for activityRole: ActivityRole) -> some View {
         Section(header: Text(activityRole.rawValue.capitalized)) {
-            if activityStore.favorite.filter ({ $0.role == activityRole }).count == 0 {
+            if selectedAccount.favorites.filter ({ $0.role == activityRole }).count == 0 {
                 favoriteCategoryNil
             } else {
                 createNavigationLink(for: activityRole)
@@ -30,9 +30,9 @@ struct FavoritesView: View {
     }
     
     @ViewBuilder private func createNavigationLink(for activityRole: ActivityRole) -> some View {
-        ForEach(activityStore.favorite, id: \.title) { activity in
+        ForEach(selectedAccount.favorites, id: \.title) { activity in
             if activity.role == activityRole {
-                NavigationLink(destination: ActivityDetailsView(activity: activity, commentsStore: commentsStore)) {
+                NavigationLink(destination: ActivityDetailsView(activity: activity, accountsStore: accountsStore, selectedAccount: selectedAccount)) {
                     ActivityCard(activity: activity, color: .blue)
                 }
             }
@@ -65,14 +65,5 @@ struct FavoritesView: View {
         .foregroundColor(.white)
         .cornerRadius(10)
         .shadow(radius: 3)
-    }
-}
-
-struct FavoritesView_Previews: PreviewProvider {
-    static var previews: some View {
-        let activityStore = ActivityStore()
-        let commentsStore = ActivityDetailStore()
-        
-        FavoritesView(activityStore: activityStore, commentsStore: commentsStore)
     }
 }

@@ -1,15 +1,14 @@
 import SwiftUI
 
 struct TabItem: View {
-    @ObservedObject var activityStore: ActivityStore
-    @ObservedObject var profileStore: ProfileStore
-    @ObservedObject var commentsStore: ActivityDetailStore
+    @ObservedObject var accountsStore: AccountsStore
+    var selectedAccount: Account
     
     @State private var selectedTab: TabItemElement = .explore
     @State private var isPresentingNewActivityView = false
     @State private var selected: ActivityRole = .frontend
     @State private var isPresentingEditProfile = false
-    @State private var editingProfile = Profile.emptyProfile
+    @State private var editingProfile = Account.emptyAccount
     
     private enum TabItemElement: Int, CaseIterable, Hashable {
         case favorites
@@ -55,15 +54,15 @@ struct TabItem: View {
                     .onChange(of: selectedTab) { tab in
                         if tab == .favorites {
                             Task {
-                                try? await activityStore.loadFavorite()
+                                accountsStore.loadAccounts
                             }
                         }
                     }
                     .sheet(isPresented: $isPresentingNewActivityView){
-                        NewActivity(isPresentingNewActivity: $isPresentingNewActivityView, activityStore: activityStore, pozitie: selected.rawValue)
+                        NewActivity(isPresentingNewActivity: $isPresentingNewActivityView, accountsStore: accountsStore, selectedAccount: selectedAccount, pozitie: selected.rawValue)
                     }
                     .sheet(isPresented: $isPresentingEditProfile) {
-                        ProfileFormView(profile: $editingProfile, profileStore: profileStore, isPresentingEditProfile: $isPresentingEditProfile)
+                        ProfileFormView(selectedAccount: $editingProfile, accountsStore:accountsStore, isPresentingEditProfile: $isPresentingEditProfile)
                     }
             }
         }
@@ -73,19 +72,19 @@ struct TabItem: View {
     
     @ViewBuilder private var tabView: some View {
         TabView(selection: $selectedTab) {
-            FavoritesView(activityStore: activityStore, commentsStore: commentsStore)
+            FavoritesView(accountsStore: accountsStore, selectedAccount: selectedAccount)
                 .tabItem {
                     Label("Favorites", systemImage: "star")
                 }
                 .tag(TabItemElement.favorites)
             
-            MainScreen(activityStore: activityStore)
+            MainScreen(accountsStore: accountsStore, selectedAccount: selectedAccount, selectedRole: selected)
                 .tabItem {
                     Label("Explore", systemImage: "safari.fill")
                 }
                 .tag(TabItemElement.explore)
             
-            ProfileView(profileStore: profileStore, commentsStore: commentsStore)
+            ProfileView(accountsStore: accountsStore, selectedAccount: selectedAccount)
                 .tabItem {
                     Label("Profile", systemImage: "person.crop.circle.fill")
                 }
@@ -96,16 +95,7 @@ struct TabItem: View {
     @ViewBuilder private var menu: some View {
         Menu {
             ForEach(ActivityRole.allCases, id: \.self) { activityRole in
-                Button(action: { selected = activityRole
-                    activityStore.name = activityRole.rawValue
-                    Task {
-                        do {
-                            try await activityStore.loadActivity()
-                        } catch {
-                            print(error)
-                        }
-                    }
-                }) {
+                Button(action: { selected = activityRole }) {
                     Label(
                         title: {
                             if activityRole == .ios {
@@ -156,9 +146,6 @@ struct TabItem: View {
     @ViewBuilder private var editProfileButton: some View {
         Button(action: {
             isPresentingEditProfile = true
-            if profileStore.profile != nil {
-                editingProfile = profileStore.profile!
-            }
         }) {
             Image(systemName: "square.and.pencil.circle.fill")
         }
@@ -176,8 +163,8 @@ struct TabItem: View {
         
         let confirmAction = UIAlertAction(title: "Confirm", style: .destructive) { _ in
             Task {
-                try await activityStore.clearFavorites()
-                try await commentsStore.clearComments()
+                try await accountsStore.clearFavorites(for: selectedAccount)
+                try await accountsStore.clearComments(for: selectedAccount)
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -191,10 +178,9 @@ struct TabItem: View {
 
 struct TabItem_Previews: PreviewProvider {
     static var previews: some View {
-        let activityStore = ActivityStore()
-        let profileStore = ProfileStore()
-        let commentsStore = ActivityDetailStore()
+        let accountsStore = AccountsStore()
+        let selectedAccount = Account.sampleData
         
-        TabItem(activityStore: activityStore, profileStore: profileStore, commentsStore: commentsStore)
+        TabItem(accountsStore: accountsStore, selectedAccount: selectedAccount)
     }
 }

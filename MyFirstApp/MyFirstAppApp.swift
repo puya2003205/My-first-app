@@ -2,31 +2,19 @@ import SwiftUI
 
 @main
 struct MyFirstAppApp: App {
-    @StateObject private var activityStore = ActivityStore()
-    @StateObject private var profileStore = ProfileStore()
-    @StateObject private var commentsStore = ActivityDetailStore()
+    @StateObject private var accountsStore = AccountsStore()
     
     var body: some Scene {
-    
+        
         WindowGroup {
-//            TabItem(activityStore: activityStore, profileStore: profileStore, commentsStore: commentsStore)
-//            .task {
-//                do {
-//                    try await activityStore.loadActivity()
-//                    try await profileStore.loadProfile()
-//                } catch {
-//                    print(error)
-//                }
-//            }
-            HelloScreenView(activityStore: activityStore, profileStore: profileStore, commentsStore: commentsStore)
+            HelloScreenView(accountsStore: accountsStore)
                 .task {
-                                do {
-                                    try await activityStore.loadActivity()
-                                    try await profileStore.loadProfile()
-                                } catch {
-                                    print(error)
-                                }
-                            }
+                    do {
+                        try accountsStore.loadAccounts()
+                    } catch {
+                        print(error)
+                    }
+                }
         }
     }
 }
