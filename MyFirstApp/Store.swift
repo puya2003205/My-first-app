@@ -53,40 +53,6 @@ class AccountsStore: ObservableObject {
             _ = await task.value
         }
     
-    func loadComments(for activity: Activity, in account: Account) async throws {
-        let task = Task<[Comment], Error> {
-            let url = try fileURL(nameForDetailsFile: "\(account.id)-\(activity.id)-comments")
-            guard let data = try? Data(contentsOf: url) else {
-                return []
-            }
-            let decodedComments = try JSONDecoder().decode([Comment].self, from: data)
-            return decodedComments
-        }
-        let comments = try await task.value
-        if let accountIndex = accounts.firstIndex(where: { $0.id == account.id }),
-           let activityIndex = accounts[accountIndex].activities.firstIndex(where: { $0.id == activity.id }) {
-            accounts[accountIndex].activities[activityIndex].comments = comments
-        }
-    }
-    
-    func saveComment(_ comment: Comment, for activity: Activity, in account: Account) async throws {
-        let task = Task {
-            do {
-                let url = try fileURL(nameForDetailsFile: "\(account.id)-\(activity.id)-comments")
-                try await loadComments(for: activity, in: account)
-                if let accountIndex = accounts.firstIndex(where: { $0.id == account.id }),
-                   let activityIndex = accounts[accountIndex].activities.firstIndex(where: { $0.id == activity.id }) {
-                    accounts[accountIndex].activities[activityIndex].comments.append(comment)
-                    let encodedComments = try JSONEncoder().encode(accounts[accountIndex].activities[activityIndex].comments)
-                    try encodedComments.write(to: url)
-                }
-            } catch {
-                print(error)
-            }
-        }
-        _ = await task.value
-    }
-    
     func updateActivityStatusTrue(for activity: Activity, in account: Account) async throws {
         if let index = accounts.firstIndex(where: { $0.id == account.id }) {
             accounts[index].activities = accounts[index].activities.map { storedActivity in
@@ -122,6 +88,18 @@ class AccountsStore: ObservableObject {
         }
     }
 
+    func addComment(newComment: Comment, for activity: Activity, in account: Account) async throws {
+        if let index = accounts.firstIndex(where: { $0.id == account.id }) {
+            accounts[index].comments.append(newComment)
+            try await saveAccounts()
+        }
+        
+        if let accountIndex = accounts.firstIndex(where: { $0.id == account.id }),
+           let activityIndex = accounts[accountIndex].activities.firstIndex(where: { $0.id == activity.id }) {
+            accounts[accountIndex].activities[activityIndex].comments.append(newComment)
+        }
+    }
+    
     func clearFavorites(for account: Account) async throws {
         if let index = accounts.firstIndex(where: { $0.id == account.id }) {
             accounts[index].favorites = []
@@ -136,8 +114,4 @@ class AccountsStore: ObservableObject {
         }
     }
     
-    private func fileURL(nameForDetailsFile: String) throws -> URL {
-        try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            .appendingPathComponent(nameForDetailsFile + ".data")
-    }
 }
