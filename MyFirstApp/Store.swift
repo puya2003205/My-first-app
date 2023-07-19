@@ -38,20 +38,15 @@ class AccountsStore: ObservableObject {
     }
     
     func saveNewActivity(for activity: Activity, in account: Account) async throws {
-            let task = Task {
-                do {
-                    try loadAccounts()
-                    
-                    if let accountIndex = accounts.firstIndex(where: { $0.id == account.id }) {
-                        accounts[accountIndex].activities.append(activity)
-                        try await saveAccounts()
-                    }
-                } catch {
-                    print(error)
-                }
+        let task = Task {
+            try loadAccounts()
+            if let accountIndex = accounts.firstIndex(where: { $0.id == account.id }) {
+                accounts[accountIndex].activities.append(activity)
+                try await saveAccounts()
             }
-            _ = await task.value
         }
+        _ = try await task.value
+    }
     
     func updateActivityStatusTrue(for activity: Activity, in account: Account) async throws {
         if let index = accounts.firstIndex(where: { $0.id == account.id }) {
@@ -91,13 +86,19 @@ class AccountsStore: ObservableObject {
     func addComment(newComment: Comment, for activity: Activity, in account: Account) async throws {
         if let index = accounts.firstIndex(where: { $0.id == account.id }) {
             accounts[index].comments.append(newComment)
-            try await saveAccounts()
         }
         
         if let accountIndex = accounts.firstIndex(where: { $0.id == account.id }),
            let activityIndex = accounts[accountIndex].activities.firstIndex(where: { $0.id == activity.id }) {
             accounts[accountIndex].activities[activityIndex].comments.append(newComment)
+        
+            if accounts[accountIndex].favorites.contains(where: { $0.id == activity.id }) {
+                if let favoriteIndex = accounts[accountIndex].favorites.firstIndex(where: { $0.id == activity.id }) {
+                    accounts[accountIndex].favorites[favoriteIndex].comments.append(newComment)
+                }
+            }
         }
+        try await saveAccounts()
     }
     
     func clearFavorites(for account: Account) async throws {

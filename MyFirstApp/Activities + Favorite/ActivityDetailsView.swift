@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ActivityDetailsView: View {
-    let activity: Activity
+    var activity: Activity
     @ObservedObject var accountsStore: AccountsStore
     var selectedAccount: Account
     @State private var newComment: String = ""
@@ -14,7 +14,7 @@ struct ActivityDetailsView: View {
         }
         .task {
             do {
-                try await accountsStore.loadComments(for: activity, in: selectedAccount)
+                try accountsStore.loadAccounts()
             } catch {
                 print("always handle errors")
             }
@@ -45,14 +45,14 @@ struct ActivityDetailsView: View {
             }
             .padding(.horizontal, 20)
         }
-        .padding(.vertical, 20)
         .font(.title2)
     }
     
     @ViewBuilder private var commentsScroll: some View {
-        ScrollView {
-            VStack(alignment: .trailing) {
-                ForEach(selectedAccount.comments, id: \.id) { comment in
+        
+        VStack(alignment: .trailing) {
+            List {
+                ForEach(activity.comments, id: \.id) { comment in
                     HStack {
                         Text(comment.date)
                         Spacer()
@@ -64,10 +64,11 @@ struct ActivityDetailsView: View {
                             .foregroundColor(.white)
                     }
                 }
+                .padding(.horizontal, 20)
             }
-            .padding(.horizontal, 20)
         }
     }
+
     
     @ViewBuilder private var enterNewComment: some View {
         HStack {
@@ -79,6 +80,7 @@ struct ActivityDetailsView: View {
         
         Button(action: {
             sendComment()
+            newComment = ""
         }) {
             Text(LocalizedStringKey("send_text"))
         }
@@ -97,7 +99,8 @@ struct ActivityDetailsView: View {
         let newComment = Comment(comment: self.newComment, date: currentTime)
         Task {
             do {
-                try await accountsStore.saveComment(newComment, for: activity, in: selectedAccount)
+                try await accountsStore.addComment(newComment: newComment, for: activity, in: selectedAccount)
+                try accountsStore.loadAccounts()
             } catch {
                 print(error)
             }

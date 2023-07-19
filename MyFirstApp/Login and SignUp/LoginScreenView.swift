@@ -73,10 +73,3 @@ struct LoginScreenView: View {
         }
     }
 }
-
-struct LoginScreenView_Previews: PreviewProvider {
-    static var previews: some View {
-        let accountsStore = AccountsStore()
-        LoginScreenView(accountsStore: accountsStore)
-    }
-}
