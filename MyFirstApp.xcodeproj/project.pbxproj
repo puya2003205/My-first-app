@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AC124DD12A544F5000D63D23 /* ActivityDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC124DD02A544F5000D63D23 /* ActivityDetailsView.swift */; };
 		AC6126122A4C27B1002C3ED7 /* NewActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6126112A4C27B1002C3ED7 /* NewActivity.swift */; };
+		AC78165F2A6E604E00387631 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78165E2A6E604E00387631 /* Router.swift */; };
 		ACA326782A5E7C5500B4EBA2 /* SaveNewActivityAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA326772A5E7C5500B4EBA2 /* SaveNewActivityAlert.swift */; };
 		ACA326802A5E81B300B4EBA2 /* SaveEditedProfileAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA3267F2A5E81B300B4EBA2 /* SaveEditedProfileAlert.swift */; };
 		ACA326842A5E919100B4EBA2 /* CommentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA326832A5E919100B4EBA2 /* CommentCard.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		AC124DD02A544F5000D63D23 /* ActivityDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsView.swift; sourceTree = "<group>"; };
 		AC6126112A4C27B1002C3ED7 /* NewActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewActivity.swift; sourceTree = "<group>"; };
+		AC78165E2A6E604E00387631 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		ACA326772A5E7C5500B4EBA2 /* SaveNewActivityAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNewActivityAlert.swift; sourceTree = "<group>"; };
 		ACA3267F2A5E81B300B4EBA2 /* SaveEditedProfileAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveEditedProfileAlert.swift; sourceTree = "<group>"; };
 		ACA326832A5E919100B4EBA2 /* CommentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCard.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				ACA6F4D12A49764D00724276 /* Assets.xcassets */,
 				ACA6F4D32A49764D00724276 /* Preview Content */,
 				ACA326912A6565ED00B4EBA2 /* Store.swift */,
+				AC78165E2A6E604E00387631 /* Router.swift */,
 			);
 			path = MyFirstApp;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				ACF0C1412A49D2F5008D10A8 /* TabItem.swift in Sources */,
 				ACA6F4E02A497F7E00724276 /* ActivityCard.swift in Sources */,
 				AC124DD12A544F5000D63D23 /* ActivityDetailsView.swift in Sources */,
+				AC78165F2A6E604E00387631 /* Router.swift in Sources */,
 				ACA6F4E42A499C4800724276 /* FavoritesView.swift in Sources */,
 				ACF0C1432A4AD35F008D10A8 /* ActivityCardWithAnimation.swift in Sources */,
 				ACA6F4E22A4996F400724276 /* ProfileView.swift in Sources */,

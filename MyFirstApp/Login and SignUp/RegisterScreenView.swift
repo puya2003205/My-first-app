@@ -5,7 +5,7 @@ struct RegisterScreenView: View {
     @State private var alertMessage = ""
     @ObservedObject var accountsStore: AccountsStore
     @State private var editingAccount = Account.emptyAccount
-    @Binding var showRegistration: Bool
+    let goBackToLogin: () -> Void
     
     var body: some View {
         NavigationView {
@@ -46,13 +46,12 @@ struct RegisterScreenView: View {
                     return
                 }
             }
-
+            goBackToLogin()
             Task {
                 try await accountsStore.saveAccount(_: editingAccount)
             }
-            showRegistration = false
-            
         }
+        
     }
 
     private func evaluateButtonGuardCondition(_ buttonGuardCondition: SaveAccountAlert) -> Bool {
