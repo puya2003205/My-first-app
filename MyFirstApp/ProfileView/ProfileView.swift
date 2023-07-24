@@ -3,16 +3,15 @@ import SwiftUI
 struct ProfileView: View {
     @ObservedObject var accountsStore: AccountsStore
     var selectedAccount: Account
-    @State private var dailyReminderTime = Date(timeIntervalSince1970: 0)
-    @State private var showComments = false
-
+    @StateObject var viewModel = ProfileViewModel()
+    
     var body: some View {
         VStack {
             profileGeneralDetails
             buttons
             Spacer()
-            if showComments {
-                AllComments(accountsStore: accountsStore, selectedAccount: selectedAccount)
+            if viewModel.showComments {
+                allComments
             } else {
                 profileExtendedDetails
             }
@@ -44,7 +43,7 @@ struct ProfileView: View {
         HStack {
             Spacer()
             Button(action: {
-                showComments = false
+                viewModel.showCommentsFalse()
             }) {
                 Text("Profile")
                     .frame(width: 100, height: 40)
@@ -54,7 +53,7 @@ struct ProfileView: View {
             }
             Spacer()
             Button(action: {
-                showComments = true
+                viewModel.showCommentsTrue()
             }) {
                 Text("Comments")
                     .frame(width: 100, height: 40)
@@ -67,7 +66,7 @@ struct ProfileView: View {
         .padding(.bottom, 10)
     }
     
-    @ViewBuilder private var profileExtendedDetails: some View {
+    @ViewBuilder var profileExtendedDetails: some View {
         List {
             VStack {
                 Section{
@@ -83,7 +82,7 @@ struct ProfileView: View {
                     HStack{
                         Text(LocalizedStringKey("profile_date_of_birth"))
                         Spacer()
-                        Text(formatDate(selectedAccount.profile.dateOfBirth))
+                        Text(viewModel.formatDate(selectedAccount.profile.dateOfBirth))
                     }
                 }
             }
@@ -99,10 +98,18 @@ struct ProfileView: View {
         }
     }
     
-    func formatDate(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter.string(from: date)
+    @ViewBuilder private var allComments: some View {
+        VStack(alignment: .trailing) {
+            List {
+                ForEach(selectedAccount.activities.reversed(), id: \.id) { activity in
+                    ForEach(activity.comments, id: \.id) { comment in
+                        NavigationLink(destination: ActivityDetailsView(activity: activity, accountsStore: accountsStore, selectedAccount: selectedAccount)) {
+                            CommentCard(activity: activity, comment: comment)
+                        }
+                    }
+                    .padding(.vertical, 5)
+                }
+            }
+        }
     }
 }
