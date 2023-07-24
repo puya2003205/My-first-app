@@ -1,11 +1,11 @@
 import SwiftUI
 
-struct ProfileCard: View {
-    var selectedAccount: Account
+struct ProfileView: View {
     @ObservedObject var accountsStore: AccountsStore
+    var selectedAccount: Account
     @State private var dailyReminderTime = Date(timeIntervalSince1970: 0)
     @State private var showComments = false
-    
+
     var body: some View {
         VStack {
             profileGeneralDetails

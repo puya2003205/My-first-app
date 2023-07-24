@@ -29,9 +29,9 @@ class AccountsStore: ObservableObject {
         try await saveAccounts()
     }
     
-    func updateAccountDetails(for account: Account) async throws {
+    func updateAccountDetails(for profile: Profile, in account: Account) async throws {
         if let index = accounts.firstIndex(where: { $0.id == account.id }) {
-            accounts[index] = account
+            accounts[index].profile = profile
             try await saveAccounts()
         }
         try loadAccounts()

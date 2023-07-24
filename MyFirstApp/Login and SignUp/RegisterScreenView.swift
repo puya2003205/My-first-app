@@ -10,7 +10,6 @@ struct RegisterScreenView: View {
     var body: some View {
         NavigationView {
             Form {
-
                 Section(header: Text(LocalizedStringKey("update_profile_contact_information"))) {
                     createEmail
                     createPassword
@@ -20,7 +19,6 @@ struct RegisterScreenView: View {
                     .alert(isPresented: $showAlert) {
                         Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("OK")))
                     }
-                    
             }
 
             .navigationTitle(Text("Register"))
@@ -42,12 +40,12 @@ struct RegisterScreenView: View {
     
     @ViewBuilder private var saveButton: some View {
         Button(LocalizedStringKey("update_profile_save_profile")) {
-//            for buttonGuardCondition in SaveAccountAlert.allCases {
-//                guard evaluateButtonGuardCondition(buttonGuardCondition) else {
-//                    createSaveEditedProfileAlert(ofType: buttonGuardCondition)
-//                    return
-//                }
-//            }
+            for buttonGuardCondition in SaveAccountAlert.allCases {
+                guard evaluateButtonGuardCondition(buttonGuardCondition) else {
+                    createSaveEditedProfileAlert(ofType: buttonGuardCondition)
+                    return
+                }
+            }
 
             Task {
                 try await accountsStore.saveAccount(_: editingAccount)

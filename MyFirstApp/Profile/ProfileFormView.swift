@@ -19,10 +19,6 @@ struct ProfileFormView: View {
                     updateBirthDate
                 }
                 
-                Section(header: Text(LocalizedStringKey("update_profile_contact_information"))) {
-                    updateEmail
-                }
-                
                 saveButton
                     .alert(isPresented: $showAlert) {
                         Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("OK")))
@@ -83,12 +79,6 @@ struct ProfileFormView: View {
             .datePickerStyle(WheelDatePickerStyle())
     }
     
-    @ViewBuilder private var updateEmail: some View {
-        TextField(LocalizedStringKey("profile_email"), text: $selectedAccount.email)
-            .autocapitalization(.none)
-            .autocorrectionDisabled()
-    }
-    
     @ViewBuilder private var saveButton: some View {
         Button(LocalizedStringKey("update_profile_save_profile")) {
             for buttonGuardCondition in SaveEditedProfileAlert.allCases {
@@ -97,9 +87,8 @@ struct ProfileFormView: View {
                     return
                 }
             }
-            
             Task {
-                try await accountsStore.updateAccountDetails(for: selectedAccount)
+                try await accountsStore.updateAccountDetails(for: selectedAccount.profile, in: selectedAccount)
                 isPresentingEditProfile = false
             }
         }
@@ -115,26 +104,11 @@ struct ProfileFormView: View {
             return selectedAccount.profile.role != nil
         case .gender:
             return selectedAccount.profile.gender != nil
-        case .validEmail:
-            return isValidEmailAddress(emailAddress: selectedAccount.email)
         }
     }
     
     private func createSaveEditedProfileAlert(ofType: SaveEditedProfileAlert) {
         alertMessage = NSLocalizedString(ofType.message, comment: "")
         showAlert = true
-    }
-    
-    private func isValidEmailAddress(emailAddress: String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z.-_]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}$"
-        
-        do {
-            let regex = try NSRegularExpression(pattern: emailRegEx)
-            let results = regex.matches(in: emailAddress, range: NSRange(location: 0, length: emailAddress.count))
-            
-            return !results.isEmpty
-        } catch {
-            return false
-        }
     }
 }

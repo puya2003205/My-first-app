@@ -1,12 +1,10 @@
 import Foundation
 
 enum SaveEditedProfileAlert: CaseIterable {
-    
     case minimumLetters
     case maximumLetters
     case role
     case gender
-    case validEmail
     
     var message: String {
         switch self {
@@ -18,8 +16,6 @@ enum SaveEditedProfileAlert: CaseIterable {
             return "profile_error_role_selection"
         case .gender:
             return "profile_error_gender_selection"
-        case .validEmail:
-            return "profile_error_email"
         }
     }
 }
