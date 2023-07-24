@@ -35,7 +35,6 @@
 		ACD11A012A541F570046ECB6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ACD11A032A541F570046ECB6 /* Localizable.strings */; };
 		ACD11A0D2A5420F50046ECB6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ACD11A0F2A5420F50046ECB6 /* Localizable.strings */; };
 		ACF0C1412A49D2F5008D10A8 /* TabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF0C1402A49D2F5008D10A8 /* TabItem.swift */; };
-		ACF0C1432A4AD35F008D10A8 /* ActivityCardWithAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF0C1422A4AD35F008D10A8 /* ActivityCardWithAnimation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,7 +68,6 @@
 		ACD11A022A541F570046ECB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ACD11A0E2A5420F50046ECB6 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ACF0C1402A49D2F5008D10A8 /* TabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItem.swift; sourceTree = "<group>"; };
-		ACF0C1422A4AD35F008D10A8 /* ActivityCardWithAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCardWithAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,14 +81,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		ACA326762A5E7C3B00B4EBA2 /* Alerts */ = {
+		AC7816622A6E793300387631 /* RegisterScreen */ = {
 			isa = PBXGroup;
 			children = (
-				ACA326772A5E7C5500B4EBA2 /* SaveNewActivityAlert.swift */,
-				ACA3267F2A5E81B300B4EBA2 /* SaveEditedProfileAlert.swift */,
-				ACA3269A2A66919800B4EBA2 /* SaveAccountAlert.swift */,
+				AC7816602A6E6B3900387631 /* RegisterScreenViewModel.swift */,
+				ACA3268D2A616CD800B4EBA2 /* RegisterScreenView.swift */,
 			);
-			path = Alerts;
+			path = RegisterScreen;
+			sourceTree = "<group>";
+		};
+		AC7816632A6E7AA200387631 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				ACA6F4DF2A497F7E00724276 /* ActivityCard.swift */,
+				ACA326832A5E919100B4EBA2 /* CommentCard.swift */,
+				ACA3268F2A6563EC00B4EBA2 /* Profile.swift */,
+				ACA326982A66914300B4EBA2 /* Comment.swift */,
+				ACA326962A66911600B4EBA2 /* Activity.swift */,
+				ACA326942A6690F300B4EBA2 /* Account.swift */,
+				ACA3269A2A66919800B4EBA2 /* SaveAccountAlert.swift */,
+				ACA3267F2A5E81B300B4EBA2 /* SaveEditedProfileAlert.swift */,
+				ACA326772A5E7C5500B4EBA2 /* SaveNewActivityAlert.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		AC7816642A6E7CC900387631 /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				ACA6F4DB2A49766400724276 /* MainScreen.swift */,
+			);
+			path = MainScreen;
 			sourceTree = "<group>";
 		};
 		ACA326882A61625B00B4EBA2 /* Login and SignUp */ = {
@@ -98,30 +119,17 @@
 			children = (
 				ACA326892A61627500B4EBA2 /* HelloScreenView.swift */,
 				ACA3268B2A616CCD00B4EBA2 /* LoginScreenView.swift */,
-				ACA3268D2A616CD800B4EBA2 /* RegisterScreenView.swift */,
-				AC7816602A6E6B3900387631 /* RegisterScreenViewModel.swift */,
 			);
 			path = "Login and SignUp";
 			sourceTree = "<group>";
 		};
-		ACA326932A6690C400B4EBA2 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				ACA326942A6690F300B4EBA2 /* Account.swift */,
-				ACA326962A66911600B4EBA2 /* Activity.swift */,
-				ACA326982A66914300B4EBA2 /* Comment.swift */,
-				ACA3268F2A6563EC00B4EBA2 /* Profile.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		ACA327482A6E525700B4EBA2 /* ProfileView */ = {
+		ACA327482A6E525700B4EBA2 /* ProfileScreen */ = {
 			isa = PBXGroup;
 			children = (
 				ACA6F4E12A4996F400724276 /* ProfileView.swift */,
 				ACA327492A6E52C700B4EBA2 /* ProfileViewModel.swift */,
 			);
-			path = ProfileView;
+			path = ProfileScreen;
 			sourceTree = "<group>";
 		};
 		ACA6F4C12A49764C00724276 = {
@@ -143,9 +151,10 @@
 		ACA6F4CC2A49764C00724276 /* MyFirstApp */ = {
 			isa = PBXGroup;
 			children = (
-				ACA327482A6E525700B4EBA2 /* ProfileView */,
-				ACA326762A5E7C3B00B4EBA2 /* Alerts */,
-				ACA326932A6690C400B4EBA2 /* Models */,
+				AC7816642A6E7CC900387631 /* MainScreen */,
+				AC7816632A6E7AA200387631 /* Components */,
+				AC7816622A6E793300387631 /* RegisterScreen */,
+				ACA327482A6E525700B4EBA2 /* ProfileScreen */,
 				ACA326882A61625B00B4EBA2 /* Login and SignUp */,
 				ACD119FE2A541EF90046ECB6 /* Info.plist */,
 				ACC6A3722A53FD4A003C7156 /* Activities + Favorite */,
@@ -174,7 +183,6 @@
 			isa = PBXGroup;
 			children = (
 				ACC6A36F2A52E2D2003C7156 /* ProfileFormView.swift */,
-				ACA326832A5E919100B4EBA2 /* CommentCard.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -182,9 +190,6 @@
 		ACC6A3722A53FD4A003C7156 /* Activities + Favorite */ = {
 			isa = PBXGroup;
 			children = (
-				ACA6F4DB2A49766400724276 /* MainScreen.swift */,
-				ACF0C1422A4AD35F008D10A8 /* ActivityCardWithAnimation.swift */,
-				ACA6F4DF2A497F7E00724276 /* ActivityCard.swift */,
 				ACA6F4E32A499C4800724276 /* FavoritesView.swift */,
 				AC6126112A4C27B1002C3ED7 /* NewActivity.swift */,
 				AC124DD02A544F5000D63D23 /* ActivityDetailsView.swift */,
@@ -284,7 +289,6 @@
 				AC124DD12A544F5000D63D23 /* ActivityDetailsView.swift in Sources */,
 				AC78165F2A6E604E00387631 /* Router.swift in Sources */,
 				ACA6F4E42A499C4800724276 /* FavoritesView.swift in Sources */,
-				ACF0C1432A4AD35F008D10A8 /* ActivityCardWithAnimation.swift in Sources */,
 				ACA6F4E22A4996F400724276 /* ProfileView.swift in Sources */,
 				AC6126122A4C27B1002C3ED7 /* NewActivity.swift in Sources */,
 				ACA6F4CE2A49764C00724276 /* MyFirstAppApp.swift in Sources */,
