@@ -17,7 +17,6 @@ struct HelloScreenView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 50))
                 HStack {
                     Spacer()
-                    
                     Button {
                         goToLogin()
                     } label: {
@@ -29,22 +28,7 @@ struct HelloScreenView: View {
                             .cornerRadius(50)
                             .bold()
                     }
-                    
                     Spacer()
-                    
-//                    NavigationLink {
-//                        RegisterScreenView(accountsStore: accountsStore, showRegistration: $showRegistration)
-//                    } label: {
-//                        Text("Register")
-//                            .frame(minWidth: 0, maxWidth: 100)
-//                            .foregroundColor(.white)
-//                            .padding(20)
-//                            .background(.blue)
-//                            .cornerRadius(50)
-//                            .bold()
-//                    }
-//                    Spacer()
-                    
                 }
                 .padding(.top, 50)
             }
