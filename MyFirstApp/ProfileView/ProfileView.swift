@@ -3,15 +3,14 @@ import SwiftUI
 struct ProfileView: View {
     @ObservedObject var accountsStore: AccountsStore
     var selectedAccount: Account
-    @State private var dailyReminderTime = Date(timeIntervalSince1970: 0)
-    @State private var showComments = false
-
+    @ObservedObject var viewModel = ProfileViewModel()
+    
     var body: some View {
         VStack {
             profileGeneralDetails
             buttons
             Spacer()
-            if showComments {
+            if viewModel.showComments {
                 AllComments(accountsStore: accountsStore, selectedAccount: selectedAccount)
             } else {
                 profileExtendedDetails
@@ -44,7 +43,7 @@ struct ProfileView: View {
         HStack {
             Spacer()
             Button(action: {
-                showComments = false
+                viewModel.showCommentsFalse()
             }) {
                 Text("Profile")
                     .frame(width: 100, height: 40)
@@ -54,7 +53,7 @@ struct ProfileView: View {
             }
             Spacer()
             Button(action: {
-                showComments = true
+                viewModel.showCommentsTrue()
             }) {
                 Text("Comments")
                     .frame(width: 100, height: 40)
@@ -83,7 +82,7 @@ struct ProfileView: View {
                     HStack{
                         Text(LocalizedStringKey("profile_date_of_birth"))
                         Spacer()
-                        Text(formatDate(selectedAccount.profile.dateOfBirth))
+                        Text(viewModel.formatDate(selectedAccount.profile.dateOfBirth))
                     }
                 }
             }
@@ -97,12 +96,5 @@ struct ProfileView: View {
                 }
             }
         }
-    }
-    
-    func formatDate(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter.string(from: date)
     }
 }
