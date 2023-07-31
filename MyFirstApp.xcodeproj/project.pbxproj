@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC005B752A6FABA500FB5A9F /* NavigationTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC005B742A6FABA500FB5A9F /* NavigationTabViewModel.swift */; };
 		AC124DD12A544F5000D63D23 /* ActivityDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC124DD02A544F5000D63D23 /* ActivityDetailsView.swift */; };
 		AC6126122A4C27B1002C3ED7 /* NewActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6126112A4C27B1002C3ED7 /* NewActivity.swift */; };
-		AC78165F2A6E604E00387631 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC78165E2A6E604E00387631 /* Router.swift */; };
-		AC7816612A6E6B3900387631 /* RegisterScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7816602A6E6B3900387631 /* RegisterScreenViewModel.swift */; };
 		ACA326782A5E7C5500B4EBA2 /* SaveNewActivityAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA326772A5E7C5500B4EBA2 /* SaveNewActivityAlert.swift */; };
 		ACA326802A5E81B300B4EBA2 /* SaveEditedProfileAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA3267F2A5E81B300B4EBA2 /* SaveEditedProfileAlert.swift */; };
 		ACA326842A5E919100B4EBA2 /* CommentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA326832A5E919100B4EBA2 /* CommentCard.swift */; };
@@ -23,7 +22,6 @@
 		ACA326972A66911600B4EBA2 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA326962A66911600B4EBA2 /* Activity.swift */; };
 		ACA326992A66914300B4EBA2 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA326982A66914300B4EBA2 /* Comment.swift */; };
 		ACA3269B2A66919800B4EBA2 /* SaveAccountAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA3269A2A66919800B4EBA2 /* SaveAccountAlert.swift */; };
-		ACA3274A2A6E52C700B4EBA2 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA327492A6E52C700B4EBA2 /* ProfileViewModel.swift */; };
 		ACA6F4CE2A49764C00724276 /* MyFirstAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA6F4CD2A49764C00724276 /* MyFirstAppApp.swift */; };
 		ACA6F4D22A49764D00724276 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACA6F4D12A49764D00724276 /* Assets.xcassets */; };
 		ACA6F4D52A49764D00724276 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACA6F4D42A49764D00724276 /* Preview Assets.xcassets */; };
@@ -34,14 +32,14 @@
 		ACC6A3702A52E2D2003C7156 /* ProfileFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC6A36F2A52E2D2003C7156 /* ProfileFormView.swift */; };
 		ACD11A012A541F570046ECB6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ACD11A032A541F570046ECB6 /* Localizable.strings */; };
 		ACD11A0D2A5420F50046ECB6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ACD11A0F2A5420F50046ECB6 /* Localizable.strings */; };
-		ACF0C1412A49D2F5008D10A8 /* TabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF0C1402A49D2F5008D10A8 /* TabItem.swift */; };
+		ACF0C1412A49D2F5008D10A8 /* NavigationTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF0C1402A49D2F5008D10A8 /* NavigationTabView.swift */; };
+		ACF0C1432A4AD35F008D10A8 /* ActivityCardWithAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF0C1422A4AD35F008D10A8 /* ActivityCardWithAnimation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC005B742A6FABA500FB5A9F /* NavigationTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTabViewModel.swift; sourceTree = "<group>"; };
 		AC124DD02A544F5000D63D23 /* ActivityDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailsView.swift; sourceTree = "<group>"; };
 		AC6126112A4C27B1002C3ED7 /* NewActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewActivity.swift; sourceTree = "<group>"; };
-		AC78165E2A6E604E00387631 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		AC7816602A6E6B3900387631 /* RegisterScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreenViewModel.swift; sourceTree = "<group>"; };
 		ACA326772A5E7C5500B4EBA2 /* SaveNewActivityAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNewActivityAlert.swift; sourceTree = "<group>"; };
 		ACA3267F2A5E81B300B4EBA2 /* SaveEditedProfileAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveEditedProfileAlert.swift; sourceTree = "<group>"; };
 		ACA326832A5E919100B4EBA2 /* CommentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCard.swift; sourceTree = "<group>"; };
@@ -54,7 +52,6 @@
 		ACA326962A66911600B4EBA2 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		ACA326982A66914300B4EBA2 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		ACA3269A2A66919800B4EBA2 /* SaveAccountAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveAccountAlert.swift; sourceTree = "<group>"; };
-		ACA327492A6E52C700B4EBA2 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		ACA6F4CA2A49764C00724276 /* MyFirstApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFirstApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACA6F4CD2A49764C00724276 /* MyFirstAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFirstAppApp.swift; sourceTree = "<group>"; };
 		ACA6F4D12A49764D00724276 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -67,7 +64,8 @@
 		ACD119FE2A541EF90046ECB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ACD11A022A541F570046ECB6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ACD11A0E2A5420F50046ECB6 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/Localizable.strings; sourceTree = "<group>"; };
-		ACF0C1402A49D2F5008D10A8 /* TabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItem.swift; sourceTree = "<group>"; };
+		ACF0C1402A49D2F5008D10A8 /* NavigationTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTabView.swift; sourceTree = "<group>"; };
+		ACF0C1422A4AD35F008D10A8 /* ActivityCardWithAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCardWithAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,37 +79,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AC7816622A6E793300387631 /* RegisterScreen */ = {
+		AC005B732A6FAB7D00FB5A9F /* NavigationTab */ = {
 			isa = PBXGroup;
 			children = (
-				AC7816602A6E6B3900387631 /* RegisterScreenViewModel.swift */,
-				ACA3268D2A616CD800B4EBA2 /* RegisterScreenView.swift */,
+				ACF0C1402A49D2F5008D10A8 /* NavigationTabView.swift */,
+				AC005B742A6FABA500FB5A9F /* NavigationTabViewModel.swift */,
 			);
-			path = RegisterScreen;
+			path = NavigationTab;
 			sourceTree = "<group>";
 		};
-		AC7816632A6E7AA200387631 /* Components */ = {
+		ACA326762A5E7C3B00B4EBA2 /* Alerts */ = {
 			isa = PBXGroup;
 			children = (
-				ACA6F4DF2A497F7E00724276 /* ActivityCard.swift */,
-				ACA326832A5E919100B4EBA2 /* CommentCard.swift */,
-				ACA3268F2A6563EC00B4EBA2 /* Profile.swift */,
-				ACA326982A66914300B4EBA2 /* Comment.swift */,
-				ACA326962A66911600B4EBA2 /* Activity.swift */,
-				ACA326942A6690F300B4EBA2 /* Account.swift */,
-				ACA3269A2A66919800B4EBA2 /* SaveAccountAlert.swift */,
-				ACA3267F2A5E81B300B4EBA2 /* SaveEditedProfileAlert.swift */,
 				ACA326772A5E7C5500B4EBA2 /* SaveNewActivityAlert.swift */,
+				ACA3267F2A5E81B300B4EBA2 /* SaveEditedProfileAlert.swift */,
+				ACA3269A2A66919800B4EBA2 /* SaveAccountAlert.swift */,
 			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		AC7816642A6E7CC900387631 /* MainScreen */ = {
-			isa = PBXGroup;
-			children = (
-				ACA6F4DB2A49766400724276 /* MainScreen.swift */,
-			);
-			path = MainScreen;
+			path = Alerts;
 			sourceTree = "<group>";
 		};
 		ACA326882A61625B00B4EBA2 /* Login and SignUp */ = {
@@ -119,17 +103,20 @@
 			children = (
 				ACA326892A61627500B4EBA2 /* HelloScreenView.swift */,
 				ACA3268B2A616CCD00B4EBA2 /* LoginScreenView.swift */,
+				ACA3268D2A616CD800B4EBA2 /* RegisterScreenView.swift */,
 			);
 			path = "Login and SignUp";
 			sourceTree = "<group>";
 		};
-		ACA327482A6E525700B4EBA2 /* ProfileScreen */ = {
+		ACA326932A6690C400B4EBA2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				ACA6F4E12A4996F400724276 /* ProfileView.swift */,
-				ACA327492A6E52C700B4EBA2 /* ProfileViewModel.swift */,
+				ACA326942A6690F300B4EBA2 /* Account.swift */,
+				ACA326962A66911600B4EBA2 /* Activity.swift */,
+				ACA326982A66914300B4EBA2 /* Comment.swift */,
+				ACA3268F2A6563EC00B4EBA2 /* Profile.swift */,
 			);
-			path = ProfileScreen;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		ACA6F4C12A49764C00724276 = {
@@ -151,22 +138,19 @@
 		ACA6F4CC2A49764C00724276 /* MyFirstApp */ = {
 			isa = PBXGroup;
 			children = (
-				AC7816642A6E7CC900387631 /* MainScreen */,
-				AC7816632A6E7AA200387631 /* Components */,
-				AC7816622A6E793300387631 /* RegisterScreen */,
-				ACA327482A6E525700B4EBA2 /* ProfileScreen */,
+				AC005B732A6FAB7D00FB5A9F /* NavigationTab */,
+				ACA326762A5E7C3B00B4EBA2 /* Alerts */,
+				ACA326932A6690C400B4EBA2 /* Models */,
 				ACA326882A61625B00B4EBA2 /* Login and SignUp */,
 				ACD119FE2A541EF90046ECB6 /* Info.plist */,
 				ACC6A3722A53FD4A003C7156 /* Activities + Favorite */,
 				ACC6A3712A53FD2C003C7156 /* Profile */,
-				ACF0C1402A49D2F5008D10A8 /* TabItem.swift */,
 				ACA6F4CD2A49764C00724276 /* MyFirstAppApp.swift */,
 				ACD11A032A541F570046ECB6 /* Localizable.strings */,
 				ACD11A0F2A5420F50046ECB6 /* Localizable.strings */,
 				ACA6F4D12A49764D00724276 /* Assets.xcassets */,
 				ACA6F4D32A49764D00724276 /* Preview Content */,
 				ACA326912A6565ED00B4EBA2 /* Store.swift */,
-				AC78165E2A6E604E00387631 /* Router.swift */,
 			);
 			path = MyFirstApp;
 			sourceTree = "<group>";
@@ -182,7 +166,9 @@
 		ACC6A3712A53FD2C003C7156 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				ACA6F4E12A4996F400724276 /* ProfileView.swift */,
 				ACC6A36F2A52E2D2003C7156 /* ProfileFormView.swift */,
+				ACA326832A5E919100B4EBA2 /* CommentCard.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -190,6 +176,9 @@
 		ACC6A3722A53FD4A003C7156 /* Activities + Favorite */ = {
 			isa = PBXGroup;
 			children = (
+				ACA6F4DB2A49766400724276 /* MainScreen.swift */,
+				ACF0C1422A4AD35F008D10A8 /* ActivityCardWithAnimation.swift */,
+				ACA6F4DF2A497F7E00724276 /* ActivityCard.swift */,
 				ACA6F4E32A499C4800724276 /* FavoritesView.swift */,
 				AC6126112A4C27B1002C3ED7 /* NewActivity.swift */,
 				AC124DD02A544F5000D63D23 /* ActivityDetailsView.swift */,
@@ -276,19 +265,18 @@
 				ACA3268E2A616CD800B4EBA2 /* RegisterScreenView.swift in Sources */,
 				ACA326902A6563EC00B4EBA2 /* Profile.swift in Sources */,
 				ACA3269B2A66919800B4EBA2 /* SaveAccountAlert.swift in Sources */,
-				ACA3274A2A6E52C700B4EBA2 /* ProfileViewModel.swift in Sources */,
 				ACA326922A6565ED00B4EBA2 /* Store.swift in Sources */,
 				ACA3268C2A616CCD00B4EBA2 /* LoginScreenView.swift in Sources */,
-				AC7816612A6E6B3900387631 /* RegisterScreenViewModel.swift in Sources */,
 				ACA6F4DC2A49766400724276 /* MainScreen.swift in Sources */,
 				ACA3268A2A61627500B4EBA2 /* HelloScreenView.swift in Sources */,
 				ACA326842A5E919100B4EBA2 /* CommentCard.swift in Sources */,
 				ACC6A3702A52E2D2003C7156 /* ProfileFormView.swift in Sources */,
-				ACF0C1412A49D2F5008D10A8 /* TabItem.swift in Sources */,
+				ACF0C1412A49D2F5008D10A8 /* NavigationTabView.swift in Sources */,
 				ACA6F4E02A497F7E00724276 /* ActivityCard.swift in Sources */,
 				AC124DD12A544F5000D63D23 /* ActivityDetailsView.swift in Sources */,
-				AC78165F2A6E604E00387631 /* Router.swift in Sources */,
 				ACA6F4E42A499C4800724276 /* FavoritesView.swift in Sources */,
+				ACF0C1432A4AD35F008D10A8 /* ActivityCardWithAnimation.swift in Sources */,
+				AC005B752A6FABA500FB5A9F /* NavigationTabViewModel.swift in Sources */,
 				ACA6F4E22A4996F400724276 /* ProfileView.swift in Sources */,
 				AC6126122A4C27B1002C3ED7 /* NewActivity.swift in Sources */,
 				ACA6F4CE2A49764C00724276 /* MyFirstAppApp.swift in Sources */,

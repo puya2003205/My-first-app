@@ -64,3 +64,9 @@ enum SwipeDirection {
     case right(CGSize)
     case none
 }
+
+enum TabItemElement: Int, CaseIterable, Hashable {
+    case favorites
+    case explore
+    case profile
+}

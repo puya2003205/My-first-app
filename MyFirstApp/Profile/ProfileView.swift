@@ -3,15 +3,27 @@ import SwiftUI
 struct ProfileView: View {
     @ObservedObject var accountsStore: AccountsStore
     var selectedAccount: Account
-    @ObservedObject var viewModel = ProfileViewModel()
-    
+    @State private var dailyReminderTime = Date(timeIntervalSince1970: 0)
+    @State private var showComments = false
+
     var body: some View {
         VStack {
             profileGeneralDetails
             buttons
             Spacer()
-            if viewModel.showComments {
-                allComments
+            if showComments {
+                VStack(alignment: .trailing) {
+                    List {
+                        ForEach(selectedAccount.activities.reversed(), id: \.id) { activity in
+                            ForEach(activity.comments, id: \.id) { comment in
+                                NavigationLink(destination: ActivityDetailsView(activity: activity, accountsStore: accountsStore, selectedAccount: selectedAccount)) {
+                                    CommentCard(activity: activity, comment: comment)
+                                }
+                            }
+                            .padding(.vertical, 5)
+                        }
+                    }
+                }
             } else {
                 profileExtendedDetails
             }
@@ -43,7 +55,7 @@ struct ProfileView: View {
         HStack {
             Spacer()
             Button(action: {
-                viewModel.showCommentsFalse()
+                showComments = false
             }) {
                 Text("Profile")
                     .frame(width: 100, height: 40)
@@ -53,7 +65,7 @@ struct ProfileView: View {
             }
             Spacer()
             Button(action: {
-                viewModel.showCommentsTrue()
+                showComments = true
             }) {
                 Text("Comments")
                     .frame(width: 100, height: 40)
@@ -82,7 +94,7 @@ struct ProfileView: View {
                     HStack{
                         Text(LocalizedStringKey("profile_date_of_birth"))
                         Spacer()
-                        Text(viewModel.formatDate(selectedAccount.profile.dateOfBirth))
+                        Text(formatDate(selectedAccount.profile.dateOfBirth))
                     }
                 }
             }
@@ -98,18 +110,10 @@ struct ProfileView: View {
         }
     }
     
-    @ViewBuilder private var allComments: some View {
-        VStack(alignment: .trailing) {
-            List {
-                ForEach(selectedAccount.activities.reversed(), id: \.id) { activity in
-                    ForEach(activity.comments, id: \.id) { comment in
-                        NavigationLink(destination: ActivityDetailsView(activity: activity, accountsStore: accountsStore, selectedAccount: selectedAccount)) {
-                            CommentCard(activity: activity, comment: comment)
-                        }
-                    }
-                    .padding(.vertical, 5)
-                }
-            }
-        }
+    func formatDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .none
+        return formatter.string(from: date)
     }
 }

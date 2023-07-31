@@ -1,49 +1,39 @@
 import SwiftUI
 
-struct MainScreen: View {
+struct ActivityCardWithAnimation: View {
     @ObservedObject var accountsStore: AccountsStore
     var selectedAccount: Account
-    var selectedRole: ActivityRole
+    var activity: Activity
     @State private var offset = CGSize.zero
     @State private var color: Color = .blue
     @State private var isAnimating = false
     
-    
     var body: some View {
+        activityCardWithAnimation
+    }
+    
+    @ViewBuilder private var activityCardWithAnimation: some View {
         VStack {
-            Spacer()
-            ZStack {
-                ForEach(selectedAccount.activities) { activity in
-                    if activity.role == selectedRole {
-                        
-                        
-                        VStack {
-                            ActivityCard(activity: activity, color: color)
-                        }
-                        .offset(x: offset.width, y: offset.height * 0.4)
-                        .rotationEffect(.degrees(Double(offset.width / 40)))
-                        .gesture(
-                            DragGesture()
-                                .onChanged { gesture in
-                                    offset = gesture.translation
-                                    withAnimation {
-                                        changeColor(width: offset.width)
-                                    }
-                                }
-                                .onEnded { _ in
-                                    withAnimation {
-                                        let swipeDirection = determineSwipeDirection(width: offset.width)
-                                        handleSwipe(swipeDirection, activity: activity)
-                                        changeColor(width: offset.width)
-                                    }
-                                }
-                        )
-                    }
-
-                }
-            }
-            Spacer()
+            ActivityCard(activity: activity, color: color)
         }
+        .offset(x: offset.width, y: offset.height * 0.4)
+        .rotationEffect(.degrees(Double(offset.width / 40)))
+        .gesture(
+            DragGesture()
+                .onChanged { gesture in
+                    offset = gesture.translation
+                    withAnimation {
+                        changeColor(width: offset.width)
+                    }
+                }
+                .onEnded { _ in
+                    withAnimation {
+                        let swipeDirection = determineSwipeDirection(width: offset.width)
+                        handleSwipe(swipeDirection)
+                        changeColor(width: offset.width)
+                    }
+                }
+        )
     }
     
     private func determineSwipeDirection(width: CGFloat) -> SwipeDirection {
@@ -57,7 +47,7 @@ struct MainScreen: View {
         }
     }
     
-    private func handleSwipe(_ swipeDirection: SwipeDirection, activity: Activity) {
+    private func handleSwipe(_ swipeDirection: SwipeDirection) {
         switch swipeDirection {
         case .left(let offset):
             self.offset = offset

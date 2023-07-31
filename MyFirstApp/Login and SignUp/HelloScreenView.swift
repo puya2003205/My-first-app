@@ -3,9 +3,9 @@ import SwiftUI
 struct HelloScreenView: View {
     @ObservedObject var accountsStore: AccountsStore
     @State private var showRegistration = false
-    let goToLogin: () -> Void
     
     var body: some View {
+        NavigationView {
             VStack {
                 Image("logo")
                     .resizable()
@@ -17,8 +17,9 @@ struct HelloScreenView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 50))
                 HStack {
                     Spacer()
-                    Button {
-                        goToLogin()
+                    
+                    NavigationLink {
+                        LoginScreenView(accountsStore: accountsStore)
                     } label: {
                         Text("Login")
                             .frame(minWidth: 0, maxWidth: 100)
@@ -28,10 +29,12 @@ struct HelloScreenView: View {
                             .cornerRadius(50)
                             .bold()
                     }
+                    
                     Spacer()
                 }
                 .padding(.top, 50)
             }
+        }
         .navigationBarBackButtonHidden(true)
     }
 }
@@ -40,6 +43,6 @@ struct HelloScreenView_Previews: PreviewProvider {
     static var previews: some View {
         let accountsStore = AccountsStore()
         
-        HelloScreenView(accountsStore: accountsStore, goToLogin: {} )
+        HelloScreenView(accountsStore: accountsStore)
     }
 }

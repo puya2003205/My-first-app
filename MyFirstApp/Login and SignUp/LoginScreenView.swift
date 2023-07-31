@@ -7,9 +7,9 @@ struct LoginScreenView: View {
     @State private var valid = false
     @State private var showAlert = false
     @State private var showRegistration = false
-    let goToRegister: () -> Void
     
     var body: some View {
+        NavigationStack {
             ZStack {
                 loginForm
                 loginButton
@@ -19,10 +19,14 @@ struct LoginScreenView: View {
             }
             .navigationDestination(isPresented: $valid) {
                 if let matchedAccount = accountsStore.accounts.first(where: { $0.email == email && $0.password == password }) {
-                    TabItem(accountsStore: accountsStore, selectedAccount: matchedAccount)
+                    NavigationTabView(viewModel: NavigationTabViewModel(accountsStore: accountsStore, selectedAccount: matchedAccount))
                 }
             }
+        }
         .navigationBarBackButtonHidden(true)
+        .sheet(isPresented: $showRegistration) {
+            RegisterScreenView(accountsStore: accountsStore, showRegistration: $showRegistration)
+        }
     }
     
     @ViewBuilder private var loginForm: some View {
@@ -37,7 +41,7 @@ struct LoginScreenView: View {
                     .autocorrectionDisabled()
             }
             Button(action: {
-                goToRegister()
+                showRegistration = true
             }) {
                 Text("Nu am cont")
                     .frame(maxWidth: .infinity, alignment: .trailing)
